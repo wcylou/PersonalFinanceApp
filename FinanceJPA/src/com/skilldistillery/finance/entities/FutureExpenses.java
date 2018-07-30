@@ -2,29 +2,32 @@ package com.skilldistillery.finance.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Table(name = "future_expenses")
 @Entity
-public class Expense {
+public class FutureExpenses {
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private double amount;
-	private Date date;
+	@Column(name="expected_date")
+	private Date expectedDate;
+	private Boolean recurring;
 	private String description;
 	@ManyToOne
-	@JoinColumn(name="category_id")
-	private ExpenseCategory expenseCategory;
-	@ManyToOne
-	@JoinColumn(name= "user_id")
+	@Column(name="user_id")
 	private User user;
-	
+	@ManyToOne
+	@Column(name="category_id")
+	private ExpenseCategory expenseCategory;
 	public int getId() {
 		return id;
 	}
@@ -37,11 +40,17 @@ public class Expense {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public Date getDate() {
-		return date;
+	public Date getExpectedDate() {
+		return expectedDate;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setExpectedDate(Date expectedDate) {
+		this.expectedDate = expectedDate;
+	}
+	public Boolean getRecurring() {
+		return recurring;
+	}
+	public void setRecurring(Boolean recurring) {
+		this.recurring = recurring;
 	}
 	public String getDescription() {
 		return description;
@@ -49,17 +58,17 @@ public class Expense {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public ExpenseCategory getExpenseCategory() {
-		return expenseCategory;
-	}
-	public void setExpenseCategory(ExpenseCategory expenseCategory) {
-		this.expenseCategory = expenseCategory;
-	}
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public ExpenseCategory getExpenseCategory() {
+		return expenseCategory;
+	}
+	public void setExpenseCategory(ExpenseCategory expenseCategory) {
+		this.expenseCategory = expenseCategory;
 	}
 	@Override
 	public int hashCode() {
@@ -68,10 +77,11 @@ public class Expense {
 		long temp;
 		temp = Double.doubleToLongBits(amount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((expectedDate == null) ? 0 : expectedDate.hashCode());
 		result = prime * result + ((expenseCategory == null) ? 0 : expenseCategory.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((recurring == null) ? 0 : recurring.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -83,18 +93,18 @@ public class Expense {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Expense other = (Expense) obj;
+		FutureExpenses other = (FutureExpenses) obj;
 		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
-			return false;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
 			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
+			return false;
+		if (expectedDate == null) {
+			if (other.expectedDate != null)
+				return false;
+		} else if (!expectedDate.equals(other.expectedDate))
 			return false;
 		if (expenseCategory == null) {
 			if (other.expenseCategory != null)
@@ -102,6 +112,11 @@ public class Expense {
 		} else if (!expenseCategory.equals(other.expenseCategory))
 			return false;
 		if (id != other.id)
+			return false;
+		if (recurring == null) {
+			if (other.recurring != null)
+				return false;
+		} else if (!recurring.equals(other.recurring))
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -112,8 +127,11 @@ public class Expense {
 	}
 	@Override
 	public String toString() {
-		return "Expense [id=" + id + ", amount=" + amount + ", date=" + date + ", description=" + description
-				+ ", expenseCategory=" + expenseCategory + ", user=" + user + "]";
+		return "FutureExpenses [id=" + id + ", amount=" + amount + ", expectedDate=" + expectedDate + ", recurring="
+				+ recurring + ", description=" + description + ", user=" + user + ", expenseCategory=" + expenseCategory
+				+ "]";
 	}
+	
+	
 
 }

@@ -2,6 +2,7 @@ package com.skilldistillery.finance.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,20 +11,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Expense {
-	
+public class Income {
+
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	private double amount;
-	private Date date;
-	private String description;
+	@Column(name ="date_received")
+	private Date dateReceived;
+	@ManyToOne
+	@Column(name="user_id")
+	private User user;
 	@ManyToOne
 	@JoinColumn(name="category_id")
-	private ExpenseCategory expenseCategory;
-	@ManyToOne
-	@JoinColumn(name= "user_id")
-	private User user;
+	private IncomeCategory incomeCategory;
 	
 	public int getId() {
 		return id;
@@ -37,29 +38,23 @@ public class Expense {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public Date getDate() {
-		return date;
+	public Date getDateReceived() {
+		return dateReceived;
 	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public ExpenseCategory getExpenseCategory() {
-		return expenseCategory;
-	}
-	public void setExpenseCategory(ExpenseCategory expenseCategory) {
-		this.expenseCategory = expenseCategory;
+	public void setDateReceived(Date dateReceived) {
+		this.dateReceived = dateReceived;
 	}
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public IncomeCategory getIncomeCategory() {
+		return incomeCategory;
+	}
+	public void setIncomeCategory(IncomeCategory incomeCategory) {
+		this.incomeCategory = incomeCategory;
 	}
 	@Override
 	public int hashCode() {
@@ -68,10 +63,9 @@ public class Expense {
 		long temp;
 		temp = Double.doubleToLongBits(amount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((expenseCategory == null) ? 0 : expenseCategory.hashCode());
+		result = prime * result + ((dateReceived == null) ? 0 : dateReceived.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((incomeCategory == null) ? 0 : incomeCategory.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -83,25 +77,20 @@ public class Expense {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Expense other = (Expense) obj;
+		Income other = (Income) obj;
 		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
 			return false;
-		if (date == null) {
-			if (other.date != null)
+		if (dateReceived == null) {
+			if (other.dateReceived != null)
 				return false;
-		} else if (!date.equals(other.date))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (expenseCategory == null) {
-			if (other.expenseCategory != null)
-				return false;
-		} else if (!expenseCategory.equals(other.expenseCategory))
+		} else if (!dateReceived.equals(other.dateReceived))
 			return false;
 		if (id != other.id)
+			return false;
+		if (incomeCategory == null) {
+			if (other.incomeCategory != null)
+				return false;
+		} else if (!incomeCategory.equals(other.incomeCategory))
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -112,8 +101,8 @@ public class Expense {
 	}
 	@Override
 	public String toString() {
-		return "Expense [id=" + id + ", amount=" + amount + ", date=" + date + ", description=" + description
-				+ ", expenseCategory=" + expenseCategory + ", user=" + user + "]";
+		return "Income [id=" + id + ", amount=" + amount + ", dateReceived=" + dateReceived + ", user=" + user
+				+ ", incomeCategory=" + incomeCategory + "]";
 	}
-
+	
 }
