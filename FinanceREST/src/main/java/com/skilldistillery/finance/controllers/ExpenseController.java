@@ -1,6 +1,6 @@
 package com.skilldistillery.finance.controllers;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +28,10 @@ public class ExpenseController {
 	
 	@RequestMapping(path="expenses/between", method= RequestMethod.GET)
 	public List<Expense> expensesBetweenMonths() {
-		Date start = new Date(2017, 1, 15);
+		Date start = new Date(2016, 1, 15);
 		Date end = new Date(2018, 9, 15);
+		System.out.println(start);
+		System.out.println(end);
 		return exServ.findExpensesBetweenDates(start, end, username);
 	}
 	
