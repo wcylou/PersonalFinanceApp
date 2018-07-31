@@ -1,6 +1,6 @@
 package com.skilldistillery.finance.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,9 +20,11 @@ public class Expense {
 	private double amount;
 	private Date date;
 	private String description;
+	
 	@ManyToOne
 	@JoinColumn(name="category_id")
-	private ExpenseCategory categoryId;
+	private ExpenseCategory expenseCategory;
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name= "user_id")
@@ -53,10 +55,10 @@ public class Expense {
 		this.description = description;
 	}
 	public ExpenseCategory getExpenseCategory() {
-		return categoryId;
+		return expenseCategory;
 	}
 	public void setExpenseCategory(ExpenseCategory expenseCategory) {
-		this.categoryId = expenseCategory;
+		this.expenseCategory = expenseCategory;
 	}
 	public User getUser() {
 		return user;
@@ -73,7 +75,7 @@ public class Expense {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((categoryId == null) ? 0 : categoryId.hashCode());
+		result = prime * result + ((expenseCategory == null) ? 0 : expenseCategory.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
@@ -99,10 +101,10 @@ public class Expense {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (categoryId == null) {
-			if (other.categoryId != null)
+		if (expenseCategory == null) {
+			if (other.expenseCategory != null)
 				return false;
-		} else if (!categoryId.equals(other.categoryId))
+		} else if (!expenseCategory.equals(other.expenseCategory))
 			return false;
 		if (id != other.id)
 			return false;
@@ -115,8 +117,18 @@ public class Expense {
 	}
 	@Override
 	public String toString() {
-		return "Expense [id=" + id + ", amount=" + amount + ", date=" + date + ", description=" + description
-				+ ", expenseCategory=" + categoryId + ", user=" + user + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Expense [id=");
+		builder.append(id);
+		builder.append(", amount=");
+		builder.append(amount);
+		builder.append(", date=");
+		builder.append(date);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append("]");
+		return builder.toString();
 	}
+	
 
 }

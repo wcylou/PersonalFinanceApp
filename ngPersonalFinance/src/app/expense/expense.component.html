@@ -12,7 +12,7 @@
 <div *ngIf="editExpense">
   <form #editExpenseForm="ngForm">
     <input type="text" name="amount" placeholder="update amount" [(ngModel)]="editExpense.amount" />
-    <input type="text" name="category" placeholder="update category" [(ngModel)]="editExpense.categoryId" />
+    <input type="text" name="expenseCategory" placeholder="update category" [(ngModel)]="editExpense.expenseCategory.name" />
     <input type="date" name="date" placeholder="update date" [(ngModel)]="editExpense.date" />
     <input type="text" name="description" placeholder="update description" [(ngModel)]="editExpense.description" />
     <button (click)="updateExpense(editExpenseForm, editExpense)">Save</button>
@@ -26,11 +26,11 @@
 <!-- create new expense item form -->
 <div *ngIf="!selected">
   <form #createExpenseRecord="ngForm">
-    <input type="text" name="amount" placeholder="amount" [(ngModel)]="newExpense.amount" />
-    <input type="number" name="categoryId" placeholder="category" [(ngModel)]="newExpense.categoryId" />
-    <input type="date" name="date" placeholder="date" [(ngModel)]="newExpense.date" />
-    <input type="text" name="description" placeholder="description" [(ngModel)]="newExpense.description" />
-    <button (click)="createNewExpense(createExpenseRecord, newExpense)">Create New Record</button>
+    <input type="text" name="amount" placeholder="amount" [(ngModel)]="newExpense.amount"/>
+    <input type="number" name="expenseCategory" placeholder="category Id" [(ngModel)]="newExpense.expenseCategory"/>
+    <input type="date" name="date" placeholder="date" [(ngModel)]="newExpense.date"/>
+    <input type="text" name="description" placeholder="description" [(ngModel)]="newExpense.description"/>
+    <button (click)="createNewExpense(createExpenseRecord)">Create New Record</button>
   </form>
 </div>
 
@@ -51,7 +51,8 @@
       <tr *ngFor="let expense of expenses">
         <td>{{expense.id}}</td>
         <td>{{expense.amount}}</td>
-        <td>{{expense.categoryId.id}}</td>
+        <td>category holder</td>
+        <!-- <td>{{expense.categoryId.id}}</td> -->
         <td>{{expense.date}}</td>
         <td>{{expense.description}}</td>
         <button (click)="displayExpense(expense)">Display Alone</button>

@@ -16,5 +16,6 @@ public interface ExpenseRepo extends JpaRepository<Expense, Integer>{
 	
 	Expense findByUser_UsernameAndId(String username, int id);
 	List<Expense> findByUser_Username(String username);
+	List<Expense> findByUser_UsernameAndExpenseCategory_Id(String username, int id);
 
 }

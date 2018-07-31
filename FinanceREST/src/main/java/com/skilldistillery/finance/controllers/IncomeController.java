@@ -25,7 +25,7 @@ public class IncomeController {
 	
 	String username = "user";
 	
-	@RequestMapping(path="incomeCategories", method= RequestMethod.GET)
+	@RequestMapping(path="income/categories", method= RequestMethod.GET)
 	public List<IncomeCategory> indexCategories() {
 		return inServ.indexIncomeCategory();
 	}

@@ -1,8 +1,10 @@
+import { ExpenseCategory } from './../models/expense-category';
 import { ExpenseService } from './../expense.service';
 import { Component, OnInit } from '@angular/core';
 import { Expense } from '../models/expense';
 import { DatePipe } from '../../../node_modules/@angular/common';
 import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
+import { NgForm } from '../../../node_modules/@angular/forms';
 
 @Component({
   selector: 'app-expense',
@@ -11,18 +13,33 @@ import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 })
 export class ExpenseComponent implements OnInit {
   expenses = [];
+  expenseCategory = [];
   selected = null;
   newExpense: Expense = new Expense();
   editExpense = null;
   destroyExpense = null;
 
-  createNewExpense(form, createExpense) {
-    console.log(createExpense);
-    console.log(createExpense.categoryId);
+  createNewExpense(form: NgForm) {
+    console.log('new expense values');
+    console.log(this.newExpense);
+
+
+    for (let i = 0; i < this.expenseCategory.length; i++) {
+      const element = this.expenseCategory[i];
+      if (this.expenseCategory[i].id === form.value.expenseCategory) {
+        this.newExpense.expenseCategory = this.expenseCategory[i];
+      }
+    }
+
+    console.log('inside component, next line prints new expense');
+
+    console.log(this.newExpense);
 
     this.expenseService.create(this.newExpense).subscribe(
       data => {
         this.reload();
+        this.newExpense = new Expense();
+
       },
       err => {
         console.log(this.newExpense);
@@ -30,7 +47,6 @@ export class ExpenseComponent implements OnInit {
         console.error('Error in component ts: ' + err);
       }
     );
-    this.newExpense = new Expense();
   }
 
   updateExpense(form, editExpense) {
@@ -94,6 +110,12 @@ export class ExpenseComponent implements OnInit {
         },
         err => console.error('loading expense list had an error: ' + err)
       );
+    this.expenseService.indexExCat().subscribe(
+      data => {
+        this.expenseCategory = data;
+      },
+      err => console.error('error inside of the category reload')
+    );
   }
 
   constructor(

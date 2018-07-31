@@ -22,5 +22,6 @@ public interface ExpenseService {
 	boolean destroyFex(String username, int id);
 	List<Expense> findExpensesBetweenDates(Date start, Date end, String username);
 	List<ExpenseCategory> indexExpenseCategory();
+	List<Expense> findExpensesByCategory(String username, int id);
 
 }
