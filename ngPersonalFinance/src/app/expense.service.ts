@@ -67,7 +67,7 @@ export class ExpenseService {
         // Authorization: `Basic ${this.authService.getToken()}`
       })
     };
-    return this.http.put<Expense>(
+    return this.http.patch<Expense>(
       this.url + '/' + expenseId, selectedExpense, httpOptions
     );
   }
