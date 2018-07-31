@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.finance.entities.Expense;
+import com.skilldistillery.finance.entities.FutureExpense;
 import com.skilldistillery.finance.services.ExpenseService;
 
 @CrossOrigin({"*", "http://localhost:4200"})
@@ -46,5 +47,30 @@ public class ExpenseController {
 	@RequestMapping(path="expenses/{id}", method = RequestMethod.DELETE)
 	public boolean deleteExpense(@PathVariable int id) {
 		return exServ.destroy(username, id);
+	}
+	
+	@RequestMapping(path="futureExpense", method= RequestMethod.GET)
+	public List<FutureExpense> indexFutureExpenses() {
+		return exServ.indexFutureExpenses(username);
+	}
+	
+	@RequestMapping(path="futureExpense/{id}", method = RequestMethod.GET) 
+	public FutureExpense getOneFutureExpense(@PathVariable int id) {
+		return exServ.showFex(username, id);
+	}
+	
+	@RequestMapping(path="futureExpense", method = RequestMethod.POST) 
+	public FutureExpense createExpense(@RequestBody FutureExpense futureExpense) {
+		return exServ.createFex(username, futureExpense);
+	}
+	
+	@RequestMapping(path="futureExpense/{id}", method = RequestMethod.PATCH) 
+	public FutureExpense updateFutureExpense(@RequestBody FutureExpense futureExpense, @PathVariable int id) {
+		return exServ.updateFex(username, id, futureExpense);
+	}
+	
+	@RequestMapping(path="futureExpense/{id}", method = RequestMethod.DELETE)
+	public boolean deleteFutureExpense(@PathVariable int id) {
+		return exServ.destroyFex(username, id);
 	}
 }

@@ -3,6 +3,7 @@ package com.skilldistillery.finance.services;
 import java.util.List;
 
 import com.skilldistillery.finance.entities.Expense;
+import com.skilldistillery.finance.entities.FutureExpense;
 
 public interface ExpenseService {
 
@@ -11,5 +12,11 @@ public interface ExpenseService {
 	Expense create(String username, Expense expense);
 	Expense update(String username, int id, Expense expense);
 	boolean destroy(String username, int id);
+	
+	List<FutureExpense> indexFutureExpenses(String username);
+	FutureExpense showFex(String username, int id);
+	FutureExpense createFex(String username, FutureExpense expense);
+	FutureExpense updateFex(String username, int id, FutureExpense expense);
+	boolean destroyFex(String username, int id);
 
 }

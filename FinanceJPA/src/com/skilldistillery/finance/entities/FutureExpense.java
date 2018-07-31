@@ -13,15 +13,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Table(name = "future_expenses")
+@Table(name = "future_expense")
 @Entity
-public class FutureExpenses {
+public class FutureExpense {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private double amount;
-	@Column(name="expected_date")
+	@Column(name="date_expected")
 	private Date expectedDate;
 	private Boolean recurring;
 	private String description;
@@ -97,7 +97,7 @@ public class FutureExpenses {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FutureExpenses other = (FutureExpenses) obj;
+		FutureExpense other = (FutureExpense) obj;
 		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
 			return false;
 		if (description == null) {
@@ -131,7 +131,7 @@ public class FutureExpenses {
 	}
 	@Override
 	public String toString() {
-		return "FutureExpenses [id=" + id + ", amount=" + amount + ", expectedDate=" + expectedDate + ", recurring="
+		return "FutureExpens [id=" + id + ", amount=" + amount + ", expectedDate=" + expectedDate + ", recurring="
 				+ recurring + ", description=" + description + ", user=" + user + ", expenseCategory=" + expenseCategory
 				+ "]";
 	}

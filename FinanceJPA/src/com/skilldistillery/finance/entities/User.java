@@ -27,7 +27,7 @@ public class User {
 	@OneToMany(mappedBy ="user")
 	private List<IncomeStream> incomeStreams;
 	@OneToMany(mappedBy ="user")
-	private List<FutureExpenses> futureExpenses;
+	private List<FutureExpense> futureExpenses;
 	
 	public void addBudget(Budget budget) {
 		if (budgets == null)
@@ -86,12 +86,12 @@ public class User {
 			incomeStream.setUser(this);
 		}
 	}
-	public void removeFutureExpenses(FutureExpenses futureExpense) {
+	public void removeFutureExpenses(FutureExpense futureExpense) {
 		if(futureExpenses != null) {
 			futureExpenses.remove(futureExpense);
 		}
 	}
-	public void addFutureExpenses(FutureExpenses futureExpense) {
+	public void addFutureExpenses(FutureExpense futureExpense) {
 		if (futureExpenses == null)
 			futureExpenses = new ArrayList<>();
 		
@@ -127,10 +127,10 @@ public class User {
 	public void setIncomeStreams(List<IncomeStream> incomeStreams) {
 		this.incomeStreams = incomeStreams;
 	}
-	public List<FutureExpenses> getFutureExpenses() {
+	public List<FutureExpense> getFutureExpenses() {
 		return futureExpenses;
 	}
-	public void setFutureExpenses(List<FutureExpenses> futureExpenses) {
+	public void setFutureExpenses(List<FutureExpense> futureExpenses) {
 		this.futureExpenses = futureExpenses;
 	}
 	public int getId() {

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.finance.entities.Expense;
+import com.skilldistillery.finance.entities.FutureExpense;
 import com.skilldistillery.finance.repo.ExpenseRepo;
+import com.skilldistillery.finance.repo.FutureExpenseRepo;
 import com.skilldistillery.finance.repo.UserRepo;
 
 @Service
@@ -16,6 +18,8 @@ public class ExpenseServiceImpl implements ExpenseService{
 	ExpenseRepo exRepo;
 	@Autowired
 	UserRepo userRepo;
+	@Autowired
+	FutureExpenseRepo fexRepo;
 	
 	@Override
 	public List<Expense> indexExpenses(String username) {
@@ -47,6 +51,45 @@ public class ExpenseServiceImpl implements ExpenseService{
 	public boolean destroy(String username, int id) {
 		try {
 			exRepo.delete(show(username, id));
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	//Future Expenses
+	
+	@Override
+	public List<FutureExpense> indexFutureExpenses(String username) {
+		return fexRepo.findByUser_Username(username);
+	}
+	
+	@Override
+	public FutureExpense showFex(String username, int id) {
+		return fexRepo.findByUser_UsernameAndId(username, id);
+	}
+	
+	@Override
+	public FutureExpense createFex(String username, FutureExpense futureExpense) {
+		futureExpense.setUser(userRepo.findByUsername(username));
+		return fexRepo.saveAndFlush(futureExpense);
+	}
+	
+	@Override
+	public FutureExpense updateFex(String username, int id, FutureExpense futureExpense) {
+		FutureExpense fex = showFex(username, id);
+		fex.setAmount(futureExpense.getAmount());
+		fex.setDescription(futureExpense.getDescription());
+		fex.setExpectedDate(futureExpense.getExpectedDate());
+		fex.setExpenseCategory(futureExpense.getExpenseCategory());
+		fex.setRecurring(futureExpense.getRecurring());
+		return fexRepo.saveAndFlush(fex);
+	}
+	
+	@Override
+	public boolean destroyFex(String username, int id) {
+		try {
+			fexRepo.delete(showFex(username, id));
 			return true;
 		} catch (Exception e) {
 			return false;
