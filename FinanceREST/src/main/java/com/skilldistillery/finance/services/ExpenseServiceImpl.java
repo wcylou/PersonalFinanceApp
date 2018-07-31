@@ -30,7 +30,9 @@ public class ExpenseServiceImpl implements ExpenseService{
 	
 	@Override
 	public List<Expense> findExpensesBetweenDates(Date start, Date end, String username) {	
-		return exRepo.findByUser_UsernameAndDateBetween(username, start, end);
+		System.out.println(start);
+		System.out.println(end);
+		return exRepo.findByUser_UsernameAndDateBetween(start, end, username);
 	}
 	
 	@Override
