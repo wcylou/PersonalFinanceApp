@@ -3,6 +3,8 @@ package com.skilldistillery.finance.services;
 import java.util.List;
 
 import com.skilldistillery.finance.entities.Income;
+import com.skilldistillery.finance.entities.IncomeCategory;
+import com.skilldistillery.finance.entities.IncomeStream;
 
 public interface IncomeService {
 
@@ -15,5 +17,17 @@ public interface IncomeService {
 	Income update(String username, int id, Income income);
 
 	boolean destroy(String username, int id);
+
+	IncomeStream updateIncomeStream(String username, int id, IncomeStream incomeStream);
+
+	boolean destroyIncomeStream(String username, int id);
+
+	IncomeStream createIncomeStream(String username, IncomeStream incomeStream);
+
+	IncomeStream showIncomeStream(String username, int id);
+
+	List<IncomeStream> indexIncomeStream(String username);
+
+	List<IncomeCategory> indexIncomeCategory();
 
 }

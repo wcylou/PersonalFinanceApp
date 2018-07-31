@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.finance.entities.Income;
+import com.skilldistillery.finance.entities.IncomeCategory;
+import com.skilldistillery.finance.entities.IncomeStream;
 import com.skilldistillery.finance.services.IncomeService;
 
 @CrossOrigin({"*", "http://localhost:4200"})
@@ -23,6 +25,10 @@ public class IncomeController {
 	
 	String username = "user";
 	
+	@RequestMapping(path="incomeCategories", method= RequestMethod.GET)
+	public List<IncomeCategory> indexCategories() {
+		return inServ.indexIncomeCategory();
+	}
 	@RequestMapping(path="income", method= RequestMethod.GET)
 	public List<Income> index() {
 		return inServ.indexIncome(username);
@@ -45,6 +51,30 @@ public class IncomeController {
 	
 	@RequestMapping(path="income/{id}", method = RequestMethod.DELETE)
 	public boolean deleteIncome(@PathVariable int id) {
+		return inServ.destroy(username, id);
+	}
+	@RequestMapping(path="incomeStream", method= RequestMethod.GET)
+	public List<IncomeStream> indexIncomeStream() {
+		return inServ.indexIncomeStream(username);
+	}
+	
+	@RequestMapping(path="incomeStream/{id}", method = RequestMethod.GET) 
+	public IncomeStream getOneIncomeStream(@PathVariable int id) {
+		return inServ.showIncomeStream(username, id);
+	}
+	
+	@RequestMapping(path="incomeStream", method = RequestMethod.POST) 
+	public IncomeStream createIncomeStream(@RequestBody IncomeStream incomeStream) {
+		return inServ.createIncomeStream(username, incomeStream);
+	}
+	
+	@RequestMapping(path="incomeStream/{id}", method = RequestMethod.PATCH) 
+	public IncomeStream updateIncomeStream(@RequestBody IncomeStream incomeStream, @PathVariable int id) {
+		return inServ.updateIncomeStream(username, id, incomeStream);
+	}
+	
+	@RequestMapping(path="incomeStream/{id}", method = RequestMethod.DELETE)
+	public boolean deleteIncomeStream(@PathVariable int id) {
 		return inServ.destroy(username, id);
 	}
 	
