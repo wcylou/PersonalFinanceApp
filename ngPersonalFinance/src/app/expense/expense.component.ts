@@ -20,17 +20,15 @@ export class ExpenseComponent implements OnInit {
   destroyExpense = null;
 
   createNewExpense(form: NgForm) {
-    console.log('form');
-    console.log(form.value);
+    console.log('new expense values');
+    console.log(this.newExpense);
 
-    this.newExpense.amount = form.value.amount;
-    this.newExpense.date = form.value.date;
-    this.newExpense.description = form.value.description;
 
     for (let i = 0; i < this.expenseCategory.length; i++) {
       const element = this.expenseCategory[i];
-      if (this.expenseCategory[i].id === form.value.ExpenseCategory) {
+      if (this.expenseCategory[i].id === form.value.categoryId) {
         this.newExpense.category = this.expenseCategory[i];
+        console.log();
       }
     }
 

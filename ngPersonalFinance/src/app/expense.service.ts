@@ -14,7 +14,7 @@ import { ExpenseCategory } from './models/expense-category';
 export class ExpenseService {
 
   private url = environment.baseUrl + 'api/expenses';
-  private exCatUrl = environment.baseUrl + 'api/incomeCategories';
+  private exCatUrl = environment.baseUrl + 'api/expensesCategories';
 
   index(): Observable<Expense[]> {
     const httpOptions = {
