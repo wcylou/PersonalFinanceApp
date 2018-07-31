@@ -1,5 +1,6 @@
 package com.skilldistillery.finance.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.finance.entities.Expense;
+import com.skilldistillery.finance.entities.ExpenseCategory;
 import com.skilldistillery.finance.entities.FutureExpense;
 import com.skilldistillery.finance.services.ExpenseService;
 
@@ -24,6 +26,17 @@ public class ExpenseController {
 	
 	String username = "user";
 	
+	@RequestMapping(path="expenses/between", method= RequestMethod.GET)
+	public List<Expense> expensesBetweenMonths() {
+		Date start = new Date(2017, 1, 15);
+		Date end = new Date(2018, 9, 15);
+		return exServ.findExpensesBetweenDates(start, end, username);
+	}
+	
+	@RequestMapping(path="expensesCategories", method= RequestMethod.GET)
+	public List<ExpenseCategory> indexExpenseCategories() {
+		return exServ.indexExpenseCategory();
+	}
 	@RequestMapping(path="expenses", method= RequestMethod.GET)
 	public List<Expense> index() {
 		return exServ.indexExpenses(username);

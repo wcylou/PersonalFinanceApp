@@ -18,6 +18,7 @@ import com.skilldistillery.finance.repo.ExpenseRepo;
 import com.skilldistillery.finance.repo.IncomeRepo;
 import com.skilldistillery.finance.services.UserService;
 
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FinanceRestApplicationTests {
@@ -34,19 +35,19 @@ public class FinanceRestApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		User user = userServ.findUserByUserName("user");
+		User user = userServ.show(1);
 		assertEquals("user", user.getUsername());
 		assertEquals("user", user.getPassword());
 	}
 	@Test
 	public void testIncome() {
 		List<Income> incomeList = inRepo.findAll();
-		assertEquals(14, incomeList.size());
+		assertEquals(15, incomeList.size());
 	}
 	@Test
 	public void indexWorks() {
 		List<Expense> expenseList = exRepo.findAll();
-		assertEquals(400, expenseList.size());
+		assertEquals(399, expenseList.size());
 	}
 	@Test
 	public void testCategories() {

@@ -27,10 +27,10 @@
 <div *ngIf="!selected">
   <form #createExpenseRecord="ngForm">
     <input type="text" name="amount" placeholder="amount" [(ngModel)]="newExpense.amount" />
-    <input type="text" name="category" placeholder="category" [(ngModel)]="newExpense.categoryId" />
+    <input type="number" name="categoryId" placeholder="category" [(ngModel)]="newExpense.categoryId" />
     <input type="date" name="date" placeholder="date" [(ngModel)]="newExpense.date" />
     <input type="text" name="description" placeholder="description" [(ngModel)]="newExpense.description" />
-    <button (click)="createNewExpense()">Create New Record</button>
+    <button (click)="createNewExpense(createExpenseRecord, newExpense)">Create New Record</button>
   </form>
 </div>
 
@@ -51,7 +51,7 @@
       <tr *ngFor="let expense of expenses">
         <td>{{expense.id}}</td>
         <td>{{expense.amount}}</td>
-        <td>{{expense.categoryId}}</td>
+        <td>{{expense.categoryId.id}}</td>
         <td>{{expense.date}}</td>
         <td>{{expense.description}}</td>
         <button (click)="displayExpense(expense)">Display Alone</button>

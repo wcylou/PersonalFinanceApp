@@ -1,12 +1,15 @@
 package com.skilldistillery.finance.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.finance.entities.Expense;
+import com.skilldistillery.finance.entities.ExpenseCategory;
 import com.skilldistillery.finance.entities.FutureExpense;
+import com.skilldistillery.finance.repo.ExpenseCategoryRepo;
 import com.skilldistillery.finance.repo.ExpenseRepo;
 import com.skilldistillery.finance.repo.FutureExpenseRepo;
 import com.skilldistillery.finance.repo.UserRepo;
@@ -15,12 +18,27 @@ import com.skilldistillery.finance.repo.UserRepo;
 public class ExpenseServiceImpl implements ExpenseService{
 	
 	@Autowired
+	ExpenseCategoryRepo exCatRepo;
+	@Autowired
 	ExpenseRepo exRepo;
 	@Autowired
 	UserRepo userRepo;
 	@Autowired
 	FutureExpenseRepo fexRepo;
 	
+	// Aggregate Functions
+	
+	@Override
+	public List<Expense> findExpensesBetweenDates(Date start, Date end, String username) {	
+		return exRepo.findByUser_UsernameAndDateBetween(username, start, end);
+	}
+	
+	@Override
+	public List<ExpenseCategory> indexExpenseCategory() {
+		return exCatRepo.findAll();
+	}
+	
+	// Expense CRUD
 	@Override
 	public List<Expense> indexExpenses(String username) {
 		return exRepo.findByUser_Username(username);
@@ -57,7 +75,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 		}
 	}
 	
-	//Future Expenses
+	//Future Expenses CRUD
 	
 	@Override
 	public List<FutureExpense> indexFutureExpenses(String username) {
