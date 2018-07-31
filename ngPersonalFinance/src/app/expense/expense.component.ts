@@ -28,13 +28,16 @@ export class ExpenseComponent implements OnInit {
     this.newExpense = new Expense();
   }
 
-  updateExpense(editExpense) {
+  updateExpense(form, editExpense) {
     console.log('update expense log: ' + editExpense);
+    console.log(editExpense);
+
 
     this.expenseService.update(editExpense.id, editExpense).subscribe(
       data => {
       this.reload();
       editExpense = null;
+      form.reset();
     },
     err => {
       console.error('update expense had an error in component: ' + err);
@@ -53,6 +56,25 @@ export class ExpenseComponent implements OnInit {
       err => {
         console.error('Delete expense had an error in the component: ' + err);
       }
+    );
+  }
+
+  displayExpense(expense) {
+    this.selected = expense;
+  }
+
+  displayTable() {
+    this.selected = null;
+  }
+
+  setEditExpense() {
+    this.editExpense = Object.assign({}, this.selected);
+  }
+
+  show(expense) {
+    this.expenseService.show(expense).subscribe(
+      data => expense,
+      err => console.error('no expense at this location')
     );
   }
 
