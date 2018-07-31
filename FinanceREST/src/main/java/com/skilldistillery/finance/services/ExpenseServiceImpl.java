@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.finance.entities.Expense;
-import com.skilldistillery.finance.entities.User;
 import com.skilldistillery.finance.repo.ExpenseRepo;
 import com.skilldistillery.finance.repo.UserRepo;
 
@@ -20,9 +19,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 	
 	@Override
 	public List<Expense> indexExpenses(String username) {
-		User user = userRepo.findByUsername(username);
-		List<Expense> expenseList = exRepo.findByUser(user.getId());
-		return expenseList;
+		return exRepo.findByUser_Username(username);
 	}
 	
 	@Override
