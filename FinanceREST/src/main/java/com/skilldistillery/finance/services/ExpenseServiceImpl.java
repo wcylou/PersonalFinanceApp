@@ -36,6 +36,11 @@ public class ExpenseServiceImpl implements ExpenseService{
 	}
 	
 	@Override
+	public List<Expense> findExpensesByCategory(String username, int id) {
+		return exRepo.findByUser_UsernameAndExpenseCategory_Id(username, id);
+	}
+	
+	@Override
 	public List<ExpenseCategory> indexExpenseCategory() {
 		return exCatRepo.findAll();
 	}
