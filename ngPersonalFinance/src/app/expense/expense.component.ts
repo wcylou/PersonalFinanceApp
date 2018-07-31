@@ -72,5 +72,7 @@ export class ExpenseComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.reload();
+  }
 }
