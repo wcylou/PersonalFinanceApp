@@ -1,8 +1,10 @@
 package com.skilldistillery.finance.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.skilldistillery.finance.entities.Expense;
+import com.skilldistillery.finance.entities.ExpenseCategory;
 import com.skilldistillery.finance.entities.FutureExpense;
 
 public interface ExpenseService {
@@ -18,5 +20,7 @@ public interface ExpenseService {
 	FutureExpense createFex(String username, FutureExpense expense);
 	FutureExpense updateFex(String username, int id, FutureExpense expense);
 	boolean destroyFex(String username, int id);
+	List<Expense> findExpensesBetweenDates(Date start, Date end, String username);
+	List<ExpenseCategory> indexExpenseCategory();
 
 }
