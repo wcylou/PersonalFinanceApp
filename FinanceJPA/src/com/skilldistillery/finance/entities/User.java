@@ -1,9 +1,13 @@
 package com.skilldistillery.finance.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -14,7 +18,121 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+	@OneToMany(mappedBy ="user")
+	private List<Budget> budgets;
+	@OneToMany(mappedBy ="user")
+	private List<Expense> expenses;
+	@OneToMany(mappedBy ="user")
+	private List<Income> incomes;
+	@OneToMany(mappedBy ="user")
+	private List<IncomeStream> incomeStreams;
+	@OneToMany(mappedBy ="user")
+	private List<FutureExpenses> futureExpenses;
 	
+	public void addBudget(Budget budget) {
+		if (budgets == null)
+			budgets = new ArrayList<>();
+		
+		if (!budgets.contains(budget)) {
+			budgets.add(budget);
+			budget.setUser(this);
+		}
+	}
+	public void removeBudget(Budget budget) {
+		if(budgets != null) {
+			budgets.remove(budget);
+		}
+	}
+	
+	public void removeExpense(Expense expense) {
+		if(expenses != null) {
+			expenses.remove(expense);
+		}
+	}
+	public void addExpense(Expense expense) {
+		if (expenses == null)
+			expenses = new ArrayList<>();
+		
+		if (!expenses.contains(expense)) {
+			expenses.add(expense);
+			expense.setUser(this);
+		}
+	}
+	public void removeIncome(Income income) {
+		if(incomes != null) {
+			incomes.remove(income);
+		}
+	}
+	public void addIncome(Income income) {
+		if (incomes == null)
+			incomes = new ArrayList<>();
+		
+		if (!incomes.contains(income)) {
+			incomes.add(income);
+			income.setUser(this);
+		}
+	}
+	public void removeIncomeStream(IncomeStream incomeStream) {
+		if(incomeStreams != null) {
+			incomeStreams.remove(incomeStream);
+		}
+	}
+	public void addIncomeStream(IncomeStream incomeStream) {
+		if (incomeStreams == null)
+			incomeStreams = new ArrayList<>();
+		
+		if (!incomeStreams.contains(incomeStream)) {
+			incomeStreams.add(incomeStream);
+			incomeStream.setUser(this);
+		}
+	}
+	public void removeFutureExpenses(FutureExpenses futureExpense) {
+		if(futureExpenses != null) {
+			futureExpenses.remove(futureExpense);
+		}
+	}
+	public void addFutureExpenses(FutureExpenses futureExpense) {
+		if (futureExpenses == null)
+			futureExpenses = new ArrayList<>();
+		
+		if (!futureExpenses.contains(futureExpense)) {
+			futureExpenses.add(futureExpense);
+			futureExpense.setUser(this);
+		}
+	}
+	
+	
+	
+	public List<Budget> getBudgets() {
+		return budgets;
+	}
+	public void setBudgets(List<Budget> budgets) {
+		this.budgets = budgets;
+	}
+	public List<Expense> getExpenses() {
+		return expenses;
+	}
+	public void setExpenses(List<Expense> expenses) {
+		this.expenses = expenses;
+	}
+	public List<Income> getIncomes() {
+		return incomes;
+	}
+	public void setIncomes(List<Income> incomes) {
+		this.incomes = incomes;
+	}
+	public List<IncomeStream> getIncomeStreams() {
+		return incomeStreams;
+	}
+	public void setIncomeStreams(List<IncomeStream> incomeStreams) {
+		this.incomeStreams = incomeStreams;
+	}
+	public List<FutureExpenses> getFutureExpenses() {
+		return futureExpenses;
+	}
+	public void setFutureExpenses(List<FutureExpenses> futureExpenses) {
+		this.futureExpenses = futureExpenses;
+	}
 	public int getId() {
 		return id;
 	}

@@ -11,6 +11,13 @@
     <!-- classes begin here -->    
     <!-- fix this entity!! -->
     <class>com.skilldistillery.finance.entities.User</class>
+    <class>com.skilldistillery.finance.entities.Budget</class>
+    <class>com.skilldistillery.finance.entities.Expense</class>
+    <class>com.skilldistillery.finance.entities.FutureExpenses</class>
+    <class>com.skilldistillery.finance.entities.Income</class>
+    <class>com.skilldistillery.finance.entities.IncomeStream</class>
+    <class>com.skilldistillery.finance.entities.IncomeCategory</class>
+    <class>com.skilldistillery.finance.entities.ExpenseCategory</class>
     
 
     <properties>

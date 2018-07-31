@@ -1,5 +1,9 @@
 package com.skilldistillery.finance.repo;
 
-public interface UserRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.skilldistillery.finance.entities.User;
+
+public interface UserRepo extends JpaRepository<User, Integer> {
 
 }
