@@ -12,7 +12,7 @@
 <div *ngIf="editExpense">
   <form #editExpenseForm="ngForm">
     <input type="text" name="amount" placeholder="update amount" [(ngModel)]="editExpense.amount" />
-    <input type="text" name="expenseCategory" placeholder="update category" [(ngModel)]="editExpense.expenseCategory" />
+    <input type="text" name="expenseCategory" placeholder="update category" [(ngModel)]="editExpense.expenseCategory.name" />
     <input type="date" name="date" placeholder="update date" [(ngModel)]="editExpense.date" />
     <input type="text" name="description" placeholder="update description" [(ngModel)]="editExpense.description" />
     <button (click)="updateExpense(editExpenseForm, editExpense)">Save</button>
