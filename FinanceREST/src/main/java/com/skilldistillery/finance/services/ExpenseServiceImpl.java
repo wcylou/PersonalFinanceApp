@@ -1,6 +1,5 @@
 package com.skilldistillery.finance.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +20,40 @@ public class ExpenseServiceImpl implements ExpenseService{
 	
 	@Override
 	public List<Expense> indexExpenses(String username) {
-		User user = userRepo.findOneByUsername(username);
+		User user = userRepo.findByUsername(username);
 		List<Expense> expenseList = exRepo.findByUser(user.getId());
-		
 		return expenseList;
 	}
 	
+	@Override
+	public Expense show(String username, int id) {
+		return exRepo.findByUser_UsernameAndId(username, id);
+	}
+	
+	@Override
+	public Expense create(String username, Expense expense) {
+		expense.setUser(userRepo.findByUsername(username));
+		return exRepo.saveAndFlush(expense);
+	}
+	
+	@Override
+	public Expense update(String username, int id, Expense expense) {
+		Expense e = show(username, id);
+		e.setAmount(expense.getAmount());
+		e.setDate(expense.getDate());
+		e.setDescription(expense.getDescription());
+		e.setExpenseCategory(expense.getExpenseCategory());
+		e.setUser(expense.getUser());
+		return exRepo.saveAndFlush(e);
+	}
+	
+	@Override
+	public boolean destroy(String username, int id) {
+		try {
+			exRepo.delete(show(username, id));
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

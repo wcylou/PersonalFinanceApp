@@ -10,4 +10,7 @@ import com.skilldistillery.finance.entities.Expense;
 public interface ExpenseRepo extends JpaRepository<Expense, Integer>{
 	@Query("select e from Expense e where e.user.id = :id")
 	List<Expense> findByUser(Integer id);
+	
+	Expense findByUser_UsernameAndId(String username, int id);
+	
 }
