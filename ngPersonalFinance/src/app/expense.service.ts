@@ -6,6 +6,7 @@ import { environment } from '../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Expense } from './models/expense';
+import { ExpenseCategory } from './models/expense-category';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import { Expense } from './models/expense';
 export class ExpenseService {
 
   private url = environment.baseUrl + 'api/expenses';
+  private exCatUrl = environment.baseUrl + 'api/incomeCategories';
 
   index(): Observable<Expense[]> {
     const httpOptions = {
@@ -25,6 +27,15 @@ export class ExpenseService {
       catchError((err: any) => {
         console.log('error retrieving expense index');
         return throwError('expense index error');
+      })
+    );
+  }
+
+  indexExCat() {
+    return this.http.get<ExpenseCategory[]>(this.exCatUrl).pipe(
+      catchError((err: any) => {
+        console.log('category retrieval error');
+        return throwError('error in index category');
       })
     );
   }

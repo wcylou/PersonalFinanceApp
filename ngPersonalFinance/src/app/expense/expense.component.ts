@@ -1,8 +1,10 @@
+import { ExpenseCategory } from './../models/expense-category';
 import { ExpenseService } from './../expense.service';
 import { Component, OnInit } from '@angular/core';
 import { Expense } from '../models/expense';
 import { DatePipe } from '../../../node_modules/@angular/common';
 import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
+import { NgForm } from '../../../node_modules/@angular/forms';
 
 @Component({
   selector: 'app-expense',
@@ -11,14 +13,30 @@ import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 })
 export class ExpenseComponent implements OnInit {
   expenses = [];
+  expenseCategory = [];
   selected = null;
   newExpense: Expense = new Expense();
   editExpense = null;
   destroyExpense = null;
 
-  createNewExpense(form, createExpense) {
-    console.log(createExpense);
-    console.log(createExpense.categoryId);
+  createNewExpense(form: NgForm) {
+    console.log('form');
+    console.log(form.value);
+
+    this.newExpense.amount = form.value.amount;
+    this.newExpense.date = form.value.date;
+    this.newExpense.description = form.value.description;
+
+    for (let i = 0; i < this.expenseCategory.length; i++) {
+      const element = this.expenseCategory[i];
+      if (this.expenseCategory[i].id === form.value.ExpenseCategory) {
+        this.newExpense.category = this.expenseCategory[i];
+      }
+    }
+
+    console.log('inside component, next line prints new expense');
+
+    console.log(this.newExpense);
 
     this.expenseService.create(this.newExpense).subscribe(
       data => {
@@ -94,6 +112,12 @@ export class ExpenseComponent implements OnInit {
         },
         err => console.error('loading expense list had an error: ' + err)
       );
+    this.expenseService.indexExCat().subscribe(
+      data => {
+        this.expenseCategory = data;
+      },
+      err => console.error('error inside of the category reload')
+    );
   }
 
   constructor(
