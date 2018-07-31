@@ -23,7 +23,7 @@ public class ExpenseController {
 	
 	String username = "user";
 	
-	@RequestMapping(path="expenses", method= RequestMethod.POST)
+	@RequestMapping(path="expenses", method= RequestMethod.GET)
 	public List<Expense> index() {
 		return exServ.indexExpenses(username);
 	}

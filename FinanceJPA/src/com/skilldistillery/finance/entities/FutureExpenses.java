@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Table(name = "future_expenses")
 @Entity
 public class FutureExpenses {
@@ -23,6 +25,7 @@ public class FutureExpenses {
 	private Date expectedDate;
 	private Boolean recurring;
 	private String description;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

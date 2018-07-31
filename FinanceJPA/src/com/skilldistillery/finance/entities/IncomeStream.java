@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Table(name = "income_stream")
 @Entity
 public class IncomeStream {
@@ -24,6 +26,7 @@ public class IncomeStream {
 	private Date startDate;
 	@Column(name = "recurrences_per_year")
 	private int yearlyOccurrences;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
