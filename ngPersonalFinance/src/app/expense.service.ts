@@ -12,7 +12,7 @@ import { Expense } from './models/expense';
 })
 export class ExpenseService {
 
-  private url = environment.baseUrl + 'api/expense';
+  private url = environment.baseUrl + 'api/expenses';
 
   index(): Observable<Expense[]> {
     const httpOptions = {
