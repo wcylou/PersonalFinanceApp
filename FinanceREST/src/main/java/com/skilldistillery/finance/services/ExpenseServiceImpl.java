@@ -40,7 +40,6 @@ public class ExpenseServiceImpl implements ExpenseService{
 		e.setDate(expense.getDate());
 		e.setDescription(expense.getDescription());
 		e.setExpenseCategory(expense.getExpenseCategory());
-		e.setUser(expense.getUser());
 		return exRepo.saveAndFlush(e);
 	}
 	

@@ -43,7 +43,7 @@ public class ExpenseController {
 		return exServ.update(username, id, expense);
 	}
 	
-	@RequestMapping(path="expenses", method = RequestMethod.DELETE)
+	@RequestMapping(path="expenses/{id}", method = RequestMethod.DELETE)
 	public boolean deleteExpense(@PathVariable int id) {
 		return exServ.destroy(username, id);
 	}
