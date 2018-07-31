@@ -14,8 +14,8 @@ import { BudgetComponent } from './budget/budget.component';
 import { ExpenseService } from './expense.service';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { DatePipe } from '../../node_modules/@angular/common';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -31,8 +31,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    NgbModule.forRoot()
+    // BrowserAnimationsModule,
+    // NgbModule.forRoot()
   ],
   providers: [
     BudgetService,

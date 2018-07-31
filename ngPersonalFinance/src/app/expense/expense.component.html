@@ -26,11 +26,11 @@
 <!-- create new expense item form -->
 <div *ngIf="!selected">
   <form #createExpenseRecord="ngForm">
-    <input type="text" name="amount" placeholder="amount"/>
-    <input type="number" name="categoryId" placeholder="category"/>
-    <input type="date" name="date" placeholder="date"/>
-    <input type="text" name="description" placeholder="description"/>
-    <button (click)="createNewExpense(createExpenseRecord)">Create New Record</button>
+    <input type="text" name="amount" placeholder="amount" [(ngModel)]="newExpense.amount"/>
+    <input type="number" name="categoryId" placeholder="category Id" [(ngModel)]="newExpense.category"/>
+    <input type="date" name="date" placeholder="date" [(ngModel)]="newExpense.date"/>
+    <input type="text" name="description" placeholder="description" [(ngModel)]="newExpense.description"/>
+    <button (click)="createNewExpense()">Create New Record</button>
   </form>
 </div>
 
@@ -51,6 +51,7 @@
       <tr *ngFor="let expense of expenses">
         <td>{{expense.id}}</td>
         <td>{{expense.amount}}</td>
+        <td>category holder</td>
         <!-- <td>{{expense.categoryId.id}}</td> -->
         <td>{{expense.date}}</td>
         <td>{{expense.description}}</td>
