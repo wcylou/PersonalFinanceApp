@@ -26,9 +26,8 @@ export class ExpenseComponent implements OnInit {
 
     for (let i = 0; i < this.expenseCategory.length; i++) {
       const element = this.expenseCategory[i];
-      if (this.expenseCategory[i].id === form.value.categoryId) {
-        this.newExpense.category = this.expenseCategory[i];
-        console.log();
+      if (this.expenseCategory[i].id === form.value.expenseCategory) {
+        this.newExpense.expenseCategory = this.expenseCategory[i];
       }
     }
 
@@ -39,6 +38,8 @@ export class ExpenseComponent implements OnInit {
     this.expenseService.create(this.newExpense).subscribe(
       data => {
         this.reload();
+        this.newExpense = new Expense();
+
       },
       err => {
         console.log(this.newExpense);
@@ -46,7 +47,6 @@ export class ExpenseComponent implements OnInit {
         console.error('Error in component ts: ' + err);
       }
     );
-    this.newExpense = new Expense();
   }
 
   updateExpense(form, editExpense) {

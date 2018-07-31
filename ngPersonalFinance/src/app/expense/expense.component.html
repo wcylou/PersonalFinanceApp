@@ -12,7 +12,7 @@
 <div *ngIf="editExpense">
   <form #editExpenseForm="ngForm">
     <input type="text" name="amount" placeholder="update amount" [(ngModel)]="editExpense.amount" />
-    <input type="text" name="category" placeholder="update category" [(ngModel)]="editExpense.categoryId" />
+    <input type="text" name="expenseCategory" placeholder="update category" [(ngModel)]="editExpense.expenseCategory" />
     <input type="date" name="date" placeholder="update date" [(ngModel)]="editExpense.date" />
     <input type="text" name="description" placeholder="update description" [(ngModel)]="editExpense.description" />
     <button (click)="updateExpense(editExpenseForm, editExpense)">Save</button>
@@ -27,10 +27,10 @@
 <div *ngIf="!selected">
   <form #createExpenseRecord="ngForm">
     <input type="text" name="amount" placeholder="amount" [(ngModel)]="newExpense.amount"/>
-    <input type="number" name="categoryId" placeholder="category Id" [(ngModel)]="newExpense.category"/>
+    <input type="number" name="expenseCategory" placeholder="category Id" [(ngModel)]="newExpense.expenseCategory"/>
     <input type="date" name="date" placeholder="date" [(ngModel)]="newExpense.date"/>
     <input type="text" name="description" placeholder="description" [(ngModel)]="newExpense.description"/>
-    <button (click)="createNewExpense()">Create New Record</button>
+    <button (click)="createNewExpense(createExpenseRecord)">Create New Record</button>
   </form>
 </div>
 
