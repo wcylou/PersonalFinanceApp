@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.skilldistillery.finance.entities.User;
 
 public interface UserRepo extends JpaRepository<User, Integer> {
-
+		User findOneByUsername(String username);
 }
