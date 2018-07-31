@@ -1,6 +1,6 @@
 package com.skilldistillery.finance.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +24,7 @@ public class Expense {
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	private ExpenseCategory expenseCategory;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name= "user_id")
@@ -117,8 +117,18 @@ public class Expense {
 	}
 	@Override
 	public String toString() {
-		return "Expense [id=" + id + ", amount=" + amount + ", date=" + date + ", description=" + description
-				 + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Expense [id=");
+		builder.append(id);
+		builder.append(", amount=");
+		builder.append(amount);
+		builder.append(", date=");
+		builder.append(date);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append("]");
+		return builder.toString();
 	}
+	
 
 }
