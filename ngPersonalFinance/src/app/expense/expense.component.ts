@@ -16,12 +16,17 @@ export class ExpenseComponent implements OnInit {
   editExpense = null;
   destroyExpense = null;
 
-  createNewExpense() {
+  createNewExpense(form, createExpense) {
+    console.log(createExpense);
+    console.log(createExpense.categoryId);
+
     this.expenseService.create(this.newExpense).subscribe(
       data => {
         this.reload();
       },
       err => {
+        console.log(this.newExpense);
+
         console.error('Error in component ts: ' + err);
       }
     );
@@ -82,7 +87,11 @@ export class ExpenseComponent implements OnInit {
     this.expenseService
       .index()
       .subscribe(
-        data => (this.expenses = data),
+        data => {
+          console.log(data);
+
+          (this.expenses = data);
+        },
         err => console.error('loading expense list had an error: ' + err)
       );
   }

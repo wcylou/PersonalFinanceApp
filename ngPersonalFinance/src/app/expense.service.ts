@@ -46,6 +46,10 @@ export class ExpenseService {
   }
 
   create(newExpense) {
+    console.log('inside of the service');
+
+    console.log(newExpense);
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
