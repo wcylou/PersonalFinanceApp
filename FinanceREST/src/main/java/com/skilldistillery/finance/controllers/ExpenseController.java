@@ -1,6 +1,8 @@
 package com.skilldistillery.finance.controllers;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +29,17 @@ public class ExpenseController {
 	String username = "user";
 	
 	@RequestMapping(path="expenses/between", method= RequestMethod.GET)
-	public List<Expense> expensesBetweenMonths() {
-		Date start = new Date(2016, 1, 15);
-		Date end = new Date(2018, 9, 15);
-		System.out.println(start);
-		System.out.println(end);
-		return exServ.findExpensesBetweenDates(start, end, username);
+	public List<Expense> expensesBetweenMonths() throws ParseException {
+		String start = "2017-12-30";
+		String end = "2018-6-30";
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = df.parse(start);
+		Date endDate = df.parse(end);
+		
+		
+		System.out.println(startDate);
+		System.out.println(endDate);
+		return exServ.findExpensesBetweenDates(startDate, endDate, username);
 	}
 	
 	@RequestMapping(path="expensesCategories", method= RequestMethod.GET)
