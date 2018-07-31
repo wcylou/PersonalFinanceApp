@@ -20,7 +20,7 @@ public class Income {
 	@Column(name ="date_received")
 	private Date dateReceived;
 	@ManyToOne
-	@Column(name="user_id")
+	@JoinColumn(name="user_id")
 	private User user;
 	@ManyToOne
 	@JoinColumn(name="category_id")

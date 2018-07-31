@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,10 +24,10 @@ public class FutureExpenses {
 	private Boolean recurring;
 	private String description;
 	@ManyToOne
-	@Column(name="user_id")
+	@JoinColumn(name="user_id")
 	private User user;
 	@ManyToOne
-	@Column(name="category_id")
+	@JoinColumn(name="category_id")
 	private ExpenseCategory expenseCategory;
 	public int getId() {
 		return id;
