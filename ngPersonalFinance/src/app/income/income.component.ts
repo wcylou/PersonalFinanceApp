@@ -21,15 +21,26 @@ export class IncomeComponent implements OnInit {
 
   hideIncome = false;
 
+  // Income Views
   selected = null;
   newIncome: Income = new Income();
   editIncome = null;
   incomeView = null;
-  // destroyExpense = null;
+  // Income Stream Views
   selectedStream = null;
   newIncomeStream: IncomeStream = new IncomeStream();
   editIncomeStream = null;
   incomeViewStream = null;
+
+// Switch view
+
+switchView() {
+  if (this.hideIncome === false) {
+    this.hideIncome = true;
+  } else {
+    this.hideIncome = false;
+  }
+}
 
 // Income Methods
 
@@ -117,6 +128,7 @@ export class IncomeComponent implements OnInit {
   }
 
   createNewIncomeStream(newIncomeForm: NgForm) {
+
     this.newIncomeStream.expectedAmount = newIncomeForm.value.expectedAmount;
     this.newIncomeStream.startDate = newIncomeForm.value.startDate;
     this.newIncomeStream.yearlyOccurrences = newIncomeForm.value.yearlyOccurrences;

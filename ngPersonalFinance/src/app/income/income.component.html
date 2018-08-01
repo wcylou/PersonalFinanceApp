@@ -1,4 +1,5 @@
-
+<button (click) = "switchView()">Switch View</button>
+<br>
 <div class = "income" *ngIf= "hideIncome">
 <span *ngIf="!selected"><button (click)= addView() >Add Income</button></span>
 <div *ngIf="!selected && incomeView">
@@ -63,7 +64,7 @@
 </div>
 
 
-<div class = "incomeStream">
+<div class = "incomeStream" *ngIf= "!hideIncome">
 <span *ngIf="!selectedStream"><button (click)= addViewStream() >Add Income Stream</button></span>
 <div *ngIf="!selectedStream && incomeViewStream">
     <form #createIncomeRecord="ngForm">
