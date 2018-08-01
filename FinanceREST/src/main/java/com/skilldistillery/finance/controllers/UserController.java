@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.finance.entities.Budget;
 import com.skilldistillery.finance.entities.User;
 import com.skilldistillery.finance.services.ExpenseService;
 import com.skilldistillery.finance.services.UserService;
@@ -21,6 +22,11 @@ public class UserController {
 	
 	@Autowired
 	UserService userServ;	
+	
+	@RequestMapping(path="users", method= RequestMethod.GET)
+	public List<User> index() {
+		return userServ.indexUser();
+	}
 	
 	@RequestMapping(path="users/{id}", method = RequestMethod.GET) 
 	public User getOneUser(@PathVariable int id) {

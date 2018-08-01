@@ -10,5 +10,6 @@ public interface UserService {
 	User show(int id);
 	User update(int id, User user);
 	boolean destroy(int id);
+	List<User> indexUser();
 
 }

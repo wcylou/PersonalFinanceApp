@@ -3,7 +3,7 @@ import { IncomeService } from './income.service';
 import { BudgetService } from './budget.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -14,8 +14,8 @@ import { BudgetComponent } from './budget/budget.component';
 import { ExpenseService } from './expense.service';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { DatePipe } from '../../node_modules/@angular/common';
-// import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -31,8 +31,8 @@ import { DatePipe } from '../../node_modules/@angular/common';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    // BrowserAnimationsModule,
-    // NgbModule.forRoot()
+    BrowserAnimationsModule,
+    NgbModule.forRoot()
   ],
   providers: [
     BudgetService,
