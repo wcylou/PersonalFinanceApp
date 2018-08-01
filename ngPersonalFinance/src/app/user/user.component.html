@@ -1,6 +1,6 @@
 <body>
 
-<div class = "container">
+<div class = "container" class ="inputForm">
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
@@ -57,11 +57,7 @@
       </div>
     </mat-step>
   </mat-horizontal-stepper>
-</div>
 
-
-
-<div class = "container">
 
     <br>
       <div *ngIf="selected">
