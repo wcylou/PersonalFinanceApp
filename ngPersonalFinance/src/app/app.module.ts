@@ -12,8 +12,9 @@ import { IncomeComponent } from './income/income.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { BudgetComponent } from './budget/budget.component';
 import { ExpenseService } from './expense.service';
-import { HttpClientModule } from '../../node_modules/@angular/common/http';
-import { DatePipe } from '../../node_modules/@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { FutureExpenseComponent } from './future-expense/future-expense.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -24,7 +25,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     UserComponent,
     IncomeComponent,
     ExpenseComponent,
-    BudgetComponent
+    BudgetComponent,
+    FutureExpenseComponent,
   ],
   imports: [
     BrowserModule,

@@ -58,10 +58,8 @@ public class ExpenseServiceImpl implements ExpenseService{
 	
 	@Override
 	public Expense create(String username, Expense expense) {
-		System.out.println("**********************");
-		System.out.println(expense);
-		System.out.println(expense.getExpenseCategory());
 		expense.setUser(userRepo.findByUsername(username));
+		expense.setExpenseCategory(exCatRepo.findById(expense.getExpenseCategory().getId()).get());
 		return exRepo.saveAndFlush(expense);
 	}
 	

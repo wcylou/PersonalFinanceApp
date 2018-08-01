@@ -1,7 +1,9 @@
+import { ExpenseCategory } from './expense-category';
+
 export class FutureExpense {
   id: number;
   userId: number;
-  categoryId: number;
+  expenseCategory: ExpenseCategory;
   amount: number;
   dateExpected: Date;
   recurring: boolean;
@@ -10,7 +12,7 @@ export class FutureExpense {
   constructor(
     id?: number,
     userId?: number,
-    categoryId?: number,
+    expenseCategory?: ExpenseCategory,
     amount?: number,
     dateExpected?: Date,
     recurring?: boolean,
@@ -18,7 +20,7 @@ export class FutureExpense {
   ) {
     this.id = id;
     this.userId = userId;
-    this.categoryId = categoryId;
+    this.expenseCategory = expenseCategory;
     this.amount = amount;
     this.dateExpected = dateExpected;
     this.recurring = recurring;

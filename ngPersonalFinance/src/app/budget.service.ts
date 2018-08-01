@@ -1,6 +1,6 @@
-import { environment } from './../environments/environment';
+import { environment } from '../environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '../../node_modules/@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Budget } from './models/budget';
