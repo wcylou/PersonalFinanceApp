@@ -1,24 +1,25 @@
+import { IncomeCategory } from './income-category';
 export class IncomeStream {
   id: number;
   userId: number;
-  categoryId: number;
+  incomeCategory: IncomeCategory;
   expectedAmount: number;
   startDate: Date;
-  recurrencesPerYear: number;
+  yearlyOccurrences: number;
 
   constructor(
     id?: number,
     userId?: number,
-    categoryId?: number,
+    incomeCategory?: IncomeCategory,
     expectedAmount?: number,
     startDate?: Date,
-    recurrencesPerYear?: number
+    yearlyOccurrences?: number
   ) {
     this.id = id;
     this.userId = userId;
-    this.categoryId = categoryId;
+    this.incomeCategory = incomeCategory;
     this.expectedAmount = expectedAmount;
     this.startDate = startDate;
-    this.recurrencesPerYear = recurrencesPerYear;
+    this.yearlyOccurrences = yearlyOccurrences;
   }
 }
