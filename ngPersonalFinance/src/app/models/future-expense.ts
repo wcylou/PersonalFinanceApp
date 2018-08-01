@@ -5,7 +5,7 @@ export class FutureExpense {
   userId: number;
   expenseCategory: ExpenseCategory;
   amount: number;
-  dateExpected: Date;
+  expectedDate: Date;
   recurring: boolean;
   description: string;
 
@@ -14,7 +14,7 @@ export class FutureExpense {
     userId?: number,
     expenseCategory?: ExpenseCategory,
     amount?: number,
-    dateExpected?: Date,
+    expectedDate?: Date,
     recurring?: boolean,
     description?: string
   ) {
@@ -22,7 +22,7 @@ export class FutureExpense {
     this.userId = userId;
     this.expenseCategory = expenseCategory;
     this.amount = amount;
-    this.dateExpected = dateExpected;
+    this.expectedDate = expectedDate;
     this.recurring = recurring;
     this.description = description;
   }

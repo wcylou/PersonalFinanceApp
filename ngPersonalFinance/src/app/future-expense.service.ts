@@ -55,11 +55,11 @@ export class FutureExpenseService {
             );
   }
 
-  create(newExpense) {
+  create(newFutureExpense) {
     console.log('inside of the service');
 
-    console.log(newExpense);
-    console.log(newExpense.expenseCategory);
+    console.log(newFutureExpense);
+    console.log(newFutureExpense.expenseCategory);
 
 
     const httpOptions = {
@@ -68,7 +68,7 @@ export class FutureExpenseService {
         // Authorization: `Basic ${this.authService.getToken()}`
       })
     };
-    return this.http.post<FutureExpense>(this.url, newExpense, httpOptions).pipe(
+    return this.http.post<FutureExpense>(this.url, newFutureExpense, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('create expense did not work');
@@ -77,7 +77,7 @@ export class FutureExpenseService {
   }
 
   update(expenseId: number, selectedExpense: FutureExpense) {
-    console.log('updated expense object below');
+    console.log('updated future expense object below');
 
     console.log(selectedExpense);
     const httpOptions = {

@@ -1,6 +1,5 @@
 import { FutureExpenseService } from './../future-expense.service';
 import { Component, OnInit } from '@angular/core';
-import { Expense } from '../models/expense';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -23,12 +22,21 @@ export class FutureExpenseComponent implements OnInit {
 
 
   createNewExpense(form: NgForm) {
-    console.log('new expense values');
+    console.log('new future expense values');
+    // this.newFutureExpense.expenseCategory.name = form.value.category.name;
     console.log(this.newFutureExpense);
+    console.log(form.value.category);
+    console.log(form);
+
+    if (form.value.recurring === true) {
+      this.newFutureExpense.recurring = true;
+    } else {
+      this.newFutureExpense.recurring = false;
+    }
 
 
     for (let i = 0; i < this.expenseCategory.length; i++) {
-      if (this.expenseCategory[i].name === form.value.expenseCategory.name) {
+      if (this.expenseCategory[i].name === form.value.category.name) {
         this.newFutureExpense.expenseCategory = this.expenseCategory[i];
       } else {
         this.newFutureExpense.expenseCategory = this.expenseCategory[1];
@@ -39,10 +47,11 @@ export class FutureExpenseComponent implements OnInit {
 
     console.log(this.newFutureExpense);
 
-    this.newFutureExpense.create(this.newFutureExpense).subscribe(
+    this.futureExpenseService.create(this.newFutureExpense).subscribe(
       data => {
         this.reload();
-        this.newFutureExpense = new Expense();
+        form.reset();
+        this.newFutureExpense = new FutureExpense();
 
       },
       err => {
@@ -54,17 +63,22 @@ export class FutureExpenseComponent implements OnInit {
   }
 
   updateExpense(form, editExpense) {
-    console.log('update expense log: ' + editExpense);
+    console.log('update future expense log: ' + editExpense);
     console.log(editExpense);
+    if (form.value.recurring === true) {
+      editExpense.recurring = true;
+    } else {
+      editExpense.recurring = false;
+    }
 
     this.futureExpenseService.update(editExpense.id, editExpense).subscribe(
       data => {
       this.reload();
       // editExpense = null;
+      form.reset();
       this.selected = null;
       this.expenseCategory = [];
-      this.editExpense = new Expense();
-      form.reset();
+      this.editFutureExpense = null;
     },
     err => {
       console.error('update expense had an error in component: ' + err);
@@ -97,8 +111,18 @@ export class FutureExpenseComponent implements OnInit {
       this.displayFullTable = true;
     }  }
 
+  setRecurringStatus() {
+    console.log(this.newFutureExpense.recurring);
+
+    if (this.newFutureExpense.recurring === false) {
+      this.newFutureExpense.recurring = true;
+    } else {
+      this.newFutureExpense.recurring = false;
+    }
+  }
+
   setEditExpense() {
-    this.editExpense = Object.assign({}, this.selected);
+    this.editFutureExpense = Object.assign({}, this.selected);
   }
 
   show(expense) {
@@ -137,6 +161,7 @@ export class FutureExpenseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.reload();
   }
 
 }

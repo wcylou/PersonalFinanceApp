@@ -26,12 +26,15 @@ export class ExpenseComponent implements OnInit {
 
 
     for (let i = 0; i < this.expenseCategory.length; i++) {
-      if (this.expenseCategory[i].name === form.value.expenseCategory.name) {
+      if (this.expenseCategory[i].name === form.value.category.name) {
         this.newExpense.expenseCategory = this.expenseCategory[i];
       } else {
         this.newExpense.expenseCategory = this.expenseCategory[1];
       }
     }
+
+    console.log(this.newExpense);
+
 
     console.log('inside component, next line prints new expense');
 
@@ -40,6 +43,7 @@ export class ExpenseComponent implements OnInit {
     this.expenseService.create(this.newExpense).subscribe(
       data => {
         this.reload();
+        form.reset();
         this.newExpense = new Expense();
 
       },
@@ -54,15 +58,23 @@ export class ExpenseComponent implements OnInit {
   updateExpense(form, editExpense) {
     console.log('update expense log: ' + editExpense);
     console.log(editExpense);
+    console.log(form.value.category.name);
+
+
+    for (let i = 0; i < this.expenseCategory.length; i++) {
+      if (this.expenseCategory[i].name === form.value.category.name) {
+        editExpense.expenseCategory = this.expenseCategory[i];
+      } else {
+        editExpense.expenseCategory = this.expenseCategory[1];
+      }
+    }
 
     this.expenseService.update(editExpense.id, editExpense).subscribe(
       data => {
-      this.reload();
-      // editExpense = null;
-      this.selected = null;
-      this.expenseCategory = [];
-      this.editExpense = new Expense();
-      form.reset();
+        form.reset();
+        this.selected = null;
+        this.editExpense = null;
+        this.reload();
     },
     err => {
       console.error('update expense had an error in component: ' + err);
@@ -117,6 +129,7 @@ export class ExpenseComponent implements OnInit {
         },
         err => console.error('loading expense list had an error: ' + err)
       );
+
     this.expenseService.indexExCat().subscribe(
       data => {
         this.expenseCategory = data;
