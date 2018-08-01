@@ -1,3 +1,66 @@
+<body>
+
+<div class = "container">
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your username</ng-template>
+        <mat-form-field appearance="outline" class="input-width">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" [(ngModel)]="newUser.username" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out your password</ng-template>
+        <mat-form-field appearance="outline" class="input-width">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Make it strong!" [(ngModel)]="newUser.password" [ngModelOptions]="{standalone: true}">
+            <mat-hint>E.g.skilldistillery@sd.com</mat-hint>
+          </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Fill out your email</ng-template>
+          <mat-form-field class="emailInput" appearance="outline" class="input-width">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Placeholder" [(ngModel)]="newUser.email" [ngModelOptions]="{standalone: true}">
+              <mat-hint>E.g.skilldistillery@sd.com</mat-hint>
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                  Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious (click)="addUser(newUser)">Sign Up</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+
+
+
 <div class = "container">
 
     <br>
@@ -67,7 +130,7 @@
     </form>
   </div>
 
-    <div *ngIf="createNewUser" class="container">
+    <!-- <div *ngIf="createNewUser" class="container">
       <h1>New User</h1>
       <form #newUser = "ngForm">
           <div class="row">
@@ -93,7 +156,8 @@
       </form>
       <button (click)="addUser(newUser)" class="btn btn-success">Add User</button>&nbsp;
       <button (click)="displayTable()" class="btn btn-success">Back</button>
-      </div>
+      </div> -->
 
 
     </div>
+  </body>
