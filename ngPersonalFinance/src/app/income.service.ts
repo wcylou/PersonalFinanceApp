@@ -1,9 +1,9 @@
 import { IncomeStream } from './models/income-stream';
 import { IncomeCategory } from './models/income-category';
 import { Injectable } from '@angular/core';
-import { DatePipe } from '../../node_modules/@angular/common';
-import { HttpClient, HttpHeaders } from '../../node_modules/@angular/common/http';
-import { ActivatedRoute, Router } from '../../node_modules/@angular/router';
+import { DatePipe } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';

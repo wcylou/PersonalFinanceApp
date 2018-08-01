@@ -1,50 +1,52 @@
-import { ExpenseCategory } from '../models/expense-category';
-import { ExpenseService } from '../expense.service';
+import { FutureExpenseService } from './../future-expense.service';
 import { Component, OnInit } from '@angular/core';
 import { Expense } from '../models/expense';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { FutureExpense } from '../models/future-expense';
 
 @Component({
-  selector: 'app-expense',
-  templateUrl: './expense.component.html',
-  styleUrls: ['./expense.component.css']
+  selector: 'app-future-expense',
+  templateUrl: './future-expense.component.html',
+  styleUrls: ['./future-expense.component.css']
 })
-export class ExpenseComponent implements OnInit {
-  expenses = [];
+export class FutureExpenseComponent implements OnInit {
+
+  futureExpenses = [];
   expenseCategory = [];
   selected = null;
-  newExpense: Expense = new Expense();
-  editExpense = null;
-  destroyExpense = null;
+  newFutureExpense: FutureExpense = new FutureExpense();
+  editFutureExpense = null;
+  destroyFutureExpense = null;
   displayFullTable = true;
+
 
   createNewExpense(form: NgForm) {
     console.log('new expense values');
-    console.log(this.newExpense);
+    console.log(this.newFutureExpense);
 
 
     for (let i = 0; i < this.expenseCategory.length; i++) {
       if (this.expenseCategory[i].name === form.value.expenseCategory.name) {
-        this.newExpense.expenseCategory = this.expenseCategory[i];
+        this.newFutureExpense.expenseCategory = this.expenseCategory[i];
       } else {
-        this.newExpense.expenseCategory = this.expenseCategory[1];
+        this.newFutureExpense.expenseCategory = this.expenseCategory[1];
       }
     }
 
     console.log('inside component, next line prints new expense');
 
-    console.log(this.newExpense);
+    console.log(this.newFutureExpense);
 
-    this.expenseService.create(this.newExpense).subscribe(
+    this.newFutureExpense.create(this.newFutureExpense).subscribe(
       data => {
         this.reload();
-        this.newExpense = new Expense();
+        this.newFutureExpense = new Expense();
 
       },
       err => {
-        console.log(this.newExpense);
+        console.log(this.newFutureExpense);
 
         console.error('Error in component ts: ' + err);
       }
@@ -55,7 +57,7 @@ export class ExpenseComponent implements OnInit {
     console.log('update expense log: ' + editExpense);
     console.log(editExpense);
 
-    this.expenseService.update(editExpense.id, editExpense).subscribe(
+    this.futureExpenseService.update(editExpense.id, editExpense).subscribe(
       data => {
       this.reload();
       // editExpense = null;
@@ -73,7 +75,7 @@ export class ExpenseComponent implements OnInit {
   deleteExpense(expense) {
     console.log(expense);
 
-    this.expenseService.destroy(expense).subscribe(
+    this.futureExpenseService.destroy(expense).subscribe(
       data => {
         this.reload();
       },
@@ -100,24 +102,24 @@ export class ExpenseComponent implements OnInit {
   }
 
   show(expense) {
-    this.expenseService.show(expense).subscribe(
+    this.futureExpenseService.show(expense).subscribe(
       data => expense,
       err => console.error('no expense at this location')
     );
   }
 
   reload() {
-    this.expenseService
+    this.futureExpenseService
       .index()
       .subscribe(
         data => {
           console.log(data);
 
-          (this.expenses = data);
+          (this.futureExpenses = data);
         },
         err => console.error('loading expense list had an error: ' + err)
       );
-    this.expenseService.indexExCat().subscribe(
+    this.futureExpenseService.indexExCat().subscribe(
       data => {
         this.expenseCategory = data;
       },
@@ -125,14 +127,16 @@ export class ExpenseComponent implements OnInit {
     );
   }
 
+
+
   constructor(
-    private expenseService: ExpenseService,
     private datePipe: DatePipe,
     private currentRoute: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private futureExpenseService: FutureExpenseService
+  ) { }
 
   ngOnInit() {
-    this.reload();
   }
+
 }

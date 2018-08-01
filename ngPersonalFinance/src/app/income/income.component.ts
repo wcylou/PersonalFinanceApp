@@ -1,10 +1,10 @@
-import { ExpenseCategory } from './../models/expense-category';
-import { IncomeService } from './../income.service';
+import { ExpenseCategory } from '../models/expense-category';
+import { IncomeService } from '../income.service';
 import { Component, OnInit } from '@angular/core';
 import { Expense } from '../models/expense';
-import { DatePipe } from '../../../node_modules/@angular/common';
-import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
-import { NgForm } from '../../../node_modules/@angular/forms';
+import { DatePipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 import { Income } from '../models/income';
 import { IncomeStream } from '../models/income-stream';
 

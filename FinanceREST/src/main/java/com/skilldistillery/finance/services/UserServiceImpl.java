@@ -1,5 +1,7 @@
 package com.skilldistillery.finance.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,11 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserRepo userRepo;
+	
+	@Override
+	public List<User> indexUser() {
+		return userRepo.findAll();
+	}
 	
 	@Override
 	public User show(int id) {
