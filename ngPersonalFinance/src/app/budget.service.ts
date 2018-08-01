@@ -14,7 +14,7 @@ import { ExpenseCategory } from './models/expense-category';
 export class BudgetService {
 
   private url = environment.baseUrl + 'api/budget';
-  private url2 = environment.baseUrl + 'api/expensesCategories';
+  private url2 = environment.baseUrl + 'api/expenses/categories';
 
   index() {
     return this.http.get<Budget[]>(this.url)
@@ -47,7 +47,7 @@ export class BudgetService {
   }
 
   update(budget: Budget) {
-    return this.http.put<Budget>(this.url + '/' + budget.id, Budget)
+    return this.http.patch<Budget>(this.url + '/' + budget.id, budget)
     .pipe(
       catchError((err: any) => {
        console.log(err);
