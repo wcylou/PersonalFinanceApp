@@ -16,4 +16,6 @@ public interface BudgetService {
 
 	List<Budget> indexBudget(String username);
 
+	List<Budget> findBudgetByCategory(String username, int id);
+
 }
