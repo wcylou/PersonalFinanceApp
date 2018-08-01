@@ -1,0 +1,66 @@
+<!-- display single record -->
+<div *ngIf="selected && !editExpense">
+    <p>Id: {{selected.id}}</p>
+    <p>Amount: {{selected.amount}}</p>
+    <p>Category: {{selected.categoryId}}</p>
+    <p>Date: {{selected.date}}</p>
+    <p>Description: {{selected.description}}</p>
+    <button (click)="setEditExpense()">Edit Entry</button>
+  </div>
+
+  <!-- edit selected expense -->
+  <div *ngIf="editFutureExpense && selected">
+    <form #editExpenseForm="ngForm">
+      <input type="text" name="amount" placeholder="update amount" [(ngModel)]="editFutureExpense.amount" />
+      <input type="expenseCategory" name="expenseCategory" placeholder="update category" [(ngModel)]="editFutureExpense.expenseCategory.name" />
+      <input type="date" name="date" placeholder="update date" [(ngModel)]="editFutureExpense.date" />
+      <input type="text" name="description" placeholder="update description" [(ngModel)]="editFutureExpense.description" />
+      <button (click)="updateExpense(editExpenseForm, editFutureExpense)">Save</button>
+      <button (click)="editTodo = null">Cancel</button>
+    </form>
+  </div>
+
+
+
+
+  <!-- create new expense item form -->
+  <div *ngIf="!selected">
+    <form #createExpenseRecord="ngForm">
+      <input type="text" name="amount" placeholder="amount" [(ngModel)]="newFutureExpense.amount"/>
+      <input type="expenseCategory" name="expenseCategory" placeholder="category" (ngModel)="newFutureExpense.expenseCategory.name"/>
+      <input type="date" name="date" placeholder="date" [(ngModel)]="newFutureExpense.dateExpected"/>
+      <input type="text" name="description" placeholder="description" [(ngModel)]="newFutureExpense.description"/>
+      <button (click)="createNewExpense(createExpenseRecord)">Create New Record</button>
+    </form>
+  </div>
+
+  <button (click)="displayTable()" *ngIf="selected">Bring back that table!</button>
+  <button (click)="displayTable()" *ngIf="!selected">Hide that table!</button>
+
+  <!-- full list of expenses -->
+  <div  *ngIf="!selected && displayFullTable">
+    <table>
+      <thead>
+        <h3>Full Table of Expenses</h3>
+      </thead>
+      <tr>
+        <td>Id</td>
+        <td>Amount</td>
+        <td>Category Id</td>
+        <td>Date</td>
+        <td>Description</td>
+      </tr>
+      <tbody>
+        <tr *ngFor="let futureExpense of futureExpenses">
+          <td>{{futureExpense.id}}</td>
+          <td>{{futureExpense.amount}}</td>
+          <td>{{futureExpense.expenseCategory.name}}</td>
+          <!-- <td>{{expense.categoryId.id}}</td> -->
+          <td>{{futureExpense.date}}</td>
+          <td>{{futureExpense.description}}</td>
+          <button (click)="displayExpense(futureExpense)">Display Alone</button>
+          <button (click)="deleteExpense(futureExpense.id)">Delete Record</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>

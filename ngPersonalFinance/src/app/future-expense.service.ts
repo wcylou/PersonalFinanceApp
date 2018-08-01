@@ -1,3 +1,4 @@
+import { FutureExpense } from './models/future-expense';
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -5,25 +6,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Expense } from './models/expense';
 import { ExpenseCategory } from './models/expense-category';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ExpenseService {
-
-  private url = environment.baseUrl + 'api/expenses';
+export class FutureExpenseService {
+  private url = environment.baseUrl + 'api/futureExpense';
   private exCatUrl = environment.baseUrl + 'api/expenses/categories';
 
-  index(): Observable<Expense[]> {
+  index(): Observable<FutureExpense[]> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         // Authorization: `Basic ${this.authService.getToken()}`
       })
     };
-    return this.http.get<Expense[]>(this.url, httpOptions).pipe(
+    return this.http.get<FutureExpense[]>(this.url, httpOptions).pipe(
       catchError((err: any) => {
         console.log('error retrieving expense index');
         return throwError('expense index error');
@@ -47,7 +46,7 @@ export class ExpenseService {
         // Authorization: `Basic ${this.authService.getToken()}`
       })
     };
-    return this.http.get<Expense>(this.url + '/' + selectedExpenseId, httpOptions)
+    return this.http.get<FutureExpense>(this.url + '/' + selectedExpenseId, httpOptions)
             .pipe(
               catchError((err: any) => {
                 console.log(err);
@@ -69,7 +68,7 @@ export class ExpenseService {
         // Authorization: `Basic ${this.authService.getToken()}`
       })
     };
-    return this.http.post<Expense>(this.url, newExpense, httpOptions).pipe(
+    return this.http.post<FutureExpense>(this.url, newExpense, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('create expense did not work');
@@ -77,7 +76,7 @@ export class ExpenseService {
     );
   }
 
-  update(expenseId: number, selectedExpense: Expense) {
+  update(expenseId: number, selectedExpense: FutureExpense) {
     console.log('updated expense object below');
 
     console.log(selectedExpense);
@@ -87,7 +86,7 @@ export class ExpenseService {
         // Authorization: `Basic ${this.authService.getToken()}`
       })
     };
-    return this.http.patch<Expense>(
+    return this.http.patch<FutureExpense>(
       this.url + '/' + expenseId, selectedExpense, httpOptions
     );
   }
@@ -99,10 +98,8 @@ export class ExpenseService {
         // Authorization: `Basic ${this.authService.getToken()}`
       })
     };
-    return this.http.delete<Expense>(this.url + '/' + expenseId, httpOptions);
+    return this.http.delete<FutureExpense>(this.url + '/' + expenseId, httpOptions);
   }
-
-
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
