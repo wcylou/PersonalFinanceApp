@@ -18,6 +18,7 @@ export class ExpenseComponent implements OnInit {
   newExpense: Expense = new Expense();
   editExpense = null;
   destroyExpense = null;
+  displayFullTable = true;
 
   createNewExpense(form: NgForm) {
     console.log('new expense values');
@@ -25,9 +26,10 @@ export class ExpenseComponent implements OnInit {
 
 
     for (let i = 0; i < this.expenseCategory.length; i++) {
-      const element = this.expenseCategory[i];
-      if (this.expenseCategory[i].id === form.value.expenseCategory) {
+      if (this.expenseCategory[i].name === form.value.expenseCategory.name) {
         this.newExpense.expenseCategory = this.expenseCategory[i];
+      } else {
+        this.newExpense.expenseCategory = this.expenseCategory[1];
       }
     }
 
@@ -53,18 +55,19 @@ export class ExpenseComponent implements OnInit {
     console.log('update expense log: ' + editExpense);
     console.log(editExpense);
 
-
     this.expenseService.update(editExpense.id, editExpense).subscribe(
       data => {
       this.reload();
-      editExpense = null;
+      // editExpense = null;
+      this.selected = null;
+      this.expenseCategory = [];
+      this.editExpense = new Expense();
       form.reset();
     },
     err => {
       console.error('update expense had an error in component: ' + err);
     }
   );
-  this.editExpense = new Expense();
   }
 
   deleteExpense(expense) {
@@ -85,8 +88,12 @@ export class ExpenseComponent implements OnInit {
   }
 
   displayTable() {
-    this.selected = null;
-  }
+    if (this.displayFullTable === true) {
+      this.displayFullTable = false;
+    } else {
+      this.selected = null;
+      this.displayFullTable = true;
+    }  }
 
   setEditExpense() {
     this.editExpense = Object.assign({}, this.selected);

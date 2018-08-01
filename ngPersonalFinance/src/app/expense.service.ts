@@ -14,7 +14,7 @@ import { ExpenseCategory } from './models/expense-category';
 export class ExpenseService {
 
   private url = environment.baseUrl + 'api/expenses';
-  private exCatUrl = environment.baseUrl + 'api/expensesCategories';
+  private exCatUrl = environment.baseUrl + 'api/expenses/categories';
 
   index(): Observable<Expense[]> {
     const httpOptions = {
@@ -60,6 +60,8 @@ export class ExpenseService {
     console.log('inside of the service');
 
     console.log(newExpense);
+    console.log(newExpense.expenseCategory);
+
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -76,6 +78,9 @@ export class ExpenseService {
   }
 
   update(expenseId: number, selectedExpense: Expense) {
+    console.log('updated expense object below');
+
+    console.log(selectedExpense);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

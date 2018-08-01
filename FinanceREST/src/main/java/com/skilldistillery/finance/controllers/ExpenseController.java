@@ -68,6 +68,10 @@ public class ExpenseController {
 	
 	@RequestMapping(path="expenses", method = RequestMethod.POST) 
 	public Expense createExpense(@RequestBody Expense expense) {
+		System.out.println("+++++++ controller print out create");
+		System.out.println(expense);
+		System.out.println(expense.getExpenseCategory());
+		System.out.println(expense.getExpenseCategory().getId());
 		return exServ.create(username, expense);
 	}
 	

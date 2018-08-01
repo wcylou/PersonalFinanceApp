@@ -2,6 +2,7 @@ package com.skilldistillery.finance.entities;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ public class Expense {
 	private Date date;
 	private String description;
 	
-	@ManyToOne
+	@ManyToOne (cascade = {CascadeType.ALL})
 	@JoinColumn(name="category_id")
 	private ExpenseCategory expenseCategory;
 
