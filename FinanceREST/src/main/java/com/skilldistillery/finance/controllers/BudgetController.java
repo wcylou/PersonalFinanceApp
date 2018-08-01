@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.finance.entities.Budget;
-import com.skilldistillery.finance.entities.Expense;
 import com.skilldistillery.finance.services.BudgetService;
 
 @CrossOrigin({"*", "http://localhost:4200"})
@@ -23,6 +22,13 @@ public class BudgetController {
 	BudgetService budServ;
 	
 	String username = "user";
+	
+	
+	@RequestMapping(path="budget/categories/{id}", method = RequestMethod.GET)
+	public List<Budget> expensesByCategory(@PathVariable int id) {
+		System.out.println(id);
+		return budServ.findBudgetByCategory(username, id);
+	}
 	
 	@RequestMapping(path="budget", method= RequestMethod.GET)
 	public List<Budget> index() {

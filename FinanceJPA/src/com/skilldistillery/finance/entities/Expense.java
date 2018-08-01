@@ -22,7 +22,7 @@ public class Expense {
 	private Date date;
 	private String description;
 	
-	@ManyToOne (cascade = {CascadeType.ALL})
+	@ManyToOne (cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="category_id")
 	private ExpenseCategory expenseCategory;
 
