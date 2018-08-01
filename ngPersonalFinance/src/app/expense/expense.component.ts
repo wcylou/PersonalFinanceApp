@@ -23,21 +23,19 @@ export class ExpenseComponent implements OnInit {
   createNewExpense(form: NgForm) {
     console.log('new expense values');
     console.log(this.newExpense);
+    console.log(form.value.category);
 
 
     for (let i = 0; i < this.expenseCategory.length; i++) {
-      if (this.expenseCategory[i].name === form.value.category.name) {
-        this.newExpense.expenseCategory = this.expenseCategory[i];
+      if (this.expenseCategory[i].name === form.value.category) {
+        this.newExpense.expenseCategory.name = this.expenseCategory[i].name;
+        this.newExpense.expenseCategory.id = this.expenseCategory[i].id;
       } else {
-        this.newExpense.expenseCategory = this.expenseCategory[1];
+        this.newExpense.expenseCategory = this.expenseCategory[0];
       }
     }
-
     console.log(this.newExpense);
-
-
     console.log('inside component, next line prints new expense');
-
     console.log(this.newExpense);
 
     this.expenseService.create(this.newExpense).subscribe(
@@ -58,12 +56,12 @@ export class ExpenseComponent implements OnInit {
   updateExpense(form, editExpense) {
     console.log('update expense log: ' + editExpense);
     console.log(editExpense);
-    console.log(form.value.category.name);
 
 
     for (let i = 0; i < this.expenseCategory.length; i++) {
-      if (this.expenseCategory[i].name === form.value.category.name) {
-        editExpense.expenseCategory = this.expenseCategory[i];
+      if (this.expenseCategory[i].name === form.value.category) {
+        this.editExpense.expenseCategory.name = this.expenseCategory[i].name;
+        this.editExpense.expenseCategory.id = this.expenseCategory[i].id;
       } else {
         editExpense.expenseCategory = this.expenseCategory[1];
       }

@@ -23,7 +23,6 @@ export class FutureExpenseComponent implements OnInit {
 
   createNewExpense(form: NgForm) {
     console.log('new future expense values');
-    // this.newFutureExpense.expenseCategory.name = form.value.category.name;
     console.log(this.newFutureExpense);
     console.log(form.value.category);
     console.log(form);
@@ -36,10 +35,11 @@ export class FutureExpenseComponent implements OnInit {
 
 
     for (let i = 0; i < this.expenseCategory.length; i++) {
-      if (this.expenseCategory[i].name === form.value.category.name) {
-        this.newFutureExpense.expenseCategory = this.expenseCategory[i];
+      if (this.expenseCategory[i].name === form.value.category) {
+        this.newFutureExpense.expenseCategory.name = this.expenseCategory[i].name;
+        this.newFutureExpense.expenseCategory.id = this.expenseCategory[i].id;
       } else {
-        this.newFutureExpense.expenseCategory = this.expenseCategory[1];
+        this.newFutureExpense.expenseCategory = this.expenseCategory[0];
       }
     }
 
@@ -69,6 +69,15 @@ export class FutureExpenseComponent implements OnInit {
       editExpense.recurring = true;
     } else {
       editExpense.recurring = false;
+    }
+
+    for (let i = 0; i < this.expenseCategory.length; i++) {
+      if (this.expenseCategory[i].name === form.value.category) {
+        this.editFutureExpense.expenseCategory.name = this.expenseCategory[i].name;
+        this.editFutureExpense.expenseCategory.id = this.expenseCategory[i].id;
+      } else {
+        this.newFutureExpense.expenseCategory = this.expenseCategory[0];
+      }
     }
 
     this.futureExpenseService.update(editExpense.id, editExpense).subscribe(
