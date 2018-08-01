@@ -98,6 +98,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 	@Override
 	public FutureExpense createFex(String username, FutureExpense futureExpense) {
 		futureExpense.setUser(userRepo.findByUsername(username));
+		futureExpense.setExpenseCategory(exCatRepo.findById(futureExpense.getExpenseCategory().getId()).get());
 		return fexRepo.saveAndFlush(futureExpense);
 	}
 	
