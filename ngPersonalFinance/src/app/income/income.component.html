@@ -1,3 +1,132 @@
-<p>
-  income works!
-</p>
+
+<div class = "income" *ngIf= "hideIncome">
+<span *ngIf="!selected"><button (click)= addView() >Add Income</button></span>
+<div *ngIf="!selected && incomeView">
+    <form #createIncomeRecord="ngForm">
+      <input type="number" name="amount" placeholder="amount" ngModel />
+      <input type="date" name="dateReceived" placeholder="date" ngModel/>
+          <select name="category" ngModel>
+              <option *ngFor="let category of incomeCategories" >{{category.name}}</option>
+            </select>
+      <button type = "submit" (click) = "createNewIncome(createIncomeRecord)">Add New Record</button>
+    </form>
+  </div>
+
+
+<div  *ngIf="!selected">
+  <table class = "table table-striped">
+    <thead class = "thead-dark">
+      <h3>Income Table</h3>
+    <tr>
+      <th>Id</th>
+      <th>Amount</th>
+      <th>Category</th>
+      <th colspan="2">Date</th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr *ngFor="let income of incomes">
+        <td>{{income.id}}</td>
+        <td>{{income.amount}}</td>
+        <td>{{income.incomeCategory.name}}</td>
+        <!-- <td>{{expense.categoryId.id}}</td> -->
+        <td>{{income.dateReceived | date }}</td>
+        <button (click)="displayIncome(income)">View</button>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="selected && !editIncome">
+  <span>
+    <button (click)="deleteIncome(selected.id)">Delete</button>
+    <button (click)="setEditIncome()">Edit</button>
+    <button (click)="viewAll()">Back</button>
+  </span>
+  <h5>{{selected.id}}</h5>
+  <ul>
+    <li>{{selected.amount}}</li>
+    <li>{{selected.incomeCategory.name}}</li>
+    <li>{{selected.dateReceived | date: 'fullDate'}}</li>
+  </ul>
+</div>
+<div *ngIf="editIncome">
+    <form #editIncomeRecord="ngForm">
+      <input type="number" name="amount" [(ngModel)]="editIncome.amount"/>
+      <input type="date" name="dateReceived" [(ngModel)]="editIncome.dateReceived"/>
+          <select name="category" [(ngModel)]= "editIncome.category">
+              <option *ngFor="let category of incomeCategories" >{{category.name}}</option>
+            </select>
+      <button type = "submit" (click) = "updateIncome(editIncomeRecord)">Save Record</button>
+      <button type = "submit" (click) = "backToSelected()">Back</button>
+    </form>
+  </div>
+</div>
+
+
+<div class = "incomeStream">
+<span *ngIf="!selectedStream"><button (click)= addViewStream() >Add Income Stream</button></span>
+<div *ngIf="!selectedStream && incomeViewStream">
+    <form #createIncomeRecord="ngForm">
+      <input type="number" name="expectedAmount" placeholder="Expected Amount" ngModel />
+      <input type="date" name="startDate" placeholder="Start Date" ngModel/>
+      <input type="number" name="yearlyOccurrences" placeholder="Yearly Occurrences" ngModel/>
+          <select name="category" ngModel>
+              <option *ngFor="let category of incomeCategories" >{{category.name}}</option>
+            </select>
+      <button type = "submit" (click) = "createNewIncomeStream(createIncomeRecord)">Add New Record</button>
+    </form>
+  </div>
+
+
+<div  *ngIf="!selectedStream">
+  <table class = "table table-striped">
+    <thead class = "thead-dark">
+      <h3>IncomeStream Table</h3>
+    <tr>
+      <th>Id</th>
+      <th>Expected Amount</th>
+      <th>Occurences per Year</th>
+      <th>Category</th>
+      <th colspan="2">Start Date</th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr *ngFor="let income of incomeStreams">
+        <td>{{income.id}}</td>
+        <td>{{income.expectedAmount}}</td>
+        <td>{{income.yearlyOccurrences}}</td>
+        <td>{{income.incomeCategory.name}}</td>
+        <!-- <td>{{expense.categoryId.id}}</td> -->
+        <td>{{income.startDate | date }}</td>
+        <button (click)="displayIncomeStream(income)">View</button>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="selectedStream && !editIncomeStream">
+  <span>
+    <button (click)="deleteIncomeStream(selectedStream.id)">Delete</button>
+    <button (click)="setEditIncomeStream()">Edit</button>
+    <button (click)="viewAllStream()">Back</button>
+  </span>
+  <h5>{{selectedStream.id}}</h5>
+  <ul>
+    <li>{{selectedStream.expectedAmount}}</li>
+    <li>{{selectedStream.yearlyOccurrences}}</li>
+    <li>{{selectedStream.incomeCategory.name}}</li>
+    <li>{{selectedStream.startDate | date: 'fullDate'}}</li>
+  </ul>
+</div>
+<div *ngIf="editIncomeStream">
+    <form #editIncomeRecord="ngForm">
+      <input type="number" name="expectedAmount" [(ngModel)]="editIncomeStream.expectedAmount"/>
+      <input type="date" name="startDate" [(ngModel)]="editIncomeStream.startDate"/>
+      <input type="number" name="yearlyOccurrences" [(ngModel)]="editIncomeStream.yearlyOccurrences"/>
+          <select name="category" [(ngModel)]= "editIncomeStream.category">
+              <option *ngFor="let category of incomeCategories" >{{category.name}}</option>
+            </select>
+      <button type = "submit" (click) = "updateIncomeStream(editIncomeRecord)">Save Record</button>
+      <button type = "submit" (click) = "backToSelectedStream()">Back</button>
+    </form>
+  </div>
+</div>
