@@ -18,6 +18,11 @@ public class BudgetServiceImpl implements BudgetService{
 	UserRepo userRepo;
 	
 	@Override
+	public List<Budget> findBudgetByCategory(String username, int id) {
+		return budRepo.findByUser_UsernameAndExpenseCategory_Id(username, id);
+	}
+	
+	@Override
 	public List<Budget> indexBudget(String username) {
 		return budRepo.findByUser_Username(username);
 	}
