@@ -75,7 +75,7 @@ public class IncomeController {
 	
 	@RequestMapping(path="incomeStream/{id}", method = RequestMethod.DELETE)
 	public boolean deleteIncomeStream(@PathVariable int id) {
-		return inServ.destroy(username, id);
+		return inServ.destroyIncomeStream(username, id);
 	}
 	
 	

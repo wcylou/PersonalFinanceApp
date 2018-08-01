@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {NgForm, FormControl} from '@angular/forms';
 import { UserService } from '../user.service';
 import { User } from '../models/user';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -9,6 +10,14 @@ import { User } from '../models/user';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
+  emailFormControl = new FormControl('', [
+  Validators.required,
+  Validators.email, ]);
+
 
   users = [];
   selected = null;
@@ -35,15 +44,18 @@ export class UserComponent implements OnInit {
     this.createNewUser = true;
   }
 
-  addUser(form: NgForm) {
-    this.newUser.username = form.value.username;
-    this.newUser.password = form.value.password;
-    this.newUser.email = form.value.email;
+  addUser() {
+    // this.newUser.username = form.value.username;
+    // this.newUser.password = form.value.password;
+    // this.newUser.email = form.value.email;
+
+
+    console.log(this.newUser);
+
 
     this.userService.create(this.newUser).subscribe(
             data => {
               this.newUser = new User();
-              form.reset();
               this.createNewUser = null;
               this.reload();
             },
@@ -99,10 +111,19 @@ export class UserComponent implements OnInit {
   }
 
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.reload();
+    this.firstFormGroup = this._formBuilder.group({
+      username: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      password: ['', Validators.required]
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      email: ['', Validators.required]
+    });
   }
 
 }
