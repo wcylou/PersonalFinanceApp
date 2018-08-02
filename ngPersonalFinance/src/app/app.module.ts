@@ -48,7 +48,8 @@ import { ChartsModule } from 'ng2-charts';
     FormInputComponent,
     AllDataTableComponent,
     PagePipePipe,
-    HomeComponent
+    HomeComponent,
+    AllDataTableComponent
   ],
   imports: [
     FormsModule,
