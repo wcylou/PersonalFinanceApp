@@ -60,6 +60,7 @@ export class AllDataTableComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  // toggle switches for showing tables
   toggleExpensesTable() {
     if (this.showExpensesTable === false) {
       this.showExpensesTable = true;
