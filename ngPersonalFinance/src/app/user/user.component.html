@@ -10,7 +10,7 @@
             <input matInput placeholder="Username" [(ngModel)]="newUser.username" [ngModelOptions]="{standalone: true}">
           </mat-form-field>
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
@@ -19,12 +19,12 @@
         <ng-template matStepLabel><span class = "formLabel">Fill out your password</span></ng-template>
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Password</mat-label>
-            <input matInput placeholder="Make it strong!" [(ngModel)]="newUser.password" [ngModelOptions]="{standalone: true}">
-            <mat-hint>E.g.skilldistillery@sd.com</mat-hint>
+           <input matInput placeholder="Make it strong!" [(ngModel)]="newUser.password" [ngModelOptions]="{standalone: true}">
+            <mat-hint>6-13 characters including 1 alphanumeric</mat-hint>
           </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-raised-button color="primary" matStepperPrevious>Back</button>&nbsp;
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
@@ -43,8 +43,8 @@
                 </mat-error>
             </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>&nbsp;
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
           </div>
         </form>
       </mat-step>
@@ -52,8 +52,8 @@
       <ng-template matStepLabel>Done</ng-template>
       You are now done.
       <div>
-        <button mat-button matStepperPrevious (click)="addUser(newUser)">Sign Up</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-raised-button color="primary" matStepperPrevious (click)="addUser(newUser)">Sign Up</button>&nbsp;
+        <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

@@ -24,10 +24,16 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
+<<<<<<< HEAD
 import { AllDataTableComponent } from './all-data-table/all-data-table.component';
 
 import { MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule } from '@angular/material';
+=======
+import { CategoryPieChartComponent } from './category-pie-chart/category-pie-chart.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+>>>>>>> 8e5d86d1ae2a11b8f5582d21e03731e49e6d7176
 import { FormInputComponent } from './form-input/form-input.component';
 
 
@@ -39,6 +45,7 @@ import { FormInputComponent } from './form-input/form-input.component';
     ExpenseComponent,
     BudgetComponent,
     FutureExpenseComponent,
+    CategoryPieChartComponent,
     FormInputComponent,
   imports: [
     FormsModule,
@@ -53,10 +60,7 @@ import { FormInputComponent } from './form-input/form-input.component';
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
-    MatTableModule
+    MatToolbarModule
   ],
   providers: [
     BudgetService,

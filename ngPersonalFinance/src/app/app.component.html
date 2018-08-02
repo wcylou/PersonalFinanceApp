@@ -1,24 +1,61 @@
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+  </head>
+<mat-toolbar color="primary">
+<mat-toolbar-row>
+    <span>    Welcome to Moonlight Confetti Personal Finance!
+      <i class="fas fa-moon fa-lg" ></i>&nbsp;
+      <i class="fas fa-dollar-sign fa-lg"></i>&nbsp;
+      <i class="fas fa-euro-sign fa-lg"></i>&nbsp;
+      <i class="fas fa-pound-sign fa-lg"></i>&nbsp;
+      <i class="fab fa-btc fa-lg"></i>&nbsp;
+      <i class="fas fa-yen-sign fa-lg"></i>&nbsp;
+
+
+    </span>
+
+  </mat-toolbar-row>
+</mat-toolbar>
 
 <mat-sidenav-container class="example-container">
     <mat-sidenav mode="side" opened>
-      <h3>Menu</h3>
-      <button class = "btn btn-primary"><a>Expenses</a></button><br><br>
-      <button class = "btn btn-primary"><a>Chart</a></button><br><br>
-      <button class = "btn btn-primary"><a>Account</a></button><br><br>
-      <button class = "btn btn-primary"><a>Logout</a></button><br><br>
-
+      <br>
+      <button mat-raised-button color="primary"><a [routerLink]="[{outlets:{user:['user']}}]">Sign Up</a></button><br><br>
+      <button mat-raised-button color="primary"><a [routerLink]="['/home']">Expenses</a></button><br><br>
+      <button mat-raised-button color="primary"><a [routerLink]="['/chart']">Chart</a></button><br><br>
+      <button mat-raised-button color="primary"><a [routerLink]="['/account']">Account</a></button><br><br>
+      <button mat-raised-button color="primary"><a [routerLink]="['/home']">Logout</a></button><br><br>
     </mat-sidenav>
+    <body>
+
+<div class="container">
+  <br>
+  <div class="row">
+      <div class="col-lg-12">
+          <router-outlet name="user"></router-outlet>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
 <div style="text-align:center">
   <h1>
     Welcome to Moonlight Confetti Personal Finance!
   </h1>
   <h3>title is a work in progress</h3>
 </div>
-    <mat-sidenav-content>
-        <!-- <app-user>loading budget...</app-user> -->
-        <!-- <app-income>loading budget...</app-income> -->
-        <!-- <app-budget>loading budget...</app-budget> -->
-        <!-- <app-expense>  expense...</app-expense> -->
-        <app-all-data-table>all data table</app-all-data-table>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+<!-- <app-expense>  expense...</app-expense> -->
+<!-- <app-income>loading income...</app-income> -->
+<!-- <app-user>loading user...</app-user> -->
+<!-- <app-user>loading user...</app-user> -->
+<!-- <app-future-expense>loading future expenses</app-future-expense> -->
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-lg-12">
+
+    </div>
+  </div>
+</div>
+</body>
+
