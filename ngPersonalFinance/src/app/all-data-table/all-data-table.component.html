@@ -1,0 +1,31 @@
+<div>
+  <mat-paginator [length]="expenses.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+
+  <mat-table class="all-data-table" [dataSource]="expenses">
+
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+      <mat-cell *matCellDef="let expenses">{{expenses.amount}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="expenseCategory">
+      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-cell *matCellDef="let expenses">{{expenses.expenseCategory.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let expenses">{{expenses.date}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let expenses">{{expenses.description}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsExpenses"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumnsExpenses" (click)="onExpenseRowClicked(row)"></mat-row>
+
+  </mat-table>
+</div>
