@@ -9,4 +9,4 @@ export class IncomeCategory {
     this.id = id;
     this.name = name;
   }
-}x§
+}
