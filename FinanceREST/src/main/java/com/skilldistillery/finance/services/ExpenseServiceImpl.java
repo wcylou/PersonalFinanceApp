@@ -1,7 +1,9 @@
 package com.skilldistillery.finance.services;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,38 @@ public class ExpenseServiceImpl implements ExpenseService{
 	FutureExpenseRepo fexRepo;
 	
 	// Aggregate Functions
+	
+	@Override
+	public Map<String, Double> sortExpensesByCategory(String username) {
+	Map<String, Double> aggCat = new HashMap<>();
+	List<Expense> allExpenses = indexExpenses(username);
+	for (int i = 0; i < allExpenses.size(); i++) {
+		if (!aggCat.containsKey(allExpenses.get(i).getExpenseCategory().getName())) {
+			aggCat.put(allExpenses.get(i).getExpenseCategory().getName(), allExpenses.get(i).getAmount());
+		}
+		else {
+			aggCat.put(allExpenses.get(i).getExpenseCategory().getName(), 
+			aggCat.get(allExpenses.get(i).getExpenseCategory().getName()) + allExpenses.get(i).getAmount());
+		}
+	}
+	return aggCat;
+	}
+	
+	@Override
+	public Map<String, Double> sortExpensesByCategoryAndDate(String username, Date inputDate, Date todayDate) {
+		Map<String, Double> aggCat = new HashMap<>();
+		List<Expense> allExpenses = findExpensesBetweenDates(inputDate, todayDate, username);
+		for (int i = 0; i < allExpenses.size(); i++) {
+			if (!aggCat.containsKey(allExpenses.get(i).getExpenseCategory().getName())) {
+				aggCat.put(allExpenses.get(i).getExpenseCategory().getName(), allExpenses.get(i).getAmount());
+			}
+			else {
+				aggCat.put(allExpenses.get(i).getExpenseCategory().getName(), 
+				aggCat.get(allExpenses.get(i).getExpenseCategory().getName()) + allExpenses.get(i).getAmount());
+			}
+		}
+		return aggCat;
+	}
 	
 	@Override
 	public List<Expense> findExpensesBetweenDates(Date start, Date end, String username) {	
