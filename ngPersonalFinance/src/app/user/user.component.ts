@@ -45,6 +45,7 @@ export class UserComponent implements OnInit {
   }
 
   addUser() {
+
     this.userService.create(this.newUser).subscribe(
             data => {
               this.newUser = new User();
@@ -53,6 +54,7 @@ export class UserComponent implements OnInit {
             },
             err => console.error('User create error' + err)
           );
+
   }
 
   setEditUser() {
