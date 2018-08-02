@@ -24,6 +24,7 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { FormInputComponent } from './form-input/form-input.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     ExpenseComponent,
     BudgetComponent,
     FutureExpenseComponent,
+    FormInputComponent,
   ],
   imports: [
     BrowserModule,
