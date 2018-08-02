@@ -1,3 +1,4 @@
+import { CategoryPieChartComponent } from './category-pie-chart/category-pie-chart.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserService } from './user.service';
 import { IncomeService } from './income.service';
@@ -30,11 +31,7 @@ import { AllDataTableComponent } from './all-data-table/all-data-table.component
 import { MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule } from '@angular/material';
 import { FormInputComponent } from './form-input/form-input.component';
-<<<<<<< HEAD
 import { HomeComponent } from './home/home.component';
-=======
-import { CategoryPieChartComponent } from './category-pie-chart/category-pie-chart.component';
->>>>>>> 8b1c9a51b20e1980ce033d076beb1b0b5eeb0f8f
 
 
 @NgModule({
@@ -47,11 +44,7 @@ import { CategoryPieChartComponent } from './category-pie-chart/category-pie-cha
     FutureExpenseComponent,
     CategoryPieChartComponent,
     FormInputComponent,
-<<<<<<< HEAD
     HomeComponent,
-=======
-    AllDataTableComponent
->>>>>>> 8b1c9a51b20e1980ce033d076beb1b0b5eeb0f8f
   ],
   imports: [
     FormsModule,
