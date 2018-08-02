@@ -1,10 +1,10 @@
 <body>
 
-<div class = "container" class ="inputForm">
+<div class = "container">
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your username</ng-template>
+        <ng-template matStepLabel><span class = "formLabel">Fill out your username</span></ng-template>
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Username</mat-label>
             <input matInput placeholder="Username" [(ngModel)]="newUser.username" [ngModelOptions]="{standalone: true}">
@@ -16,7 +16,7 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your password</ng-template>
+        <ng-template matStepLabel><span class = "formLabel">Fill out your password</span></ng-template>
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Password</mat-label>
             <input matInput placeholder="Make it strong!" [(ngModel)]="newUser.password" [ngModelOptions]="{standalone: true}">
@@ -30,7 +30,7 @@
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup">
-          <ng-template matStepLabel>Fill out your email</ng-template>
+          <ng-template matStepLabel><span class = "formLabel">Fill out your email</span></ng-template>
           <mat-form-field class="emailInput" appearance="outline" class="input-width">
               <mat-label>Email</mat-label>
               <input matInput placeholder="Placeholder" [(ngModel)]="newUser.email" [ngModelOptions]="{standalone: true}">

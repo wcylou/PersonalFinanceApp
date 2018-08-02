@@ -1,20 +1,23 @@
-<!--The content below is only a placeholder and can be replaced.-->
+
+<mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened>
+      <h3>Menu</h3>
+      <button class = "btn btn-primary"><a>Expenses</a></button><br><br>
+      <button class = "btn btn-primary"><a>Chart</a></button><br><br>
+      <button class = "btn btn-primary"><a>Account</a></button><br><br>
+      <button class = "btn btn-primary"><a>Logout</a></button><br><br>
+
+    </mat-sidenav>
 <div style="text-align:center">
   <h1>
     Welcome to Moonlight Confetti Personal Finance!
   </h1>
   <h3>title is a work in progress</h3>
 </div>
-
-<!-- <app-budget>loading budget...</app-budget> -->
-<!-- <app-expense>  expense...</app-expense> -->
-<<<<<<< HEAD
-<!-- <app-income>loading income...</app-income> -->
-<app-user>loading user...</app-user>
-=======
-<app-income>loading income...</app-income>
-<!-- <app-user>loading user...</app-user> -->
-<!-- <app-future-expense>loading future expenses</app-future-expense> -->
->>>>>>> 652152ee33ab1728ccf3022b30e01ba0134c4628
-
-
+    <mat-sidenav-content>
+        <app-user>loading budget...</app-user>
+        <app-income>loading budget...</app-income>
+        <app-budget>loading budget...</app-budget>
+        <app-expense>  expense...</app-expense>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

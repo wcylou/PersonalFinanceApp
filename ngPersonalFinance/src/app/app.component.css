@@ -1,0 +1,18 @@
+mat-sidenav {
+  width:150px;
+  background-color:navy;
+  color:white;
+}
+
+h3 {
+  background-color:black;
+  text-align:center;
+  text-transform:uppercase;
+  height:50px;
+  padding-top:10px;
+}
+
+button {
+  color:white;
+}
+

@@ -10,7 +10,20 @@
   width:300px;
 }
 
-body {
+body, mat-horizontal-stepper  {
+  background-color:black;
+  color:white;
+}
+
+form, .formLabel, mat-stepper-horizontal-line, mat-form-field, mat-label, mat-input {
+  color:white;
+}
+
+mat-horizontal-content-container {
   background-color:black;
 }
 
+mat-stepper-horizontal-line {
+
+border-top-color:white;
+}
