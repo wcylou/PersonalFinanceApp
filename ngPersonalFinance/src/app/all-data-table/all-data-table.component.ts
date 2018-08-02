@@ -104,10 +104,10 @@ export class AllDataTableComponent implements OnInit {
     this.reload();
   }
 
-  ngAfterViewInit() {
-    this.paginator.page.pipe(
-      tap(() => this.reload())
-    ).subscribe();
-  }
+  // ngAfterViewInit() {
+  //   this.paginator.page.pipe(
+  //     tap(() => this.reload())
+  //   ).subscribe();
+  // }
 
 }
