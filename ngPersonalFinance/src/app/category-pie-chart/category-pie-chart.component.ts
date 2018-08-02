@@ -14,6 +14,7 @@ export class CategoryPieChartComponent implements OnInit {
  dateToday = Date.now();
 
 //  public pieChartData: number[] = [];
+ // tslint:disable-next-line:no-inferrable-types
  public pieChartType: string = 'pie';
   newMap: object;
 
@@ -34,6 +35,7 @@ export class CategoryPieChartComponent implements OnInit {
               console.log(this.dateToday);
 
 
+              // tslint:disable-next-line:prefer-const
               for (let p in this.newMap) {
                 if (this.newMap.hasOwnProperty(p)) {
                   this.pieChartLabels.push(p);

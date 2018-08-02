@@ -46,13 +46,9 @@ import { ChartsModule } from 'ng2-charts';
     FutureExpenseComponent,
     CategoryPieChartComponent,
     FormInputComponent,
-<<<<<<< HEAD
     AllDataTableComponent,
-    PagePipePipe
-=======
-    HomeComponent,
-    AllDataTableComponent
->>>>>>> 9bd3a451c0b273f902174c11c8995a0e19d53b43
+    PagePipePipe,
+    HomeComponent
   ],
   imports: [
     FormsModule,
