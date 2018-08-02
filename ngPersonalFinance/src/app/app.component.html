@@ -21,12 +21,12 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav mode="side" opened>
       <br>
-      <button mat-raised-button color="primary"><a [routerLink]="[{outlets:{home:['home'], user:null, formInput:null}}]">Home</a></button><br><br>
-      <button mat-raised-button color="primary"><a [routerLink]="[{outlets:{user:['user'], formInput:null, home:null}}]">Sign Up</a></button><br><br>
-      <button mat-raised-button color="primary"><a [routerLink]="[{outlets:{formInput:['formInput'], user:null, home:null}}]">Expenses</a></button><br><br>
-      <button mat-raised-button color="primary"><a [routerLink]="['/chart']">Chart</a></button><br><br>
-      <button mat-raised-button color="primary"><a [routerLink]="['/account']">Account</a></button><br><br>
-      <button mat-raised-button color="primary"><a [routerLink]="['/home']">Logout</a></button><br><br>
+      <button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{home:['home'], user:null, formInput:null, allDataTable:null, categoryPieChart:null}}]">Home</a></button><br><br>
+      <button mat-raised-button color="primary"><i class="far fa-registered"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{user:['user'], formInput:null, home:null, allDataTable:null, categoryPieChart: null}}]">Sign Up</a></button><br><br>
+      <button mat-raised-button color="primary"><i class="far fa-credit-card"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{formInput:['formInput'], allDataTable:['allDataTable'], categoryPieChart:['categoryPieChart'], user:null, home:null}}]">Expenses</a></button><br><br>
+      <button mat-raised-button color="primary"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;<a [routerLink]="['/chart']">Chart</a></button><br><br>
+      <button mat-raised-button color="primary"><i class="far fa-user-circle"></i>&nbsp;&nbsp;<a [routerLink]="['/account']">Account</a></button><br><br>
+      <button mat-raised-button color="primary"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;<a [routerLink]="['/home']">Logout</a></button><br><br>
     </mat-sidenav>
     <body>
 
@@ -40,12 +40,10 @@
   </div>
   <div class="row">
     <div class="col-lg-6">
-          <router-outlet name="formInput"></router-outlet>
-    </div>
-
-    <div class="col-lg-6">
         <router-outlet></router-outlet>
+        <router-outlet name="categoryPieChart"></router-outlet>
 
+<<<<<<< HEAD
 <div style="text-align:center">
   <h1>
     Welcome to Moonlight Confetti Personal Finance!
@@ -57,11 +55,17 @@
 <!-- <app-user>loading user...</app-user> -->
 <!-- <app-user>loading user...</app-user> -->
 <!-- <app-future-expense>loading future expenses</app-future-expense> -->
+=======
+    </div>
+>>>>>>> 9bd3a451c0b273f902174c11c8995a0e19d53b43
 
+    <div class="col-lg-6">
+        <router-outlet name="formInput"></router-outlet>
     </div>
   </div>
   <div class="row">
   <div class="col-lg-12">
+      <router-outlet name="allDataTable"></router-outlet>
 
     </div>
   </div>

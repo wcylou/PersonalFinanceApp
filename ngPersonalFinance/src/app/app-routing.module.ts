@@ -1,9 +1,11 @@
+import { AllDataTableComponent } from './all-data-table/all-data-table.component';
 import { FormInputComponent } from './form-input/form-input.component';
 import { UserComponent } from './user/user.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { CategoryPieChartComponent } from './category-pie-chart/category-pie-chart.component';
 
 const routes: Routes = [
     {path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -11,6 +13,8 @@ const routes: Routes = [
     {path: 'expense', component: ExpenseComponent},
     {path: 'user', component: UserComponent, outlet: 'user'},
     {path: 'formInput', component: FormInputComponent, outlet: 'formInput'},
+    {path: 'allDataTable', component: AllDataTableComponent, outlet: 'allDataTable'},
+    {path: 'categoryPieChart', component: CategoryPieChartComponent, outlet: 'categoryPieChart'},
   ];
 
 @NgModule({

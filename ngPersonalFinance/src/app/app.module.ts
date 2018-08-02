@@ -32,6 +32,7 @@ import { MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule } from '@angular/material';
 import { FormInputComponent } from './form-input/form-input.component';
 import { HomeComponent } from './home/home.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { HomeComponent } from './home/home.component';
     CategoryPieChartComponent,
     FormInputComponent,
     HomeComponent,
+    AllDataTableComponent
   ],
   imports: [
     FormsModule,
@@ -61,7 +63,8 @@ import { HomeComponent } from './home/home.component';
     MatSidenavModule,
     MatToolbarModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ChartsModule
   ],
   providers: [
     BudgetService,
