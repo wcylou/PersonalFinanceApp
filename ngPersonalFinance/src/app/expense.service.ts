@@ -31,6 +31,8 @@ export class ExpenseService {
     );
   }
 
+
+
   indexExCat() {
     return this.http.get<ExpenseCategory[]>(this.exCatUrl).pipe(
       catchError((err: any) => {

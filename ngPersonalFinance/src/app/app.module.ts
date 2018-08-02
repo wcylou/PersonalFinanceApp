@@ -1,3 +1,4 @@
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserService } from './user.service';
 import { IncomeService } from './income.service';
 import { BudgetService } from './budget.service';
@@ -20,11 +21,16 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatPaginator } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { AllDataTableComponent } from './all-data-table/all-data-table.component';
+
+import { MatPaginatorModule, MatProgressSpinnerModule,
+  MatSortModule, MatTableModule } from '@angular/material';
 import { FormInputComponent } from './form-input/form-input.component';
+import { CategoryPieChartComponent } from './category-pie-chart/category-pie-chart.component';
 
 
 @NgModule({
@@ -35,10 +41,11 @@ import { FormInputComponent } from './form-input/form-input.component';
     ExpenseComponent,
     BudgetComponent,
     FutureExpenseComponent,
+    CategoryPieChartComponent,
     FormInputComponent,
+    AllDataTableComponent
   ],
   imports: [
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -50,7 +57,10 @@ import { FormInputComponent } from './form-input/form-input.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     BudgetService,
