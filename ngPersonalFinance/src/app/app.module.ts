@@ -24,6 +24,10 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { AllDataTableComponent } from './all-data-table/all-data-table.component';
+
+import { MatPaginatorModule, MatProgressSpinnerModule,
+  MatSortModule, MatTableModule } from '@angular/material';
 
 
 @NgModule({
@@ -34,6 +38,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     ExpenseComponent,
     BudgetComponent,
     FutureExpenseComponent,
+    AllDataTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatTableModule
   ],
   providers: [
     BudgetService,

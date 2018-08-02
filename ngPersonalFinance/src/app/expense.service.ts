@@ -31,6 +31,10 @@ export class ExpenseService {
     );
   }
 
+  findExpenses(
+    pageNumber = 0, pageSize = 10
+  ): Observable<Expense>
+
   indexExCat() {
     return this.http.get<ExpenseCategory[]>(this.exCatUrl).pipe(
       catchError((err: any) => {
