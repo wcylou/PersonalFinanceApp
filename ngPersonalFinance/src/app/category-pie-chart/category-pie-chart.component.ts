@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExpenseService } from '../expense.service';
 
 @Component({
   selector: 'app-category-pie-chart',
@@ -6,10 +7,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category-pie-chart.component.css']
 })
 export class CategoryPieChartComponent implements OnInit {
+ // Pie
+ public pieChartLabels: string[] = [];
+ public isDataLoaded = false;
+ public pieChartData: number[] = [];
+ dateToday = Date.now();
 
-  constructor() { }
+//  public pieChartData: number[] = [];
+ public pieChartType: string = 'pie';
+  newMap: object;
+
+
+ // events
+ public chartClicked(e: any): void {
+   console.log(e);
+ }
+
+ public chartHovered(e: any): void {
+   console.log(e);
+ }
+
+ reload() {
+    this.expenseService.getExpenseByCategory().subscribe(
+            data => {
+              this.newMap = data;
+              console.log(this.dateToday);
+
+
+              for (let p in this.newMap) {
+                if (this.newMap.hasOwnProperty(p)) {
+                  this.pieChartLabels.push(p);
+                  this.pieChartData.push(this.newMap[p]);
+                }
+              }
+            this.isDataLoaded = true;
+            },
+            err => console.error('User create error' + err)
+          );
+  }
+
+
+
+  constructor(private expenseService: ExpenseService) { }
 
   ngOnInit() {
+    this.reload();
   }
 
 }
