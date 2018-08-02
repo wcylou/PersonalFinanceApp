@@ -28,6 +28,7 @@ import { AllDataTableComponent } from './all-data-table/all-data-table.component
 
 import { MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule } from '@angular/material';
+import { FormInputComponent } from './form-input/form-input.component';
 
 
 @NgModule({
@@ -38,10 +39,8 @@ import { MatPaginatorModule, MatProgressSpinnerModule,
     ExpenseComponent,
     BudgetComponent,
     FutureExpenseComponent,
-    AllDataTableComponent,
-  ],
+    FormInputComponent,
   imports: [
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
