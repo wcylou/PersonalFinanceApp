@@ -1,31 +1,180 @@
-<div>
-  <mat-paginator [length]="expenses.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+<button (click)="toggleExpensesTable()">Expense Table</button>
+<button (click)="toggleFutureExpensesTable()">Future Expense Table</button>
+<button (click)="toggleBudgetsTable()">Budget Table</button>
+<button (click)="toggleIncomesTable()">Income Table</button>
+<button (click)="toggleIncomeStreamsTable()">Incomes Stream Table</button>
 
-  <mat-table class="all-data-table" [dataSource]="expenses">
+<!-- Expenses table -->
+<div *ngIf="showExpensesTable">
+  <h3>Expenses</h3>
+  <mat-paginator [length]="expenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterList($event)"></mat-paginator>
+
+  <mat-table class="all-data-table" [dataSource]="filteredExpenses">
 
     <ng-container matColumnDef="amount">
       <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
-      <mat-cell *matCellDef="let expenses">{{expenses.amount}}</mat-cell>
+      <mat-cell *matCellDef="let expense">{{expense.amount}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="expenseCategory">
       <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
-      <mat-cell *matCellDef="let expenses">{{expenses.expenseCategory.name}}</mat-cell>
+      <mat-cell *matCellDef="let expense">{{expense.expenseCategory.name}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
-      <mat-cell *matCellDef="let expenses">{{expenses.date}}</mat-cell>
+      <mat-cell *matCellDef="let expense">{{expense.date | date:'mediumDate'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="description">
       <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-      <mat-cell *matCellDef="let expenses">{{expenses.description}}</mat-cell>
+      <mat-cell *matCellDef="let expense">{{expense.description}}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumnsExpenses"></mat-header-row>
 
     <mat-row *matRowDef="let row; columns: displayedColumnsExpenses" (click)="onExpenseRowClicked(row)"></mat-row>
+
+
+  </mat-table>
+</div>
+
+<!-- Future expenses table -->
+<div *ngIf="showFutureExpensesTable">
+  <h3>Future Expenses</h3>
+  <mat-paginator [length]="expenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterList($event)"></mat-paginator>
+
+  <mat-table class="all-data-table" [dataSource]="filteredFutureExpenses">
+
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+      <mat-cell *matCellDef="let futureExpense">{{futureExpense.amount}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="expenseCategory">
+      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-cell *matCellDef="let futureExpense">{{futureExpense.expenseCategory.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="expectedDate">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let futureExpense">{{futureExpense.expectedDate | date:'mediumDate'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="recurring">
+      <mat-header-cell *matHeaderCellDef>Recurring</mat-header-cell>
+      <mat-cell *matCellDef="let futureExpense">{{futureExpense.recurring}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let futureExpense">{{futureExpense.description}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsFutureExpenses"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumnsFutureExpenses" (click)="onFutureExpenseRowClicked(row)"></mat-row>
+
+
+  </mat-table>
+</div>
+
+<!-- Budget table -->
+<div *ngIf="showBudgetsTable">
+  <h3>Budget</h3>
+  <mat-paginator [length]="expenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterList($event)"></mat-paginator>
+
+  <mat-table class="all-data-table" [dataSource]="filteredBudgets">
+
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{budget.amount}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="expenseCategory">
+      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{budget.expenseCategory.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="startDate">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{budget.startDate | date:'mediumDate'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="endDate">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{budget.endDate}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{budget.description}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsBudgets"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumnsBudgets" (click)="onBudgetRowClicked(row)"></mat-row>
+
+
+  </mat-table>
+</div>
+
+<!-- Incomes table -->
+<div *ngIf="showIncomesTable">
+  <h3>Income</h3>
+  <mat-paginator [length]="expenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterList($event)"></mat-paginator>
+
+  <mat-table class="all-data-table" [dataSource]="filteredIncomes">
+
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+      <mat-cell *matCellDef="let incomes">{{incomes.amount}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="incomeCategory">
+      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-cell *matCellDef="let incomes">{{incomes.incomeCategory.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateReceived">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let incomes">{{incomes.dateReceived | date:'mediumDate'}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsIncomes"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumnsIncomes" (click)="onIncomeRowClicked(row)"></mat-row>
+
+
+  </mat-table>
+</div>
+
+<!-- Income Streams table -->
+<div *ngIf="showIncomeStreamsTable">
+  <h3>Income Streams</h3>
+  <mat-paginator [length]="expenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterList($event)"></mat-paginator>
+
+  <mat-table class="all-data-table" [dataSource]="filteredIncomeStreams">
+
+    <ng-container matColumnDef="expectedAmount">
+      <mat-header-cell *matHeaderCellDef>Expected Amount</mat-header-cell>
+      <mat-cell *matCellDef="let incomeStream">{{incomeStream.expectedAmount}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="incomeCategory">
+      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-cell *matCellDef="let incomeStream">{{incomeStream.incomeCategory.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="startDate">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let incomeStream">{{incomeStream.startDate | date:'mediumDate'}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsIncomeStreams"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumnsIncomeStreams" (click)="onIncomeStreamRowClicked(row)"></mat-row>
+
 
   </mat-table>
 </div>

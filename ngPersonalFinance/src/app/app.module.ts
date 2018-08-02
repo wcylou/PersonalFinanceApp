@@ -22,7 +22,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
-import { MatFormFieldModule, MatInputModule, MatPaginator } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatPaginator, PageEvent } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -32,6 +32,7 @@ import { MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule } from '@angular/material';
 import { FormInputComponent } from './form-input/form-input.component';
 import { HomeComponent } from './home/home.component';
+import { PagePipePipe } from './pipes/page-pipe.pipe';
 import { ChartsModule } from 'ng2-charts';
 
 
@@ -45,8 +46,13 @@ import { ChartsModule } from 'ng2-charts';
     FutureExpenseComponent,
     CategoryPieChartComponent,
     FormInputComponent,
+<<<<<<< HEAD
+    AllDataTableComponent,
+    PagePipePipe
+=======
     HomeComponent,
     AllDataTableComponent
+>>>>>>> 9bd3a451c0b273f902174c11c8995a0e19d53b43
   ],
   imports: [
     FormsModule,
@@ -71,7 +77,9 @@ import { ChartsModule } from 'ng2-charts';
     ExpenseService,
     IncomeService,
     UserService,
-    DatePipe
+    DatePipe,
+    PageEvent,
+    PagePipePipe
   ],
   bootstrap: [AppComponent]
 })
