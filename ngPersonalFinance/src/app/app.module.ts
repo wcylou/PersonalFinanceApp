@@ -28,6 +28,7 @@ import { CategoryPieChartComponent } from './category-pie-chart/category-pie-cha
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { FormInputComponent } from './form-input/form-input.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { FormInputComponent } from './form-input/form-input.component';
     FutureExpenseComponent,
     CategoryPieChartComponent,
     FormInputComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
