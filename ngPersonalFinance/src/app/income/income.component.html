@@ -4,8 +4,8 @@
 <span *ngIf="!selected"><button (click)= addView() >Add Income</button></span>
 <div *ngIf="!selected && incomeView">
     <form #createIncomeRecord="ngForm">
-      <input type="number" name="amount" placeholder="amount" ngModel />
-      <input type="date" name="dateReceived" placeholder="date" ngModel/>
+      Amount: <input type="number" name="amount" placeholder="amount" ngModel /> <br>
+      <input type="date" name="dateReceived" placeholder="date" ngModel/> <br>
           <select name="category" ngModel>
               <option *ngFor="let category of incomeCategories" >{{category.name}}</option>
             </select>

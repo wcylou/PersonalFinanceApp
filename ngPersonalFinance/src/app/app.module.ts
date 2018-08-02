@@ -27,6 +27,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { CategoryPieChartComponent } from './category-pie-chart/category-pie-chart.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
+import { FormInputComponent } from './form-input/form-input.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     BudgetComponent,
     FutureExpenseComponent,
     CategoryPieChartComponent,
+    FormInputComponent,
   ],
   imports: [
     BrowserModule,
