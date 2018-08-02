@@ -1,4 +1,4 @@
-import { ChartsModule } from 'ng2-charts';
+import { CategoryPieChartComponent } from './category-pie-chart/category-pie-chart.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserService } from './user.service';
 import { IncomeService } from './income.service';
@@ -32,8 +32,8 @@ import { MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule } from '@angular/material';
 import { FormInputComponent } from './form-input/form-input.component';
 import { HomeComponent } from './home/home.component';
-import { CategoryPieChartComponent } from './category-pie-chart/category-pie-chart.component';
 import { PagePipePipe } from './pipes/page-pipe.pipe';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
