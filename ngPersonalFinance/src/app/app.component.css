@@ -1,7 +1,8 @@
 mat-sidenav {
   width:150px;
-  background-color:navy;
+  background-color:indigo	;
   color:white;
+  text-align: center;
 }
 
 h3 {
@@ -12,7 +13,11 @@ h3 {
   padding-top:10px;
 }
 
-button {
+button, a {
   color:white;
+  text-transform:uppercase;
 }
 
+backgroundMain {
+  background-color:black;
+}

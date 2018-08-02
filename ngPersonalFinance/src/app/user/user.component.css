@@ -14,7 +14,10 @@ body, mat-horizontal-stepper  {
   background-color:black;
   color:white;
 }
+mat-horizontal-stepper  {
+border:1px white solid;
 
+}
 form, .formLabel, mat-stepper-horizontal-line, mat-form-field, mat-label, mat-input {
   color:white;
 }
@@ -24,6 +27,7 @@ mat-horizontal-content-container {
 }
 
 mat-stepper-horizontal-line {
-
 border-top-color:white;
 }
+
+

@@ -24,6 +24,9 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { CategoryPieChartComponent } from './category-pie-chart/category-pie-chart.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 
 @NgModule({
@@ -34,6 +37,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     ExpenseComponent,
     BudgetComponent,
     FutureExpenseComponent,
+    CategoryPieChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatToolbarModule
   ],
   providers: [
     BudgetService,
