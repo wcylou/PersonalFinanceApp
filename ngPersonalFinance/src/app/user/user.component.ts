@@ -45,6 +45,14 @@ export class UserComponent implements OnInit {
   }
 
   addUser() {
+    // this.newUser.username = form.value.username;
+    // this.newUser.password = form.value.password;
+    // this.newUser.email = form.value.email;
+
+
+    console.log(this.newUser);
+
+
     this.userService.create(this.newUser).subscribe(
             data => {
               this.newUser = new User();
@@ -53,6 +61,7 @@ export class UserComponent implements OnInit {
             },
             err => console.error('User create error' + err)
           );
+
   }
 
   setEditUser() {
