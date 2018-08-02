@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -104,11 +105,26 @@ public class ExpenseController {
 	
 	@RequestMapping(path="futureExpense/{id}", method = RequestMethod.PATCH) 
 	public FutureExpense updateFutureExpense(@RequestBody FutureExpense futureExpense, @PathVariable int id) {
-		return exServ.updateFex(username, id, futureExpense);
+		return exServ.updateFex(username, id, futureExpense);	
 	}
 	
 	@RequestMapping(path="futureExpense/{id}", method = RequestMethod.DELETE)
 	public boolean deleteFutureExpense(@PathVariable int id) {
 		return exServ.destroyFex(username, id);
+	}
+	
+	@RequestMapping(path="expenses/piechart", method = RequestMethod.GET)
+	public Map<String, Double> sortExpensesByCategory() {
+		return exServ.sortExpensesByCategory(username);
+	}
+	
+	@RequestMapping(path="expenses/piechart", method = RequestMethod.POST)
+	public Map<String, Double> sortExpensesByCategoryAndDate(@RequestBody DateDTO dateDTO) throws ParseException {
+		String start = dateDTO.getStart();
+		String end = dateDTO.getEnd();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = df.parse(start);
+		Date endDate = df.parse(end);
+		return exServ.sortExpensesByCategoryAndDate(username, startDate, endDate);
 	}
 }
