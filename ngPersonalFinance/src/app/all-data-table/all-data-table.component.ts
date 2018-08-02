@@ -15,7 +15,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { MatPaginator } from '../../../node_modules/@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '../../../node_modules/@angular/material';
 import { tap } from '../../../node_modules/rxjs/operators';
 import { PageEvent } from '@angular/material';
 
@@ -30,6 +30,7 @@ export class AllDataTableComponent implements OnInit {
 
   expenses = [];
   filteredExpenses = [];
+  expenseDataSource = new MatTableDataSource(this.filteredExpenses);
 
   futureExpenses = [];
   filteredFutureExpenses = [];
@@ -59,6 +60,7 @@ export class AllDataTableComponent implements OnInit {
   showIncomeStreamsTable = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   // toggle switches for showing tables
   toggleExpensesTable() {
@@ -98,14 +100,14 @@ export class AllDataTableComponent implements OnInit {
   }
 
   toggleIncomesTable() {
-    if (this.showBudgetsTable === false) {
+    if (this.showIncomesTable === false) {
       this.showExpensesTable = false;
       this.showFutureExpensesTable = false;
       this.showBudgetsTable = false;
       this.showIncomesTable = true;
       this.showIncomeStreamsTable = false;
     } else {
-      this.showBudgetsTable = false;
+      this.showIncomesTable = false;
     }
   }
 
@@ -162,6 +164,7 @@ export class AllDataTableComponent implements OnInit {
       data => {
         this.expenses = data;
         this.filteredExpenses = this.pagePipe.transform(this.expenses, 0, this.pageSize);
+        this.expenseDataSource.sort = this.sort;
       },
       err => {
         console.error('data table component could not load expenses');
