@@ -21,7 +21,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
-import { MatFormFieldModule, MatInputModule, MatPaginator } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatPaginator, PageEvent } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -31,6 +31,7 @@ import { MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule } from '@angular/material';
 import { FormInputComponent } from './form-input/form-input.component';
 import { CategoryPieChartComponent } from './category-pie-chart/category-pie-chart.component';
+import { PagePipePipe } from './pipes/page-pipe.pipe';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { CategoryPieChartComponent } from './category-pie-chart/category-pie-cha
     FutureExpenseComponent,
     CategoryPieChartComponent,
     FormInputComponent,
-    AllDataTableComponent
+    AllDataTableComponent,
+    PagePipePipe
   ],
   imports: [
     FormsModule,
@@ -67,7 +69,9 @@ import { CategoryPieChartComponent } from './category-pie-chart/category-pie-cha
     ExpenseService,
     IncomeService,
     UserService,
-    DatePipe
+    DatePipe,
+    PageEvent,
+    PagePipePipe
   ],
   bootstrap: [AppComponent]
 })

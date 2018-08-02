@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../environments/environment';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 import { Expense } from './models/expense';
 import { ExpenseCategory } from './models/expense-category';
 
@@ -31,7 +31,16 @@ export class ExpenseService {
     );
   }
 
-
+  findExpenses(
+    pageNumber = 0, pageSize = 3): Observable<Expense[]> {
+      return this.http.get(this.url, {
+        params: new HttpParams()
+          .set('pageNumber', pageNumber.toString())
+          .set('pageSize', pageSize.toString())
+      }).pipe(
+        map(res => res['payload'])
+      );
+    }
 
   indexExCat() {
     return this.http.get<ExpenseCategory[]>(this.exCatUrl).pipe(
