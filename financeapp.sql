@@ -670,7 +670,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `personal_finance_app`;
-INSERT INTO `personal_finance_app`.`future_expense` (`id`, `user_id`, `category_id`, `amount`, `date_expected`, `recurring`, `description`, `number_of_recurrences`) VALUES (1, 1, 3, '24.99', '2018-02-09', 0, NULL, NULL);
+INSERT INTO `personal_finance_app`.`future_expense` (`id`, `user_id`, `category_id`, `amount`, `date_expected`, `recurring`, `description`, `number_of_recurrences`) VALUES (1, 1, 3, '24.99', '2018-02-09', 0, NULL, 0);
 
 COMMIT;
 
