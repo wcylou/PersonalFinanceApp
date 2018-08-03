@@ -32,6 +32,9 @@ public class FutureExpense {
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	private ExpenseCategory expenseCategory;
+	@Column(name = "number_of_recurrences")
+	private int numberOfRecurrences;
+	
 	public int getId() {
 		return id;
 	}
@@ -85,6 +88,7 @@ public class FutureExpense {
 		result = prime * result + ((expectedDate == null) ? 0 : expectedDate.hashCode());
 		result = prime * result + ((expenseCategory == null) ? 0 : expenseCategory.hashCode());
 		result = prime * result + id;
+		result = prime * result + numberOfRecurrences;
 		result = prime * result + ((recurring == null) ? 0 : recurring.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
@@ -117,6 +121,8 @@ public class FutureExpense {
 			return false;
 		if (id != other.id)
 			return false;
+		if (numberOfRecurrences != other.numberOfRecurrences)
+			return false;
 		if (recurring == null) {
 			if (other.recurring != null)
 				return false;
@@ -134,6 +140,12 @@ public class FutureExpense {
 		return "FutureExpens [id=" + id + ", amount=" + amount + ", expectedDate=" + expectedDate + ", recurring="
 				+ recurring + ", description=" + description + ", user=" + user + ", expenseCategory=" + expenseCategory
 				+ "]";
+	}
+	public int getNumberOfRecurrences() {
+		return numberOfRecurrences;
+	}
+	public void setNumberOfRecurrences(int numberOfRecurrences) {
+		this.numberOfRecurrences = numberOfRecurrences;
 	}
 	
 	

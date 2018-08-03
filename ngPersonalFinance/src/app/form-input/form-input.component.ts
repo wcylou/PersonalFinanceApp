@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { CategoryPieChartComponent } from './../category-pie-chart/category-pie-chart.component';
 import { Budget } from './../models/budget';
 import { FutureExpense } from './../models/future-expense';
@@ -84,6 +85,12 @@ export class FormInputComponent implements OnInit {
     );
   }
 
+  transformDate(epoch) {
+    const d = new Date(0);
+    d.setUTCSeconds(epoch);
+    return d;
+  }
+
   createNewFutureExpense(form: NgForm) {
 
     this.newFutureExpense.amount = form.value.amount;
@@ -92,6 +99,19 @@ export class FormInputComponent implements OnInit {
 
     if (form.value.recurring === true) {
       this.newFutureExpense.recurring = true;
+      this.newFutureExpense.numberOfRecurrences = form.value.numberOfRecurrences;
+      if (form.value.frequency === 'weekly') {
+          for (let i = 0; i < this.newFutureExpense.numberOfRecurrences; i++) {
+            const recurringExpense = this.newFutureExpense;
+                console.log(recurringExpense.expectedDate.valueOf());
+                const addWeek = (new Date(recurringExpense.expectedDate).valueOf() + 604800);
+               recurringExpense.expectedDate = this.transformDate(addWeek);
+               console.log(recurringExpense.expectedDate.valueOf());
+
+
+
+          }
+      }
     } else {
       this.newFutureExpense.recurring = false;
     }
@@ -185,6 +205,7 @@ export class FormInputComponent implements OnInit {
     private exServ: ExpenseService,
     private budServ: BudgetService,
     private fexServ: FutureExpenseService,
+    private dp: DatePipe
   ) { }
 
   ngOnInit() {

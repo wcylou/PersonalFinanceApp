@@ -8,6 +8,7 @@ export class FutureExpense {
   expectedDate: Date;
   recurring: boolean;
   description: string;
+  numberOfRecurrences: number;
 
   constructor(
     id?: number,
@@ -16,7 +17,9 @@ export class FutureExpense {
     amount?: number,
     expectedDate?: Date,
     recurring?: boolean,
-    description?: string
+    description?: string,
+    numberOfRecurrences?: number
+
   ) {
     this.id = id;
     this.userId = userId;
@@ -25,5 +28,6 @@ export class FutureExpense {
     this.expectedDate = expectedDate;
     this.recurring = recurring;
     this.description = description;
+    this.numberOfRecurrences = numberOfRecurrences;
   }
 }
