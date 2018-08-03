@@ -22,7 +22,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
-import { MatFormFieldModule, MatInputModule, MatPaginator, PageEvent } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatPaginator, PageEvent, MatNativeDateModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -36,6 +36,7 @@ import { PagePipePipe } from './pipes/page-pipe.pipe';
 import { ChartsModule } from 'ng2-charts';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FrontPageComponent } from './front-page/front-page.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -73,7 +74,9 @@ import { FrontPageComponent } from './front-page/front-page.component';
     MatTableModule,
     MatPaginatorModule,
     ChartsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     BudgetService,
