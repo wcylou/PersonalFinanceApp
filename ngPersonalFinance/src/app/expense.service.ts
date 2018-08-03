@@ -122,6 +122,16 @@ export class ExpenseService {
     };
     return this.http.get<Map<string, number>>(this.url + '/piechart',  httpOptions);
   }
+  getExpenseBetweenDates(dates) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.post<Expense[]>(this.url + '/between', dates, httpOptions);
+
+  }
 
 
 

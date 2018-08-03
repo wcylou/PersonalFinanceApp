@@ -15,13 +15,15 @@ import { BudgetService } from './../budget.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import { MatPaginator, MatSort, MatTableDataSource } from '../../../node_modules/@angular/material';
+import { NgForm, FormControl } from '@angular/forms';
+import {
+  MatPaginator,
+  MatSort,
+  MatTableDataSource
+} from '../../../node_modules/@angular/material';
 import { tap } from '../../../node_modules/rxjs/operators';
 import { PageEvent } from '@angular/material';
 import { Sort } from '@angular/material';
-
-
 
 @Component({
   selector: 'app-all-data-table',
@@ -29,6 +31,14 @@ import { Sort } from '@angular/material';
   styleUrls: ['./all-data-table.component.css']
 })
 export class AllDataTableComponent implements OnInit {
+  endDate;
+  startDate;
+  loadedStartDate = false;
+
+  dateObject = {
+    start: null,
+    end: null
+  };
 
   expenses = [];
   filteredExpenses = [];
@@ -47,11 +57,32 @@ export class AllDataTableComponent implements OnInit {
   filteredBudgets = [];
 
   // display column order for each table
-  displayedColumnsExpenses = ['amount', 'expenseCategory', 'date', 'description'];
-  displayedColumnsFutureExpenses = ['amount', 'expenseCategory', 'expectedDate', 'recurring', 'description'];
-  displayedColumnsBudgets = ['amount', 'expenseCategory', 'startDate', 'endDate', 'description'];
+  displayedColumnsExpenses = [
+    'amount',
+    'expenseCategory',
+    'date',
+    'description'
+  ];
+  displayedColumnsFutureExpenses = [
+    'amount',
+    'expenseCategory',
+    'expectedDate',
+    'recurring',
+    'description'
+  ];
+  displayedColumnsBudgets = [
+    'amount',
+    'expenseCategory',
+    'startDate',
+    'endDate',
+    'description'
+  ];
   displayedColumnsIncomes = ['amount', 'incomeCategory', 'dateReceived'];
-  displayedColumnsIncomeStreams = ['expectedAmount', 'incomeCategory', 'startDate'];
+  displayedColumnsIncomeStreams = [
+    'expectedAmount',
+    'incomeCategory',
+    'startDate'
+  ];
 
   sortedExpenses: Expense[];
   sortedFutureExpenses: FutureExpense[];
@@ -71,6 +102,13 @@ export class AllDataTableComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;
+
+  setInitialStartDate() {
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.startDate.setDate(this.startDate.getDate() - 30);
+    console.log(this.startDate);
+  }
 
   // toggle switches for showing tables
   toggleExpensesTable() {
@@ -156,28 +194,48 @@ export class AllDataTableComponent implements OnInit {
   filterBudgetList(event) {
     console.log(event);
     this.currentPage = event.pageIndex;
-    this.filteredBudgets = this.pagePipe.transform(this.sortedBudgets, event.pageIndex, event.pageSize);
+    this.filteredBudgets = this.pagePipe.transform(
+      this.sortedBudgets,
+      event.pageIndex,
+      event.pageSize
+    );
   }
 
   filterExpensesList(event) {
     console.log(event);
     this.currentPage = event.pageIndex;
-    this.filteredExpenses = this.pagePipe.transform(this.sortedExpenses, event.pageIndex, event.pageSize);
+    this.filteredExpenses = this.pagePipe.transform(
+      this.sortedExpenses,
+      event.pageIndex,
+      event.pageSize
+    );
   }
 
   filterFutureExpensesList(event) {
     this.currentPage = event.pageIndex;
-    this.filteredFutureExpenses = this.pagePipe.transform(this.sortedFutureExpenses, event.pageIndex, event.pageSize);
+    this.filteredFutureExpenses = this.pagePipe.transform(
+      this.sortedFutureExpenses,
+      event.pageIndex,
+      event.pageSize
+    );
   }
 
   filterIncomesList(event) {
     this.currentPage = event.pageIndex;
-    this.filteredIncomes = this.pagePipe.transform(this.sortedIncomes, event.pageIndex, event.pageSize);
+    this.filteredIncomes = this.pagePipe.transform(
+      this.sortedIncomes,
+      event.pageIndex,
+      event.pageSize
+    );
   }
 
   filterIncomeStreamsList(event) {
     this.currentPage = event.pageIndex;
-    this.filteredIncomes = this.pagePipe.transform(this.sortedIncomes, event.pageIndex, event.pageSize);
+    this.filteredIncomes = this.pagePipe.transform(
+      this.sortedIncomes,
+      event.pageIndex,
+      event.pageSize
+    );
   }
 
   // sorting functions
@@ -195,15 +253,24 @@ export class AllDataTableComponent implements OnInit {
     this.sortedBudgets = budgetsData.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'amount' : return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory' : return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
-        case 'startDate' : return this.compare(a.startDate, b.startDate, isAsc);
-        case 'endDate' : return this.compare(a.endDate, b.endDate, isAsc);
-        default : return 0;
+        case 'amount':
+          return this.compare(a.amount, b.amount, isAsc);
+        case 'expenseCategory':
+          return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
+        case 'startDate':
+          return this.compare(a.startDate, b.startDate, isAsc);
+        case 'endDate':
+          return this.compare(a.endDate, b.endDate, isAsc);
+        default:
+          return 0;
       }
     });
 
-    this.filteredBudgets = this.pagePipe.transform(this.sortedBudgets, this.currentPage, this.pageSize);
+    this.filteredBudgets = this.pagePipe.transform(
+      this.sortedBudgets,
+      this.currentPage,
+      this.pageSize
+    );
   }
 
   sortExpenses(sort: Sort) {
@@ -216,14 +283,22 @@ export class AllDataTableComponent implements OnInit {
     this.sortedExpenses = expensesData.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'amount' : return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory' : return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
-        case 'date' : return this.compare(a.date, b.date, isAsc);
-        default : return 0;
+        case 'amount':
+          return this.compare(a.amount, b.amount, isAsc);
+        case 'expenseCategory':
+          return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
+        case 'date':
+          return this.compare(a.date, b.date, isAsc);
+        default:
+          return 0;
       }
     });
 
-    this.filteredExpenses = this.pagePipe.transform(this.sortedExpenses, this.currentPage, this.pageSize);
+    this.filteredExpenses = this.pagePipe.transform(
+      this.sortedExpenses,
+      this.currentPage,
+      this.pageSize
+    );
   }
 
   sortFutureExpenses(sort: Sort) {
@@ -236,14 +311,22 @@ export class AllDataTableComponent implements OnInit {
     this.sortedFutureExpenses = futureExpensesData.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'amount' : return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory' : return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
-        case 'expectedDate' : return this.compare(a.expectedDate, b.expectedDate, isAsc);
-        default : return 0;
+        case 'amount':
+          return this.compare(a.amount, b.amount, isAsc);
+        case 'expenseCategory':
+          return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
+        case 'expectedDate':
+          return this.compare(a.expectedDate, b.expectedDate, isAsc);
+        default:
+          return 0;
       }
     });
 
-    this.filteredFutureExpenses = this.pagePipe.transform(this.sortedFutureExpenses, this.currentPage, this.pageSize);
+    this.filteredFutureExpenses = this.pagePipe.transform(
+      this.sortedFutureExpenses,
+      this.currentPage,
+      this.pageSize
+    );
   }
 
   sortIncomes(sort: Sort) {
@@ -256,14 +339,22 @@ export class AllDataTableComponent implements OnInit {
     this.sortedIncomes = incomesData.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'amount' : return this.compare(a.amount, b.amount, isAsc);
-        case 'incomeCategory' : return this.compare(a.incomeCategory, b.incomeCategory, isAsc);
-        case 'dateReceived' : return this.compare(a.dateReceived, b.dateReceived, isAsc);
-        default : return 0;
+        case 'amount':
+          return this.compare(a.amount, b.amount, isAsc);
+        case 'incomeCategory':
+          return this.compare(a.incomeCategory, b.incomeCategory, isAsc);
+        case 'dateReceived':
+          return this.compare(a.dateReceived, b.dateReceived, isAsc);
+        default:
+          return 0;
       }
     });
 
-    this.filteredIncomes = this.pagePipe.transform(this.sortedIncomes, this.currentPage, this.pageSize);
+    this.filteredIncomes = this.pagePipe.transform(
+      this.sortedIncomes,
+      this.currentPage,
+      this.pageSize
+    );
   }
 
   sortIncomeStreams(sort: Sort) {
@@ -276,24 +367,35 @@ export class AllDataTableComponent implements OnInit {
     this.sortedIncomeStreams = futureIncomesData.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'expectedAmount' : return this.compare(a.expectedAmount, b.expectedAmount, isAsc);
-        case 'incomeCategory' : return this.compare(a.incomeCategory, b.incomeCategory, isAsc);
-        case 'startDate' : return this.compare(a.startDate, b.startDate, isAsc);
-        default : return 0;
+        case 'expectedAmount':
+          return this.compare(a.expectedAmount, b.expectedAmount, isAsc);
+        case 'incomeCategory':
+          return this.compare(a.incomeCategory, b.incomeCategory, isAsc);
+        case 'startDate':
+          return this.compare(a.startDate, b.startDate, isAsc);
+        default:
+          return 0;
       }
     });
 
-    this.filteredIncomeStreams = this.pagePipe.transform(this.sortedIncomeStreams, this.currentPage, this.pageSize);
+    this.filteredIncomeStreams = this.pagePipe.transform(
+      this.sortedIncomeStreams,
+      this.currentPage,
+      this.pageSize
+    );
   }
 
   // reload the various arrays
   reload() {
-
     this.budgetService.index().subscribe(
       data => {
         this.budgets = data;
         this.sortedBudgets = this.budgets;
-        this.filteredBudgets = this.pagePipe.transform(this.sortedBudgets, 0, this.pageSize);
+        this.filteredBudgets = this.pagePipe.transform(
+          this.sortedBudgets,
+          0,
+          this.pageSize
+        );
       },
       err => {
         console.error('data table component could not load budgets');
@@ -304,7 +406,11 @@ export class AllDataTableComponent implements OnInit {
       data => {
         this.expenses = data;
         this.sortedExpenses = this.expenses;
-        this.filteredExpenses = this.pagePipe.transform(this.sortedExpenses, 0, this.pageSize);
+        this.filteredExpenses = this.pagePipe.transform(
+          this.sortedExpenses,
+          0,
+          this.pageSize
+        );
       },
       err => {
         console.error('data table component could not load expenses');
@@ -315,7 +421,11 @@ export class AllDataTableComponent implements OnInit {
       data => {
         this.futureExpenses = data;
         this.sortedFutureExpenses = this.futureExpenses;
-        this.filteredFutureExpenses = this.pagePipe.transform(this.sortedFutureExpenses, 0, this.pageSize);
+        this.filteredFutureExpenses = this.pagePipe.transform(
+          this.sortedFutureExpenses,
+          0,
+          this.pageSize
+        );
       },
       err => {
         console.error('data table component could not load future expenses');
@@ -325,7 +435,11 @@ export class AllDataTableComponent implements OnInit {
     this.incomeService.index().subscribe(
       data => {
         this.incomes = data;
-        this.filteredIncomes = this.pagePipe.transform(this.incomes, 0, this.pageSize);
+        this.filteredIncomes = this.pagePipe.transform(
+          this.incomes,
+          0,
+          this.pageSize
+        );
       },
       err => {
         console.error('data table component could not load incomes');
@@ -335,16 +449,31 @@ export class AllDataTableComponent implements OnInit {
     this.incomeService.indexIncomeStream().subscribe(
       data => {
         this.incomeStreams = data;
-        this.filteredIncomeStreams = this.pagePipe.transform(this.incomeStreams, 0, this.pageSize);
+        this.filteredIncomeStreams = this.pagePipe.transform(
+          this.incomeStreams,
+          0,
+          this.pageSize
+        );
       },
       err => {
         console.error('data table component could not load income streams');
       }
     );
-
-
   }
 
+  findExpensesBetweenDates() {
+
+    const date1 = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
+    this.dateObject.start = date1;
+    const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
+    this.dateObject.end = date2;
+    console.log(this.dateObject);
+    this.expenseService
+      .getExpenseBetweenDates(this.dateObject)
+      .subscribe(data => { console.log(data);
+       },
+       err => console.log(err));
+  }
 
   constructor(
     private datePipe: DatePipe,
@@ -362,10 +491,12 @@ export class AllDataTableComponent implements OnInit {
     this.sortedFutureExpenses = this.futureExpenses.slice();
     this.sortedIncomes = this.incomes.slice();
     this.sortedIncomeStreams = this.incomeStreams.slice();
-   }
+  }
 
   ngOnInit() {
+    this.setInitialStartDate();
     this.reload();
+    this.loadedStartDate = true;
   }
 
   // ngAfterViewInit() {
@@ -373,5 +504,4 @@ export class AllDataTableComponent implements OnInit {
   //     tap(() => this.reload())
   //   ).subscribe();
   // }
-
 }
