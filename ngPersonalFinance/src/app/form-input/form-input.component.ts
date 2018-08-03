@@ -12,15 +12,12 @@ import { IncomeStream } from '../models/income-stream';
 import { Income } from '../models/income';
 import { Expense } from '../models/expense';
 
-
-
 @Component({
   selector: 'app-form-input',
   templateUrl: './form-input.component.html',
   styleUrls: ['./form-input.component.css']
 })
 export class FormInputComponent implements OnInit {
-
   incomeCategories = [];
   expenseCategories = [];
 
@@ -32,7 +29,7 @@ export class FormInputComponent implements OnInit {
 
   newBudget: Budget = new Budget();
 
-// adding budgets
+  // adding budgets
 
   addBudget(form: NgForm) {
     this.newBudget.amount = form.value.amount;
@@ -40,24 +37,23 @@ export class FormInputComponent implements OnInit {
     this.newBudget.endDate = form.value.endDate;
     this.newBudget.description = form.value.description;
 
-   this.expenseCategories.forEach(category => {
-        if (form.value.category === category.name) {
-          this.newBudget.expenseCategory = category;
-        }
-   });
+    this.expenseCategories.forEach(category => {
+      if (form.value.category === category.name) {
+        this.newBudget.expenseCategory = category;
+      }
+    });
 
     this.budServ.create(this.newBudget).subscribe(
-            data => {
-              this.loadIncomeData();
-              form.reset();
-              this.newBudget = new Budget();
-            },
-            err => console.error('Post error' + err)
-          );
-
+      data => {
+        this.loadIncomeData();
+        form.reset();
+        this.newBudget = new Budget();
+      },
+      err => console.error('Post error' + err)
+    );
   }
 
-// Adding new expenses
+  // Adding new expenses
 
   createNewExpense(form: NgForm) {
     this.newExpense.amount = form.value.amount;
@@ -75,7 +71,6 @@ export class FormInputComponent implements OnInit {
         this.loadIncomeData();
         form.reset();
         this.newExpense = new Expense();
-
       },
       err => {
         console.log(this.newExpense);
@@ -88,56 +83,109 @@ export class FormInputComponent implements OnInit {
   transformDate(epoch) {
     const d = new Date(0);
     d.setUTCSeconds(epoch);
+    console.log('logging d' + d);
     return d;
   }
 
   createNewFutureExpense(form: NgForm) {
-
     this.newFutureExpense.amount = form.value.amount;
     this.newFutureExpense.description = form.value.description;
     this.newFutureExpense.expectedDate = form.value.expectedDate;
 
+    this.expenseCategories.forEach(category => {
+      if (category.name === form.value.category) {
+        this.newFutureExpense.expenseCategory = category;
+      }
+    });
+
     if (form.value.recurring === true) {
       this.newFutureExpense.recurring = true;
-      this.newFutureExpense.numberOfRecurrences = form.value.numberOfRecurrences;
+      this.newFutureExpense.numberOfRecurrences =
+        form.value.numberOfRecurrences;
       if (form.value.frequency === 'weekly') {
-          for (let i = 0; i < this.newFutureExpense.numberOfRecurrences; i++) {
-            const recurringExpense = this.newFutureExpense;
-                console.log(recurringExpense.expectedDate.valueOf());
-                const addWeek = (new Date(recurringExpense.expectedDate).valueOf() + 604800);
-               recurringExpense.expectedDate = this.transformDate(addWeek);
-               console.log(recurringExpense.expectedDate.valueOf());
+        const recurringExpense = Object.assign({}, this.newFutureExpense);
+        for (let i = 0; i < this.newFutureExpense.numberOfRecurrences; i++) {
+          recurringExpense.expectedDate = new Date(
+            recurringExpense.expectedDate
+          );
+          this.fexServ.create(recurringExpense).subscribe(
+            data => {
+              this.loadIncomeData();
+              form.reset();
+              this.newFutureExpense = new FutureExpense();
+            },
+            err => {
+              console.log(this.newFutureExpense);
 
+              console.error('Error in component ts: ' + err);
+            }
+          );
+         recurringExpense.expectedDate.setDate(
+            recurringExpense.expectedDate.getDate() + 7
+          );
+        }
+      } else if (form.value.frequency === 'monthly') {
+        const recurringExpense = Object.assign({}, this.newFutureExpense);
+        for (let i = 0; i < this.newFutureExpense.numberOfRecurrences; i++) {
+          recurringExpense.expectedDate = new Date(
+            recurringExpense.expectedDate
+          );
+          this.fexServ.create(recurringExpense).subscribe(
+            data => {
+              this.loadIncomeData();
+              form.reset();
+              this.newFutureExpense = new FutureExpense();
+            },
+            err => {
+              console.log(this.newFutureExpense);
 
+              console.error('Error in component ts: ' + err);
+            }
+          );
+         recurringExpense.expectedDate.setMonth(
+            recurringExpense.expectedDate.getMonth() + 1
+          );
+        }
+      } else {
+        const recurringExpense = Object.assign({}, this.newFutureExpense);
+        for (let i = 0; i < this.newFutureExpense.numberOfRecurrences; i++) {
+          recurringExpense.expectedDate = new Date(
+            recurringExpense.expectedDate
+          );
+          this.fexServ.create(recurringExpense).subscribe(
+            data => {
+              this.loadIncomeData();
+              form.reset();
+              this.newFutureExpense = new FutureExpense();
+            },
+            err => {
+              console.log(this.newFutureExpense);
 
-          }
+              console.error('Error in component ts: ' + err);
+            }
+          );
+         recurringExpense.expectedDate.setFullYear(
+            recurringExpense.expectedDate.getFullYear() + 1
+          );
+        }
       }
     } else {
       this.newFutureExpense.recurring = false;
+
+      this.fexServ.create(this.newFutureExpense).subscribe(
+        data => {
+          this.loadIncomeData();
+          form.reset();
+          this.newFutureExpense = new FutureExpense();
+        },
+        err => {
+          console.log(this.newFutureExpense);
+
+          console.error('Error in component ts: ' + err);
+        }
+      );
     }
-
-
-      this.expenseCategories.forEach(category => {
-          if (category.name === form.value.category) {
-            this.newFutureExpense.expenseCategory = category;
-          }
-        });
-
-    this.fexServ.create(this.newFutureExpense).subscribe(
-      data => {
-        this.loadIncomeData();
-        form.reset();
-        this.newFutureExpense = new FutureExpense();
-
-      },
-      err => {
-        console.log(this.newFutureExpense);
-
-        console.error('Error in component ts: ' + err);
-      }
-    );
   }
-
 
   // Adding new Incomes
 
@@ -156,16 +204,15 @@ export class FormInputComponent implements OnInit {
         newIncomeForm.reset();
         console.log('success');
       },
-      err =>
-      console.log(err)
+      err => console.log(err)
     );
   }
 
   createNewIncomeStream(newIncomeForm: NgForm) {
-
     this.newIncomeStream.expectedAmount = newIncomeForm.value.expectedAmount;
     this.newIncomeStream.startDate = newIncomeForm.value.startDate;
-    this.newIncomeStream.yearlyOccurrences = newIncomeForm.value.yearlyOccurrences;
+    this.newIncomeStream.yearlyOccurrences =
+      newIncomeForm.value.yearlyOccurrences;
     this.incomeCategories.forEach(category => {
       if (category.name === newIncomeForm.value.category) {
         this.newIncomeStream.incomeCategory = category;
@@ -177,8 +224,7 @@ export class FormInputComponent implements OnInit {
         this.newIncomeStream = new IncomeStream();
         newIncomeForm.reset();
       },
-      err =>
-      console.log(err)
+      err => console.log(err)
     );
   }
 
@@ -198,18 +244,16 @@ export class FormInputComponent implements OnInit {
     );
   }
 
-
-
   // tslint:disable-next-line:max-line-length
-  constructor(private incServ: IncomeService,
+  constructor(
+    private incServ: IncomeService,
     private exServ: ExpenseService,
     private budServ: BudgetService,
     private fexServ: FutureExpenseService,
     private dp: DatePipe
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.loadIncomeData();
   }
-
 }

@@ -166,19 +166,16 @@ export class AllDataTableComponent implements OnInit {
   }
 
   filterFutureExpensesList(event) {
-    console.log(event);
     this.currentPage = event.pageIndex;
     this.filteredFutureExpenses = this.pagePipe.transform(this.sortedFutureExpenses, event.pageIndex, event.pageSize);
   }
 
   filterIncomesList(event) {
-    console.log(event);
     this.currentPage = event.pageIndex;
     this.filteredIncomes = this.pagePipe.transform(this.sortedIncomes, event.pageIndex, event.pageSize);
   }
 
   filterIncomeStreamsList(event) {
-    console.log(event);
     this.currentPage = event.pageIndex;
     this.filteredIncomes = this.pagePipe.transform(this.sortedIncomes, event.pageIndex, event.pageSize);
   }
