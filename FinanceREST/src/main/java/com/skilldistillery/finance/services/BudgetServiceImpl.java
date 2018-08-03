@@ -24,7 +24,7 @@ public class BudgetServiceImpl implements BudgetService{
 	
 	@Override
 	public List<Budget> indexBudget(String username) {
-		return budRepo.findByUser_Username(username);
+		return budRepo.findByUser_UsernameOrderByStartDateDesc(username);
 	}
 	
 	@Override

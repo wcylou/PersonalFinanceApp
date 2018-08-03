@@ -82,7 +82,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 	// Expense CRUD
 	@Override
 	public List<Expense> indexExpenses(String username) {
-		return exRepo.findByUser_Username(username);
+		return exRepo.findByUser_UsernameOrderByDateDesc(username);
 	}
 	
 	@Override
@@ -121,7 +121,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 	
 	@Override
 	public List<FutureExpense> indexFutureExpenses(String username) {
-		return fexRepo.findByUser_Username(username);
+		return fexRepo.findByUser_UsernameOrderByExpectedDateAsc(username);
 	}
 	
 	@Override
