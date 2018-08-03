@@ -1,12 +1,14 @@
+import { ExpenseService } from './expense.service';
 import { FutureExpense } from './models/future-expense';
 import { Injectable } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ExpenseCategory } from './models/expense-category';
+import { Expense } from './models/expense';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,8 @@ import { ExpenseCategory } from './models/expense-category';
 export class FutureExpenseService {
   private url = environment.baseUrl + 'api/futureExpense';
   private exCatUrl = environment.baseUrl + 'api/expenses/categories';
+  myDate = new Date();
+
 
   index(): Observable<FutureExpense[]> {
     const httpOptions = {
@@ -38,7 +42,6 @@ export class FutureExpenseService {
       })
     );
   }
-
   show(selectedExpenseId) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -103,6 +106,7 @@ export class FutureExpenseService {
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
-    private router: Router
+    private router: Router,
+    private exServ: ExpenseService
   ) { }
 }

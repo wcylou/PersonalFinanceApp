@@ -144,6 +144,7 @@ export class ExpenseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(new Date());
     this.reload();
   }
 }
