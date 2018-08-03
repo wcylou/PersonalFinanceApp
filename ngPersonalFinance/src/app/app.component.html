@@ -21,6 +21,7 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav mode="side" opened>
       <br>
+      <button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{frontPage:['frontPage'], home:null, user:null, formInput:null, allDataTable:null, categoryPieChart:null}}]">Home</a></button><br><br>
       <button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{home:['home'], user:null, formInput:null, allDataTable:null, categoryPieChart:null}}]">Home</a></button><br><br>
       <button mat-raised-button color="primary"><i class="far fa-registered"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{user:['user'], formInput:null, home:null, allDataTable:null, categoryPieChart: null}}]">Sign Up</a></button><br><br>
       <button mat-raised-button color="primary"><i class="far fa-credit-card"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{formInput:['formInput'], allDataTable:['allDataTable'], categoryPieChart:['categoryPieChart'], user:null, home:null}}]">Expenses</a></button><br><br>
@@ -36,10 +37,11 @@
       <div class="col-lg-12">
           <router-outlet name="home"></router-outlet>
           <router-outlet name="user"></router-outlet>
+          <router-outlet name="frontPage"></router-outlet>
         </div>
   </div>
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-7">
         <router-outlet></router-outlet>
         <router-outlet name="categoryPieChart"></router-outlet>
 
@@ -51,7 +53,7 @@
 <!-- <app-future-expense>loading future expenses</app-future-expense> -->
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-lg-5">
         <router-outlet name="formInput"></router-outlet>
     </div>
   </div>

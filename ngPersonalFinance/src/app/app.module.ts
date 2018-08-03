@@ -34,6 +34,9 @@ import { FormInputComponent } from './form-input/form-input.component';
 import { HomeComponent } from './home/home.component';
 import { PagePipePipe } from './pipes/page-pipe.pipe';
 import { ChartsModule } from 'ng2-charts';
+import {MatTabsModule} from '@angular/material/tabs';
+import { FrontPageComponent } from './front-page/front-page.component';
+
 
 
 @NgModule({
@@ -49,7 +52,8 @@ import { ChartsModule } from 'ng2-charts';
     AllDataTableComponent,
     PagePipePipe,
     HomeComponent,
-    AllDataTableComponent
+    AllDataTableComponent,
+    FrontPageComponent
   ],
   imports: [
     FormsModule,
@@ -67,7 +71,8 @@ import { ChartsModule } from 'ng2-charts';
     MatToolbarModule,
     MatTableModule,
     MatPaginatorModule,
-    ChartsModule
+    ChartsModule,
+    MatTabsModule
   ],
   providers: [
     BudgetService,

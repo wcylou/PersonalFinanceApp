@@ -19,6 +19,11 @@ export class CategoryPieChartComponent implements OnInit {
   newMap: object;
 
 
+  public chartColors: any[] = [
+    {
+      backgroundColor: ['#FF7360', '#6FC8CE', '#FAFFF2', '#FFFCC4', '#B9E8E0']
+    }];
+
  // events
  public chartClicked(e: any): void {
    console.log(e);
