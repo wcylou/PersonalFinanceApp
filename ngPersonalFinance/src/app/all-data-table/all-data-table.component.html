@@ -7,22 +7,22 @@
 <!-- Expenses table -->
 <div *ngIf="showExpensesTable">
   <h3>Expenses</h3>
-  <mat-paginator [length]="expenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterList($event)"></mat-paginator>
+  <mat-paginator [length]="expenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesList($event)" ></mat-paginator>
 
-  <mat-table class="all-data-table" [dataSource]="filteredExpenses" matSort class="mat-elevation-z8">
+  <mat-table class="all-data-table" [dataSource]="filteredExpenses" matSort (matSortChange)="sortExpenses($event)" class="mat-elevation-z8">
 
     <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
       <mat-cell *matCellDef="let expense">{{expense.amount}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="expenseCategory">
-      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="expenseCategory.id">Category</mat-header-cell>
       <mat-cell *matCellDef="let expense">{{expense.expenseCategory.name}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="date">Date</mat-header-cell>
       <mat-cell *matCellDef="let expense">{{expense.date | date:'mediumDate'}}</mat-cell>
     </ng-container>
 
@@ -42,22 +42,22 @@
 <!-- Future expenses table -->
 <div *ngIf="showFutureExpensesTable">
   <h3>Future Expenses</h3>
-  <mat-paginator [length]="futureExpenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterList($event)"></mat-paginator>
+  <mat-paginator [length]="futureExpenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterFutureExpensesList($event)"></mat-paginator>
 
-  <mat-table class="all-data-table" [dataSource]="filteredFutureExpenses">
+  <mat-table class="all-data-table" [dataSource]="filteredFutureExpenses" matSort (matSortChange)="sortFutureExpenses($event)" class="mat-elevation-z8">
 
     <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
       <mat-cell *matCellDef="let futureExpense">{{futureExpense.amount}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="expenseCategory">
-      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="expenseCategory.name">Category</mat-header-cell>
       <mat-cell *matCellDef="let futureExpense">{{futureExpense.expenseCategory.name}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="expectedDate">
-      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="expectedDate">Date</mat-header-cell>
       <mat-cell *matCellDef="let futureExpense">{{futureExpense.expectedDate | date:'mediumDate'}}</mat-cell>
     </ng-container>
 
@@ -82,27 +82,27 @@
 <!-- Budget table -->
 <div *ngIf="showBudgetsTable">
   <h3>Budget</h3>
-  <mat-paginator [length]="budgets.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterList($event)"></mat-paginator>
+  <mat-paginator [length]="budgets.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterBudgetList($event)"></mat-paginator>
 
-  <mat-table class="all-data-table" [dataSource]="filteredBudgets" >
+  <mat-table class="all-data-table" [dataSource]="filteredBudgets"  matSort (matSortChange)="sortBudgets($event)" class="mat-elevation-z8">
 
     <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
       <mat-cell *matCellDef="let budget">{{budget.amount}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="expenseCategory">
-      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="expenseCategory.name">Category</mat-header-cell>
       <mat-cell *matCellDef="let budget">{{budget.expenseCategory.name}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="startDate">
-      <mat-header-cell *matHeaderCellDef>Start Date</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="startDate">Start Date</mat-header-cell>
       <mat-cell *matCellDef="let budget">{{budget.startDate | date:'mediumDate'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="endDate">
-      <mat-header-cell *matHeaderCellDef>End Date</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="endDate">End Date</mat-header-cell>
       <mat-cell *matCellDef="let budget">{{budget.endDate | date:'mediumDate'}}</mat-cell>
     </ng-container>
 
@@ -122,22 +122,22 @@
 <!-- Incomes table -->
 <div *ngIf="showIncomesTable">
   <h3>Income</h3>
-  <mat-paginator [length]="incomes.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterList($event)"></mat-paginator>
+  <mat-paginator [length]="incomes.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomesList($event)"></mat-paginator>
 
-  <mat-table class="all-data-table" [dataSource]="filteredIncomes">
+  <mat-table class="all-data-table" [dataSource]="filteredIncomes" matSort (matSortChange)="sortIncomes($event)" class="mat-elevation-z8">
 
     <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
       <mat-cell *matCellDef="let incomes">{{incomes.amount}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="incomeCategory">
-      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="incomeCategory.name">Category</mat-header-cell>
       <mat-cell *matCellDef="let incomes">{{incomes.incomeCategory.name}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="dateReceived">
-      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="dateReceived">Date</mat-header-cell>
       <mat-cell *matCellDef="let incomes">{{incomes.dateReceived | date:'mediumDate'}}</mat-cell>
     </ng-container>
 
@@ -152,22 +152,22 @@
 <!-- Income Streams table -->
 <div *ngIf="showIncomeStreamsTable">
   <h3>Income Streams</h3>
-  <mat-paginator [length]="incomeStreams.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterList($event)"></mat-paginator>
+  <mat-paginator [length]="incomeStreams.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomeStreamsList($event)"></mat-paginator>
 
-  <mat-table class="all-data-table" [dataSource]="filteredIncomeStreams">
+  <mat-table class="all-data-table" [dataSource]="filteredIncomeStreams" matSort (matSortChange)="sortIncomeStreams($event)" class="mat-elevation-z8">
 
     <ng-container matColumnDef="expectedAmount">
-      <mat-header-cell *matHeaderCellDef>Expected Amount</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="expectedAmount">Expected Amount</mat-header-cell>
       <mat-cell *matCellDef="let incomeStream">{{incomeStream.expectedAmount}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="incomeCategory">
-      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="incomeCategory.name">Category</mat-header-cell>
       <mat-cell *matCellDef="let incomeStream">{{incomeStream.incomeCategory.name}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="startDate">
-      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header="startDate">Date</mat-header-cell>
       <mat-cell *matCellDef="let incomeStream">{{incomeStream.startDate | date:'mediumDate'}}</mat-cell>
     </ng-container>
 
