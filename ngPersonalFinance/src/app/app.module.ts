@@ -53,7 +53,7 @@ import { FrontPageComponent } from './front-page/front-page.component';
     PagePipePipe,
     HomeComponent,
     AllDataTableComponent,
-    FrontPageComponent
+    FrontPageComponent,
   ],
   imports: [
     FormsModule,
@@ -68,6 +68,7 @@ import { FrontPageComponent } from './front-page/front-page.component';
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
+    MatSortModule,
     MatToolbarModule,
     MatTableModule,
     MatPaginatorModule,
