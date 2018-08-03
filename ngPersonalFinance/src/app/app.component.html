@@ -21,13 +21,13 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav mode="side" opened>
       <br>
-      <button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{frontPage:['frontPage'], home:null, user:null, formInput:null, allDataTable:null, categoryPieChart:null}}]">Home</a></button><br><br>
-      <button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{home:['home'], user:null, formInput:null, allDataTable:null, categoryPieChart:null}}]">Home</a></button><br><br>
-      <button mat-raised-button color="primary"><i class="far fa-registered"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{user:['user'], formInput:null, home:null, allDataTable:null, categoryPieChart: null}}]">Sign Up</a></button><br><br>
-      <button mat-raised-button color="primary"><i class="far fa-credit-card"></i>&nbsp;&nbsp;<a [routerLink]="[{outlets:{formInput:['formInput'], allDataTable:['allDataTable'], categoryPieChart:['categoryPieChart'], user:null, home:null}}]">Expenses</a></button><br><br>
-      <button mat-raised-button color="primary"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;<a [routerLink]="['/chart']">Chart</a></button><br><br>
-      <button mat-raised-button color="primary"><i class="far fa-user-circle"></i>&nbsp;&nbsp;<a [routerLink]="['/account']">Account</a></button><br><br>
-      <button mat-raised-button color="primary"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;<a [routerLink]="['/home']">Logout</a></button><br><br>
+      <a [routerLink]="[{outlets:{frontPage:['frontPage'], home:null, user:null, formInput:null, allDataTable:null, categoryPieChart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</button></a><br><br>
+      <a [routerLink]="[{outlets:{home:['home'], user:null, formInput:null, allDataTable:null, categoryPieChart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</button></a><br><br>
+      <a [routerLink]="[{outlets:{user:['user'], formInput:null, home:null, allDataTable:null, categoryPieChart: null}}]"><button mat-raised-button color="primary"><i class="far fa-registered"></i>&nbsp;&nbsp;Sign Up</button></a><br><br>
+      <a [routerLink]="[{outlets:{formInput:['formInput'], allDataTable:['allDataTable'], categoryPieChart:['categoryPieChart'], user:null, home:null}}]"><button mat-raised-button color="primary"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Expenses</button></a><br><br>
+      <a [routerLink]="['/chart']"><button mat-raised-button color="primary"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Chart</button></a><br><br>
+      <a [routerLink]="['/account']"><button mat-raised-button color="primary"><i class="far fa-user-circle"></i>&nbsp;&nbsp;Account</button></a><br><br>
+      <a [routerLink]="['/home']"><button mat-raised-button color="primary"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</button></a><br><br>
     </mat-sidenav>
     <body>
 
