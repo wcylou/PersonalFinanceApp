@@ -15,7 +15,7 @@ public interface ExpenseRepo extends JpaRepository<Expense, Integer>{
 	List<Expense> findByUser_UsernameAndDateBetween(@Param("start") Date start,@Param("end") Date end, @Param("username") String username);
 	
 	Expense findByUser_UsernameAndId(String username, int id);
-	List<Expense> findByUser_Username(String username);
+	List<Expense> findByUser_UsernameOrderByDateDesc(String username);
 	List<Expense> findByUser_UsernameAndExpenseCategory_Id(String username, int id);
 
 }

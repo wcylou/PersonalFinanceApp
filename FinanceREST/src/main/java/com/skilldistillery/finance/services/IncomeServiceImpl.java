@@ -31,7 +31,7 @@ public class IncomeServiceImpl implements IncomeService{
 	}
 	@Override
 	public List<Income> indexIncome(String username) {
-		return inRepo.findByUser_Username(username);
+		return inRepo.findByUser_UsernameOrderByDateReceivedDesc(username);
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class IncomeServiceImpl implements IncomeService{
 	}
 	@Override
 	public List<IncomeStream> indexIncomeStream(String username) {
-		return inStreamRepo.findByUser_Username(username);
+		return inStreamRepo.findByUser_UsernameOrderByStartDateAsc(username);
 	}
 	
 	@Override
