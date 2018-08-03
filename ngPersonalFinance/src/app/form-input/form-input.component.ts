@@ -1,3 +1,4 @@
+import { CategoryPieChartComponent } from './../category-pie-chart/category-pie-chart.component';
 import { Budget } from './../models/budget';
 import { FutureExpense } from './../models/future-expense';
 import { FutureExpenseService } from './../future-expense.service';
@@ -177,8 +178,14 @@ export class FormInputComponent implements OnInit {
     );
   }
 
+
+
   // tslint:disable-next-line:max-line-length
-  constructor(private incServ: IncomeService, private exServ: ExpenseService, private budServ: BudgetService, private fexServ: FutureExpenseService) { }
+  constructor(private incServ: IncomeService,
+    private exServ: ExpenseService,
+    private budServ: BudgetService,
+    private fexServ: FutureExpenseService,
+  ) { }
 
   ngOnInit() {
     this.loadIncomeData();

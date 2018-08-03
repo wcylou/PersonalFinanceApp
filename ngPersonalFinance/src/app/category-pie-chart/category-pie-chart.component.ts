@@ -37,7 +37,6 @@ export class CategoryPieChartComponent implements OnInit {
     this.expenseService.getExpenseByCategory().subscribe(
             data => {
               this.newMap = data;
-              console.log(this.dateToday);
 
 
               // tslint:disable-next-line:prefer-const
