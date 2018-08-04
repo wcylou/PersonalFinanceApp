@@ -1,8 +1,9 @@
-<button (click)="toggleExpensesTable()">Expense Table</button>
-<button (click)="toggleFutureExpensesTable()">Future Expense Table</button>
-<button (click)="toggleBudgetsTable()">Budget Table</button>
-<button (click)="toggleIncomesTable()">Income Table</button>
-<button (click)="toggleIncomeStreamsTable()">Incomes Stream Table</button>
+<button mat-stroked-button (click)="toggleExpensesTable()">Expense Table</button>
+<button mat-stroked-button (click)="toggleFutureExpensesTable()">Future Expense Table</button>
+<button mat-stroked-button (click)="toggleBudgetsTable()">Budget Table</button>
+<button mat-stroked-button (click)="toggleIncomesTable()">Income Table</button>
+<button mat-stroked-button (click)="toggleIncomeStreamsTable()">Incomes Stream Table</button>
+
 
 <!-- Expenses table -->
 <div *ngIf="showExpensesTable">
@@ -155,7 +156,7 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumnsIncomes"></mat-header-row>
 
-    <mat-row *matRowDef="let row; columns: displayedColumnsIncomes" (click)="onIncomeRowClicked(row)"></mat-row>
+    <mat-row  *matRowDef="let row; columns: displayedColumnsIncomes" (click)="onIncomeRowClicked(row)"></mat-row>
 
 
   </mat-table>
@@ -190,3 +191,6 @@
 
   </mat-table>
 </div>
+
+
+<script src="js/main.js"></script>

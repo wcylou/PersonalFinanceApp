@@ -1,4 +1,4 @@
-<h3>Add Income/Expenses/Budgets</h3>
+<!-- <h3>Add Income/Expenses/Budgets</h3>
 <ngb-accordion [closeOthers]="true">
   <ngb-panel id="static-1" title="Add Income">
     <ng-template ngbPanelContent>
@@ -81,7 +81,7 @@
     <!-- <ng-template ngbPanelTitle>
         <span> <b>Fancy</b> </span>
       </ng-template> -->
-    <ng-template ngbPanelContent>
+    <!-- <ng-template ngbPanelContent>
       <ngb-tabset>
         <ngb-tab title="Single Expense">
           <ng-template ngbTabContent>
@@ -225,4 +225,256 @@
       </div>
     </ng-template>
   </ngb-panel>
-</ngb-accordion>
+</ngb-accordion> -->
+
+
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+         Income
+        </mat-panel-title>
+        <mat-panel-description>
+          Add past/future
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-tab-group>
+          <mat-tab label="Past Income">
+            <br>
+      <div class="container">
+          <form #createIncomeRecord="ngForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  Category:
+                  <select name="category" required ngModel>
+                    <option *ngFor="let category of incomeCategories">{{category.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  Amount:
+                  <input type="number" name="amount" placeholder="amount" required ngModel />
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+              Date Received:
+                <input type="date" name="dateReceived" placeholder="date" required ngModel/>
+              </div>
+            </div>
+            <br>
+            <mat-action-row>
+            <button mat-raised-button color="primary" type="submit" (click)="createNewIncome(createIncomeRecord)">Add New Record</button>
+          </mat-action-row>
+          </form>
+        </div>
+        </mat-tab>
+        <mat-tab label="Future Income">
+          <br>
+          <div class="container">
+              <form #createIncomeStreamRecord="ngForm">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      Category:
+                      <select name="category" ngModel>
+                        <option *ngFor="let category of incomeCategories">{{category.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      Amount:
+                      <input type="number" name="expectedAmount" placeholder="Expected Amount" ngModel />
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    Start Date:
+                    <input type="date" name="startDate" placeholder="Start Date" ngModel/>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    Yearly Occurences:
+                    <input type="number" name="yearlyOccurrences" placeholder="Yearly Occurrences" ngModel/>
+                  </div>
+                </div>
+                <br>
+                <mat-action-row>
+                <button mat-raised-button color="primary" type="submit" (click)="createNewIncomeStream(createIncomeStreamRecord)">Add New Record</button>
+                </mat-action-row>
+              </form>
+            </div>
+          </mat-tab>
+          </mat-tab-group>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Expense
+        </mat-panel-title>
+        <mat-panel-description>
+        Add past/future
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-tab-group>
+          <mat-tab label="Past Expense">
+            <br>
+      <div class="container">
+          <form #createIncomeStreamRecord="ngForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  Category:
+                  <select name="category" ngModel>
+                    <option *ngFor="let category of incomeCategories">{{category.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  Amount:
+                  <input type="number" name="expectedAmount" placeholder="Expected Amount" ngModel />
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                Start Date:
+                <input type="date" name="startDate" placeholder="Start Date" ngModel/>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                Yearly Occurences:
+                <input type="number" name="yearlyOccurrences" placeholder="Yearly Occurrences" ngModel/>
+              </div>
+            </div>
+            <br>
+            <mat-action-row>
+            <button mat-raised-button color="primary" type="submit" (click)="createNewIncomeStream(createIncomeStreamRecord)">Add New Record</button>
+          </mat-action-row>
+          </form>
+        </div>
+      </mat-tab>
+      <mat-tab label="Future Expense">
+        <br>
+        <div class="container">
+            <form #createFutureExpenseRecord="ngForm">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    Category
+                    <select name="category" ngModel>
+                      <option *ngFor="let category of expenseCategories" [value]="category.name">{{ category.name }}</option>
+                    </select>
+                    <br>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    Amount:
+                    <input type="number" class="form-control" name="amount" ngModel/>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  Payment Date:
+                  <input type="date" name="expectedDate" placeholder="Expected Date" ngModel/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  Description:
+                  <input type="text" name="description" placeholder="Description" ngModel/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <span> Recurring:
+                    <input type="checkbox" name="recurring" ngModel/>
+                  </span>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                    <input type="number" name="numberOfRecurrences" ngModel/>
+                </div>
+                <div class="form-group">
+                    Weekly: <input type="radio" name="frequency" value = "weekly" ngModel/>
+                   Monthly: <input type="radio" name="frequency" value = "monthly" ngModel/>
+                   Yearly: <input type="radio" name="frequency" value = "yearly" ngModel/>
+                </div>
+              </div>
+              <br>
+              <mat-action-row>
+              <button mat-raised-button color="primary" (click)="createNewFutureExpense(createFutureExpenseRecord)">Create New Record</button>
+              </mat-action-row>
+              <br>
+            </form>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Budget
+        </mat-panel-title>
+        <mat-panel-description>
+          Add by category/date
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="container">
+          <form #newBudget="ngForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  Category
+                  <select name="category" ngModel>
+                    <option *ngFor="let category of expenseCategories" [value]="category.name">{{ category.name }}</option>
+                  </select>
+                  <br>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  Amount:
+                  <input type="number" class="form-control" name="amount" ngModel/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  Start Date:
+                  <input type="date" class="form-control" name="startDate" ngModel/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  End Date:
+                  <input type="date" class="form-control" name="endDate" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              Description:
+              <input type="text" class="form-control" name="description" placeholder="Description" ngModel/>
+            </div>
+            <mat-action-row>
+            <button mat-raised-button color="primary" (click)="addBudget(newBudget)" class="btn btn-success">Add Budget</button>&nbsp;
+          </mat-action-row>
+          </form>
+        </div>
+    </mat-expansion-panel>
+
+  </mat-accordion>

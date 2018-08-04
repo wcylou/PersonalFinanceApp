@@ -1,0 +1,21 @@
+.banner {
+	background: url(../images/money.jpg);
+	background-attachment: fixed center;
+	background-repeat: no-repeat;
+	min-height: 680px;
+	background-size: cover;
+	color: black;
+	text-align: center;
+}
+
+.darkSection {
+  background:indigo;
+}
+
+agm-map {
+  height: 300px;
+}
+
+body {
+  text-align:center;
+}

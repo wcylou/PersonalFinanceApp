@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./front-page.component.css']
 })
 export class FrontPageComponent implements OnInit {
+  lat = 39.609012;
+  lng = -104.902477;
+  zoom = 13;
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

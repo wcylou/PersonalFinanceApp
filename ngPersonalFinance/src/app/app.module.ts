@@ -37,7 +37,9 @@ import { ChartsModule } from 'ng2-charts';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatExpansionModule} from '@angular/material/expansion';
 
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -77,6 +79,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatExpansionModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDu3z8H8wEptTmzLK1unAnBejz0QmTc_h8'
+    })
   ],
   providers: [
     BudgetService,
