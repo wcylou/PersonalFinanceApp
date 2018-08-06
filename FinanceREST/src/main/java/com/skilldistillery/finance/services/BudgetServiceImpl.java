@@ -1,5 +1,6 @@
 package com.skilldistillery.finance.services;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,11 @@ public class BudgetServiceImpl implements BudgetService{
 		}
 	}
 	return aggCat;
+	}
+	
+	@Override
+	public List<Budget> findBugetsBetweenDates(String username, Date startDate, Date endDate) {	
+		return budRepo.findByUser_UsernameAndStartDateLessThanEqualAndEndDateGreaterThanEqual(username, startDate, endDate);
 	}
 	
 	@Override

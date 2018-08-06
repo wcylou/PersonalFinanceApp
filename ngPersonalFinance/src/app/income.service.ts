@@ -169,6 +169,16 @@ export class IncomeService {
     return this.http.delete<IncomeStream>(this.streamUrl + '/' + incomeId, httpOptions);
   }
 
+  getIncomeBetweenDates(dates) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.post<Income[]>(this.url + '/between', dates, httpOptions);
+  }
+
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,

@@ -1,5 +1,6 @@
 package com.skilldistillery.finance.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.skilldistillery.finance.entities.Income;
@@ -29,5 +30,6 @@ public interface IncomeService {
 	List<IncomeStream> indexIncomeStream(String username);
 
 	List<IncomeCategory> indexIncomeCategory();
+	List<Income> findIncomeBetweenDates(Date start, Date end, String username);
 
 }

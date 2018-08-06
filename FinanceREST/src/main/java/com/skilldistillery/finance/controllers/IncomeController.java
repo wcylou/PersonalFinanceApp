@@ -1,5 +1,8 @@
 package com.skilldistillery.finance.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.finance.entities.Budget;
+import com.skilldistillery.finance.entities.DateDTO;
 import com.skilldistillery.finance.entities.Income;
 import com.skilldistillery.finance.entities.IncomeCategory;
 import com.skilldistillery.finance.entities.IncomeStream;
@@ -24,6 +29,16 @@ public class IncomeController {
 	IncomeService inServ;
 	
 	String username = "user";
+	
+	@RequestMapping(path="income/between", method= RequestMethod.POST)
+	public List<Income> incomeBetweenMonths(@RequestBody DateDTO dateDTO) throws ParseException  {
+		String start = dateDTO.getStart();
+		String end = dateDTO.getEnd();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = df.parse(start);
+		Date endDate = df.parse(end);
+		return inServ.findIncomeBetweenDates(startDate, endDate, username);
+	}
 	
 	@RequestMapping(path="income/categories", method= RequestMethod.GET)
 	public List<IncomeCategory> indexCategories() {
