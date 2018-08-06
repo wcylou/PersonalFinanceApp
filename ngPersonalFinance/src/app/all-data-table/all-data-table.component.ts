@@ -154,7 +154,7 @@ export class AllDataTableComponent implements OnInit {
       }
     }
 
-    toggleBudgetsTableByDate() {
+    toggleBudgetsByDateTable() {
       if (this.showBudgetsTableByDate === false) {
         this.showBudgetsTable = false;
         this.showBudgetsTableByDate = true;
@@ -220,7 +220,7 @@ export class AllDataTableComponent implements OnInit {
     }
   }
 
-  toggleIncomesTableaByDate() {
+  toggleIncomesByDateTable() {
     if (this.showIncomesTableByDate === false) {
       this.showBudgetsTable = false;
       this.showExpensesTable = false;
@@ -577,6 +577,24 @@ export class AllDataTableComponent implements OnInit {
   }
 
   // subscribe functions between dates
+  findBudgetsBetweenDates() {
+
+    const date1 = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
+    this.dateObject.start = date1;
+    const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
+    this.dateObject.end = date2;
+    console.log(this.dateObject);
+    this.budgetService
+      .getBudgetBetweenDates(this.dateObject)
+      .subscribe(data => {
+        console.log(data);
+        this.budgetsByDate = data;
+        this.filteredBudgetsByDate = data;
+        this.toggleBudgetsByDateTable();
+       },
+       err => console.log(err));
+  }
+
   findExpensesBetweenDates() {
 
     const date1 = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
@@ -594,6 +612,25 @@ export class AllDataTableComponent implements OnInit {
        },
        err => console.log(err));
   }
+
+  findIncomesBetweenDates() {
+
+    const date1 = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
+    this.dateObject.start = date1;
+    const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
+    this.dateObject.end = date2;
+    console.log(this.dateObject);
+    this.incomeService
+      .getIncomeBetweenDates(this.dateObject)
+      .subscribe(data => {
+        console.log(data);
+        this.incomesByDate = data;
+        this.filteredIncomesByDate = data;
+        this.toggleIncomesByDateTable();
+       },
+       err => console.log(err));
+  }
+
 
   // reload the various arrays
   reload() {

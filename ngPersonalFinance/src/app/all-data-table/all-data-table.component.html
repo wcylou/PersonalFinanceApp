@@ -5,22 +5,23 @@
 <button mat-stroked-button (click)="toggleIncomeStreamsTable()">Incomes Stream Table</button>
 
 
+<div *ngIf="loadedStartDate">
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker3" placeholder="Value binding" [(ngModel)] = "startDate" [value]="startDate.value">
+    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+    <mat-datepicker #picker3></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker2" placeholder="Value binding" [(ngModel)] = "endDate"[value]="endDate.value">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+  <button (click)= "findExpensesBetweenDates(); findIncomesBetweenDates(); findBudgetsBetweenDates()">Click</button>
+</div>
+
 <!-- Expenses table -->
 <div *ngIf="showExpensesTable">
   <h3>Expenses</h3>
-  <div *ngIf="loadedStartDate">
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker3" placeholder="Value binding" [(ngModel)] = "startDate" [value]="startDate.value">
-      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-      <mat-datepicker #picker3></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker2" placeholder="Value binding" [(ngModel)] = "endDate"[value]="endDate.value">
-      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
-    <button (click)= findExpensesBetweenDates()>Click</button>
-  </div>
   <mat-paginator [length]="expenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesList($event)"></mat-paginator>
 
   <mat-table class="all-data-table" [dataSource]="filteredExpenses" matSort (matSortChange)="sortExpenses($event)" class="mat-elevation-z8">
