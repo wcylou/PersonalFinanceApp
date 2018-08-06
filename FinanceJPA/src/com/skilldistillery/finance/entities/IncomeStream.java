@@ -24,8 +24,8 @@ public class IncomeStream {
 	private double expectedAmount;
 	@Column(name = "start_date")
 	private Date startDate;
-	@Column(name = "recurrences_per_year")
-	private int yearlyOccurrences;
+	@Column(name = "number_of_occurrences")
+	private int numberOfOccurrences;
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -33,7 +33,14 @@ public class IncomeStream {
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private IncomeCategory incomeCategory;
+	private boolean recurring;
 	
+	public boolean isRecurring() {
+		return recurring;
+	}
+	public void setRecurring(boolean recurring) {
+		this.recurring = recurring;
+	}
 	public int getId() {
 		return id;
 	}
@@ -52,11 +59,11 @@ public class IncomeStream {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	public int getYearlyOccurrences() {
-		return yearlyOccurrences;
+	public int getNumberOfOccurrences() {
+		return numberOfOccurrences;
 	}
-	public void setYearlyOccurrences(int yearlyOccurrences) {
-		this.yearlyOccurrences = yearlyOccurrences;
+	public void setNumberOfOccurrences(int numberOfOccurrences) {
+		this.numberOfOccurrences = numberOfOccurrences;
 	}
 	public User getUser() {
 		return user;
@@ -79,9 +86,10 @@ public class IncomeStream {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + id;
 		result = prime * result + ((incomeCategory == null) ? 0 : incomeCategory.hashCode());
+		result = prime * result + (recurring ? 1231 : 1237);
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result + yearlyOccurrences;
+		result = prime * result + numberOfOccurrences;
 		return result;
 	}
 	@Override
@@ -102,6 +110,8 @@ public class IncomeStream {
 				return false;
 		} else if (!incomeCategory.equals(other.incomeCategory))
 			return false;
+		if (recurring != other.recurring)
+			return false;
 		if (startDate == null) {
 			if (other.startDate != null)
 				return false;
@@ -112,7 +122,7 @@ public class IncomeStream {
 				return false;
 		} else if (!user.equals(other.user))
 			return false;
-		if (yearlyOccurrences != other.yearlyOccurrences)
+		if (numberOfOccurrences != other.numberOfOccurrences)
 			return false;
 		return true;
 	}
@@ -120,7 +130,7 @@ public class IncomeStream {
 	@Override
 	public String toString() {
 		return "IncomeStream [id=" + id + ", expectedAmount=" + expectedAmount + ", startDate=" + startDate
-				+ ", yearlyOccurrences=" + yearlyOccurrences + ", user=" + user + ", incomeCategory=" + incomeCategory
+				+ ", numberOfOccurrences=" + numberOfOccurrences + ", user=" + user + ", incomeCategory=" + incomeCategory
 				+ "]";
 	}
 }

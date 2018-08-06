@@ -366,6 +366,7 @@ export class AllDataTableComponent implements OnInit {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
+
   sortBudgets(sort: Sort) {
     const budgetsData = this.budgets.slice();
     if (!sort.active || sort.direction === '') {
@@ -378,8 +379,8 @@ export class AllDataTableComponent implements OnInit {
       switch (sort.active) {
         case 'amount':
           return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory':
-          return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
+        case 'expenseCategory.name':
+          return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
         case 'startDate':
           return this.compare(a.startDate, b.startDate, isAsc);
         case 'endDate':
@@ -408,8 +409,8 @@ export class AllDataTableComponent implements OnInit {
       switch (sort.active) {
         case 'amount':
           return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory':
-          return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
+        case 'expenseCategory.name':
+          return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
         case 'startDate':
           return this.compare(a.startDate, b.startDate, isAsc);
         case 'endDate':
@@ -438,8 +439,8 @@ export class AllDataTableComponent implements OnInit {
       switch (sort.active) {
         case 'amount':
           return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory':
-          return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
+        case 'expenseCategory.name':
+          return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
         case 'date':
           return this.compare(a.date, b.date, isAsc);
         default:
@@ -466,8 +467,8 @@ export class AllDataTableComponent implements OnInit {
       switch (sort.active) {
         case 'amount':
           return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory':
-          return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
+        case 'expenseCategory.name':
+          return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
         case 'date':
           return this.compare(a.date, b.date, isAsc);
         default:
@@ -494,8 +495,8 @@ export class AllDataTableComponent implements OnInit {
       switch (sort.active) {
         case 'amount':
           return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory':
-          return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
+        case 'expenseCategory.name':
+          return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
         case 'expectedDate':
           return this.compare(a.expectedDate, b.expectedDate, isAsc);
         default:
@@ -522,8 +523,8 @@ export class AllDataTableComponent implements OnInit {
       switch (sort.active) {
         case 'amount':
           return this.compare(a.amount, b.amount, isAsc);
-        case 'incomeCategory':
-          return this.compare(a.incomeCategory, b.incomeCategory, isAsc);
+        case 'incomeCategory.name':
+          return this.compare(a.incomeCategory.name, b.incomeCategory.name, isAsc);
         case 'dateReceived':
           return this.compare(a.dateReceived, b.dateReceived, isAsc);
         default:
@@ -550,8 +551,8 @@ export class AllDataTableComponent implements OnInit {
       switch (sort.active) {
         case 'amount':
           return this.compare(a.amount, b.amount, isAsc);
-        case 'incomeCategory':
-          return this.compare(a.incomeCategory, b.incomeCategory, isAsc);
+        case 'incomeCategory.name':
+          return this.compare(a.incomeCategory.name, b.incomeCategory.name, isAsc);
         case 'dateReceived':
           return this.compare(a.dateReceived, b.dateReceived, isAsc);
         default:
@@ -578,8 +579,8 @@ export class AllDataTableComponent implements OnInit {
       switch (sort.active) {
         case 'expectedAmount':
           return this.compare(a.expectedAmount, b.expectedAmount, isAsc);
-        case 'incomeCategory':
-          return this.compare(a.incomeCategory, b.incomeCategory, isAsc);
+        case 'incomeCategory.name':
+          return this.compare(a.incomeCategory.name, b.incomeCategory.name, isAsc);
         case 'startDate':
           return this.compare(a.startDate, b.startDate, isAsc);
         default:

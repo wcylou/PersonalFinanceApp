@@ -54,6 +54,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { AgmCoreModule } from '@agm/core';
 import { DialogComponent } from './dialog/dialog.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 @NgModule({
   declarations: [
@@ -95,7 +97,8 @@ import { DialogComponent } from './dialog/dialog.component';
     MatNativeDateModule,
     MatExpansionModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSlideToggleModule
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyDu3z8H8wEptTmzLK1unAnBejz0QmTc_h8'
     // })

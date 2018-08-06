@@ -19,6 +19,7 @@
   <button (click)="findExpensesBetweenDates(); findIncomesBetweenDates(); findBudgetsBetweenDates(); showAll = false">Click</button>
 </div>
 <button (click)="showAll = true">Show All</button>
+
 <!-- Expenses table -->
 <div *ngIf="showAll">
   <div *ngIf="showExpensesTable">
@@ -32,7 +33,7 @@
       </ng-container>
 
       <ng-container matColumnDef="expenseCategory">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="expenseCategory.id">Category</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header="expenseCategory.name">Category</mat-header-cell>
         <mat-cell *matCellDef="let expense">{{expense.expenseCategory.name}}</mat-cell>
       </ng-container>
 
@@ -67,7 +68,7 @@
       </ng-container>
 
       <ng-container matColumnDef="expenseCategory">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="expenseCategory.id">Category</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header="expenseCategory.name">Category</mat-header-cell>
         <mat-cell *matCellDef="let expense">{{expense.expenseCategory.name}}</mat-cell>
       </ng-container>
 

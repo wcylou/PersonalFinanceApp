@@ -23,7 +23,13 @@ export class CategoryPieChartComponent implements OnInit {
               value = args.value;
         return label + ': ' + value;
       }
-    }
+    },
+    legend: {
+      labels: {
+           fontColor: 'pink',
+           fontSize: 14
+          }
+       },
   };
 
 
@@ -43,8 +49,6 @@ export class CategoryPieChartComponent implements OnInit {
             data => {
               this.newMap = data;
               console.log(this.dateToday);
-
-
               // tslint:disable-next-line:prefer-const
               for (let p in this.newMap) {
                 if (this.newMap.hasOwnProperty(p)) {

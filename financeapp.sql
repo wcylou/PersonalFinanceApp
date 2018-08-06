@@ -186,7 +186,8 @@ CREATE TABLE IF NOT EXISTS `personal_finance_app`.`income_stream` (
   `category_id` INT(11) NOT NULL,
   `expected_amount` DECIMAL(10,2) NOT NULL,
   `start_date` DATE NOT NULL,
-  `recurrences_per_year` INT(11) NULL,
+  `number_of_occurrences` INT(11) NULL,
+  `recurring` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `fk_income_stream_user_idx` (`user_id` ASC),
   INDEX `fk_income_stream_income_categories_idx` (`category_id` ASC),
@@ -819,7 +820,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `personal_finance_app`;
-INSERT INTO `personal_finance_app`.`income_stream` (`id`, `user_id`, `category_id`, `expected_amount`, `start_date`, `recurrences_per_year`) VALUES (1, 1, 3, 100, '2018-10-10', 0);
+INSERT INTO `personal_finance_app`.`income_stream` (`id`, `user_id`, `category_id`, `expected_amount`, `start_date`, `number_of_occurrences`, `recurring`) VALUES (1, 1, 3, 100, '2018-10-10', 0, 0);
 
 COMMIT;
 

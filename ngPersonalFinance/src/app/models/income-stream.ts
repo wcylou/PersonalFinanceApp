@@ -5,7 +5,8 @@ export class IncomeStream {
   incomeCategory: IncomeCategory;
   expectedAmount: number;
   startDate: Date;
-  yearlyOccurrences: number;
+  numberOfOccurrences: number;
+  recurring: boolean;
 
   constructor(
     id?: number,
@@ -13,13 +14,15 @@ export class IncomeStream {
     incomeCategory?: IncomeCategory,
     expectedAmount?: number,
     startDate?: Date,
-    yearlyOccurrences?: number
+    numberOfOccurrences?: number,
+    recurring?: boolean
   ) {
     this.id = id;
     this.userId = userId;
     this.incomeCategory = incomeCategory;
     this.expectedAmount = expectedAmount;
     this.startDate = startDate;
-    this.yearlyOccurrences = yearlyOccurrences;
+    this.numberOfOccurrences = numberOfOccurrences;
+    this.recurring = recurring;
   }
 }
