@@ -12,6 +12,7 @@ export class CategoryPieChartComponent implements OnInit {
  public isDataLoaded = false;
  public pieChartData: number[] = [];
  dateToday = Date.now();
+ // tslint:disable-next-line:no-inferrable-types
  public pieChartType: string = 'pie';
   newMap: object;
 
