@@ -51,12 +51,16 @@ export class AllDataTableComponent implements OnInit {
 
   incomes = [];
   filteredIncomes = [];
+  incomesByDate = [];
+  filteredIncomesByDate = [];
 
   incomeStreams = [];
   filteredIncomeStreams = [];
 
   budgets = [];
   filteredBudgets = [];
+  budgetsByDate = [];
+  filteredBudgetsByDate = [];
 
   // display column order for each table
   displayedColumnsExpenses = [
@@ -71,6 +75,7 @@ export class AllDataTableComponent implements OnInit {
     'date',
     'description'
   ];
+
   displayedColumnsFutureExpenses = [
     'amount',
     'expenseCategory',
@@ -78,6 +83,7 @@ export class AllDataTableComponent implements OnInit {
     'recurring',
     'description'
   ];
+
   displayedColumnsBudgets = [
     'amount',
     'expenseCategory',
@@ -85,29 +91,43 @@ export class AllDataTableComponent implements OnInit {
     'endDate',
     'description'
   ];
+
+  displayedColumnsBudgetsByDate = [
+    'amount',
+    'expenseCategory',
+    'startDate',
+    'endDate',
+    'description'
+  ];
+
   displayedColumnsIncomes = ['amount', 'incomeCategory', 'dateReceived'];
+  displayedColumnsIncomesByDate = ['amount', 'incomeCategory', 'dateReceived'];
   displayedColumnsIncomeStreams = [
     'expectedAmount',
     'incomeCategory',
     'startDate'
   ];
 
+  sortedBudgets: Budget[];
+  sortedBudgetsByDate: Budget[];
   sortedExpenses: Expense[];
   sortedExpensesByDate: Expense[];
   sortedFutureExpenses: FutureExpense[];
-  sortedBudgets: Budget[];
   sortedIncomes: Income[];
+  sortedIncomesByDate: Income[];
   sortedIncomeStreams: IncomeStream[];
 
   currentPage = 0;
   pageSize = 10;
   pageSizeOptions = [5, 10, 15];
 
+  showBudgetsTable = false;
+  showBudgetsTableByDate = false;
   showExpensesTable = false;
   showExpensesByDateTable = false;
   showFutureExpensesTable = false;
-  showBudgetsTable = false;
   showIncomesTable = false;
+  showIncomesTableByDate = false;
   showIncomeStreamsTable = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -121,6 +141,33 @@ export class AllDataTableComponent implements OnInit {
   }
 
   // toggle switches for showing tables
+    toggleBudgetsTable() {
+      if (this.showBudgetsTable === false) {
+        this.showExpensesTable = false;
+        this.showExpensesByDateTable = false;
+        this.showFutureExpensesTable = false;
+        this.showBudgetsTable = true;
+        this.showIncomesTable = false;
+        this.showIncomeStreamsTable = false;
+      } else {
+        this.showBudgetsTable = false;
+      }
+    }
+
+    toggleBudgetsTableByDate() {
+      if (this.showBudgetsTableByDate === false) {
+        this.showBudgetsTable = false;
+        this.showBudgetsTableByDate = true;
+        this.showExpensesTable = false;
+        this.showExpensesByDateTable = false;
+        this.showFutureExpensesTable = false;
+        this.showIncomesTable = false;
+        this.showIncomeStreamsTable = false;
+      } else {
+        this.showBudgetsTableByDate = false;
+      }
+    }
+
   toggleExpensesTable() {
     if (this.showExpensesTable === false) {
       this.showExpensesTable = true;
@@ -160,29 +207,30 @@ export class AllDataTableComponent implements OnInit {
     }
   }
 
-  toggleBudgetsTable() {
-    if (this.showBudgetsTable === false) {
-      this.showExpensesTable = false;
-      this.showExpensesByDateTable = false;
-      this.showFutureExpensesTable = false;
-      this.showBudgetsTable = true;
-      this.showIncomesTable = false;
-      this.showIncomeStreamsTable = false;
-    } else {
-      this.showBudgetsTable = false;
-    }
-  }
-
   toggleIncomesTable() {
     if (this.showIncomesTable === false) {
+      this.showBudgetsTable = false;
       this.showExpensesTable = false;
       this.showExpensesByDateTable = false;
       this.showFutureExpensesTable = false;
-      this.showBudgetsTable = false;
       this.showIncomesTable = true;
       this.showIncomeStreamsTable = false;
     } else {
       this.showIncomesTable = false;
+    }
+  }
+
+  toggleIncomesTableaByDate() {
+    if (this.showIncomesTableByDate === false) {
+      this.showBudgetsTable = false;
+      this.showExpensesTable = false;
+      this.showExpensesByDateTable = false;
+      this.showFutureExpensesTable = false;
+      this.showIncomesTable = false;
+      this.showIncomesTableByDate = true;
+      this.showIncomeStreamsTable = false;
+    } else {
+      this.showIncomesTableByDate = false;
     }
   }
 
@@ -229,6 +277,16 @@ export class AllDataTableComponent implements OnInit {
     );
   }
 
+  filterBudgetListByDate(event) {
+    console.log(event);
+    this.currentPage = event.pageIndex;
+    this.filteredBudgetsByDate = this.pagePipe.transform(
+      this.sortedBudgetsByDate,
+      event.pageIndex,
+      event.pageSize
+    );
+  }
+
   filterExpensesList(event) {
     console.log(event);
     this.currentPage = event.pageIndex;
@@ -262,6 +320,15 @@ export class AllDataTableComponent implements OnInit {
     this.currentPage = event.pageIndex;
     this.filteredIncomes = this.pagePipe.transform(
       this.sortedIncomes,
+      event.pageIndex,
+      event.pageSize
+    );
+  }
+
+  filterIncomesListByDate(event) {
+    this.currentPage = event.pageIndex;
+    this.filteredIncomesByDate = this.pagePipe.transform(
+      this.sortedIncomesByDate,
       event.pageIndex,
       event.pageSize
     );
@@ -306,6 +373,36 @@ export class AllDataTableComponent implements OnInit {
 
     this.filteredBudgets = this.pagePipe.transform(
       this.sortedBudgets,
+      this.currentPage,
+      this.pageSize
+    );
+  }
+
+  sortBudgetsByDate(sort: Sort) {
+    const budgetsDataByDate = this.budgets.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedBudgetsByDate = budgetsDataByDate;
+      return;
+    }
+
+    this.sortedBudgetsByDate = budgetsDataByDate.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'amount':
+          return this.compare(a.amount, b.amount, isAsc);
+        case 'expenseCategory':
+          return this.compare(a.expenseCategory, b.expenseCategory, isAsc);
+        case 'startDate':
+          return this.compare(a.startDate, b.startDate, isAsc);
+        case 'endDate':
+          return this.compare(a.endDate, b.endDate, isAsc);
+        default:
+          return 0;
+      }
+    });
+
+    this.filteredBudgetsByDate = this.pagePipe.transform(
+      this.sortedBudgetsByDate,
       this.currentPage,
       this.pageSize
     );
@@ -423,6 +520,34 @@ export class AllDataTableComponent implements OnInit {
     );
   }
 
+  sortIncomesByDate(sort: Sort) {
+    const incomesDataByDate = this.incomes.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedIncomesByDate = incomesDataByDate;
+      return;
+    }
+
+    this.sortedIncomesByDate = incomesDataByDate.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'amount':
+          return this.compare(a.amount, b.amount, isAsc);
+        case 'incomeCategory':
+          return this.compare(a.incomeCategory, b.incomeCategory, isAsc);
+        case 'dateReceived':
+          return this.compare(a.dateReceived, b.dateReceived, isAsc);
+        default:
+          return 0;
+      }
+    });
+
+    this.filteredIncomesByDate = this.pagePipe.transform(
+      this.sortedIncomesByDate,
+      this.currentPage,
+      this.pageSize
+    );
+  }
+
   sortIncomeStreams(sort: Sort) {
     const futureIncomesData = this.incomeStreams.slice();
     if (!sort.active || sort.direction === '') {
@@ -449,6 +574,25 @@ export class AllDataTableComponent implements OnInit {
       this.currentPage,
       this.pageSize
     );
+  }
+
+  // subscribe functions between dates
+  findExpensesBetweenDates() {
+
+    const date1 = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
+    this.dateObject.start = date1;
+    const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
+    this.dateObject.end = date2;
+    console.log(this.dateObject);
+    this.expenseService
+      .getExpenseBetweenDates(this.dateObject)
+      .subscribe(data => {
+        console.log(data);
+        this.expensesByDate = data;
+        this.filteredExpensesByDate = data;
+        this.toggleExpensesByDateTable();
+       },
+       err => console.log(err));
   }
 
   // reload the various arrays
@@ -527,23 +671,7 @@ export class AllDataTableComponent implements OnInit {
     );
   }
 
-  findExpensesBetweenDates() {
 
-    const date1 = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
-    this.dateObject.start = date1;
-    const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
-    this.dateObject.end = date2;
-    console.log(this.dateObject);
-    this.expenseService
-      .getExpenseBetweenDates(this.dateObject)
-      .subscribe(data => {
-        console.log(data);
-        this.expensesByDate = data;
-        this.filteredExpensesByDate = data;
-        this.toggleExpensesByDateTable();
-       },
-       err => console.log(err));
-  }
 
   constructor(
     private datePipe: DatePipe,
