@@ -607,6 +607,7 @@ export class AllDataTableComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.budgetsByDate = data;
+        this.sortedBudgetsByDate = data;
         this.filteredBudgetsByDate = data;
        },
        err => console.log(err));
@@ -624,6 +625,7 @@ export class AllDataTableComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.expensesByDate = data;
+        this.sortedExpensesByDate = data;
         this.filteredExpensesByDate = data;
        },
        err => console.log(err));
@@ -641,6 +643,7 @@ export class AllDataTableComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.incomesByDate = data;
+        this.sortedIncomesByDate = data;
         this.filteredIncomesByDate = data;
        },
        err => console.log(err));
