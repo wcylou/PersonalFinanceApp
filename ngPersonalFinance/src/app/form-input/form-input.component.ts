@@ -211,13 +211,98 @@ export class FormInputComponent implements OnInit {
   createNewIncomeStream(newIncomeForm: NgForm) {
     this.newIncomeStream.expectedAmount = newIncomeForm.value.expectedAmount;
     this.newIncomeStream.startDate = newIncomeForm.value.startDate;
-    this.newIncomeStream.yearlyOccurrences =
-      newIncomeForm.value.yearlyOccurrences;
+    this.newIncomeStream.numberOfOccurrences =
+      newIncomeForm.value.numberOfRecurrences;
     this.incomeCategories.forEach(category => {
       if (category.name === newIncomeForm.value.category) {
         this.newIncomeStream.incomeCategory = category;
       }
     });
+    console.log(this.newIncomeStream);
+
+
+    if (newIncomeForm.value.recurring === true) {
+      this.newIncomeStream.recurring = true;
+      this.newIncomeStream.numberOfOccurrences =
+      newIncomeForm.value.numberOfRecurrences;
+      if (newIncomeForm.value.frequency === 'weekly') {
+        const recurringIncome = Object.assign({}, this.newIncomeStream);
+        for (let i = 0; i < this.newIncomeStream.numberOfOccurrences; i++) {
+          recurringIncome.startDate = new Date(
+            recurringIncome.startDate
+          );
+          this.incServ.createIncomeStream(recurringIncome).subscribe(
+            data => {
+              this.loadIncomeData();
+              newIncomeForm.reset();
+              this.newIncomeStream = new IncomeStream();
+            },
+            err => {
+              console.error('Error in component ts: ' + err);
+            }
+          );
+         recurringIncome.startDate.setDate(
+            recurringIncome.startDate.getDate() + 7
+          );
+        }
+      } else if (newIncomeForm.value.frequency === 'monthly') {
+        const recurringIncome = Object.assign({}, this.newIncomeStream);
+        for (let i = 0; i < this.newIncomeStream.numberOfOccurrences; i++) {
+          recurringIncome.startDate = new Date(
+            recurringIncome.startDate
+          );
+          this.incServ.createIncomeStream(recurringIncome).subscribe(
+            data => {
+              this.loadIncomeData();
+              newIncomeForm.reset();
+              this.newIncomeStream = new IncomeStream();
+            },
+            err => {
+              console.error('Error in component ts: ' + err);
+            }
+          );
+         recurringIncome.startDate.setMonth(
+            recurringIncome.startDate.getMonth() + 1
+          );
+        }
+      } else {
+        const recurringIncome = Object.assign({}, this.newIncomeStream);
+        for (let i = 0; i < this.newIncomeStream.numberOfOccurrences; i++) {
+          recurringIncome.startDate = new Date(
+            recurringIncome.startDate
+          );
+          this.incServ.createIncomeStream(recurringIncome).subscribe(
+            data => {
+              this.loadIncomeData();
+              newIncomeForm.reset();
+              this.newIncomeStream = new IncomeStream();
+            },
+            err => {
+              console.error('Error in component ts: ' + err);
+            }
+          );
+         recurringIncome.startDate.setFullYear(
+            recurringIncome.startDate.getFullYear() + 1
+          );
+        }
+      }
+    } else {
+      this.newIncomeStream.recurring = false;
+
+      this.incServ.createIncomeStream(this.newIncomeStream).subscribe(
+        data => {
+          this.loadIncomeData();
+          newIncomeForm.reset();
+          this.newIncomeStream = new IncomeStream();
+        },
+        err => {
+          console.log(this.newIncomeStream);
+
+          console.error('Error in component ts: ' + err);
+        }
+      );
+    }
+
     this.incServ.createIncomeStream(this.newIncomeStream).subscribe(
       data => {
         this.loadIncomeData();

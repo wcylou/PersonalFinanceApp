@@ -21,3 +21,8 @@ button, a {
 backgroundMain {
   background-color:black;
 }
+
+span {
+  text-align:center;
+  justify-content: center;
+}

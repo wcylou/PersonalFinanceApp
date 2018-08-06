@@ -299,11 +299,22 @@
                   </div>
                 </div>
                 <div class="col">
-                  <div class="form-group">
-                    Yearly Occurences:
-                    <input type="number" name="yearlyOccurrences" placeholder="Yearly Occurrences" ngModel/>
+                    <div class="form-group">
+                      <span> Recurring:
+                        <input type="checkbox" name="recurring" ngModel/>
+                      </span>
+                    </div>
                   </div>
-                </div>
+                  <div class="col">
+                    <div class="form-group">
+                      No Of Occurences  <input type="number" name="numberOfRecurrences" ngModel/>
+                    </div>
+                    <div class="form-group">
+                        Weekly: <input type="radio" name="frequency" value = "weekly" ngModel/>
+                       Monthly: <input type="radio" name="frequency" value = "monthly" ngModel/>
+                       Yearly: <input type="radio" name="frequency" value = "yearly" ngModel/>
+                    </div>
+                  </div>
                 <br>
                 <mat-action-row>
                 <button mat-raised-button color="primary" type="submit" (click)="createNewIncomeStream(createIncomeStreamRecord)">Add New Record</button>
@@ -327,39 +338,41 @@
       <mat-tab-group>
           <mat-tab label="Past Expense">
             <br>
-      <div class="container">
-          <form #createIncomeStreamRecord="ngForm">
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  Category:
-                  <select name="category" ngModel>
-                    <option *ngFor="let category of incomeCategories">{{category.name}}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  Amount:
-                  <input type="number" name="expectedAmount" placeholder="Expected Amount" ngModel />
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                Start Date:
-                <input type="date" name="startDate" placeholder="Start Date" ngModel/>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                Yearly Occurences:
-                <input type="number" name="yearlyOccurrences" placeholder="Yearly Occurrences" ngModel/>
-              </div>
-            </div>
+            <div class="container">
+                <form #createExpenseRecord="ngForm">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        Category
+                        <select name="category" ngModel>
+                          <option *ngFor="let category of expenseCategories" [value]="category.name">{{ category.name }}</option>
+                        </select>
+                        <br>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        Amount:
+                        <input type="number" class="form-control" name="amount" ngModel/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      Payment Date:
+                      <input type="date" name="date" placeholder="date" ngModel/>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      Description:
+                      <input type="text" name="description" placeholder="description" ngModel/>
+                    </div>
+                  </div>
+                  <br>
             <br>
             <mat-action-row>
-            <button mat-raised-button color="primary" type="submit" (click)="createNewIncomeStream(createIncomeStreamRecord)">Add New Record</button>
+            <button mat-raised-button color="primary" type="submit" (click)="createNewExpense(createExpenseRecord)">Create New Record</button>
           </mat-action-row>
           </form>
         </div>
@@ -476,5 +489,4 @@
           </form>
         </div>
     </mat-expansion-panel>
-
   </mat-accordion>

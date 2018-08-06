@@ -40,6 +40,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AgmCoreModule } from '@agm/core';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { AgmCoreModule } from '@agm/core';
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
+    MatSlideToggleModule
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyDu3z8H8wEptTmzLK1unAnBejz0QmTc_h8'
     // })
