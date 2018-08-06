@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 import { IncomeService } from './income.service';
 import { BudgetService } from './budget.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -17,24 +17,36 @@ import { ExpenseService } from './expense.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { FutureExpenseComponent } from './future-expense/future-expense.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import {ReactiveFormsModule} from '@angular/forms';
-import {MatStepperModule} from '@angular/material/stepper';
-import { MatFormFieldModule, MatInputModule, MatPaginator, PageEvent, MatNativeDateModule } from '@angular/material';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
+// tslint:disable-next-line:max-line-length
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatPaginator,
+  PageEvent,
+  MatNativeDateModule,
+  MatDialogModule,
+} from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { AllDataTableComponent } from './all-data-table/all-data-table.component';
 
-import { MatPaginatorModule, MatProgressSpinnerModule,
-  MatSortModule, MatTableModule } from '@angular/material';
+import {
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSortModule,
+  MatTableModule
+} from '@angular/material';
 import { FormInputComponent } from './form-input/form-input.component';
 import { HomeComponent } from './home/home.component';
 import { PagePipePipe } from './pipes/page-pipe.pipe';
 import { ChartsModule } from 'ng2-charts';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -43,6 +55,10 @@ import {MatSelectModule} from '@angular/material/select';
 import { AgmCoreModule } from '@agm/core';
 import { CategorySelectorPipe } from './pipes/category-selector.pipe';
 import { IncomeCategorySelectorPipe } from './pipes/income-category-selector.pipe';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+import { DialogComponent } from './dialog/dialog.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -62,6 +78,7 @@ import { IncomeCategorySelectorPipe } from './pipes/income-category-selector.pip
     FrontPageComponent,
     CategorySelectorPipe,
     IncomeCategorySelectorPipe,
+    DialogComponent,
   ],
   imports: [
     FormsModule,
@@ -86,6 +103,9 @@ import { IncomeCategorySelectorPipe } from './pipes/income-category-selector.pip
     MatNativeDateModule,
     MatExpansionModule,
     MatSelectModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatSlideToggleModule
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyDu3z8H8wEptTmzLK1unAnBejz0QmTc_h8'
     // })
@@ -101,6 +121,7 @@ import { IncomeCategorySelectorPipe } from './pipes/income-category-selector.pip
     CategorySelectorPipe,
     IncomeCategorySelectorPipe
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogComponent]
 })
-export class AppModule { }
+export class AppModule {}

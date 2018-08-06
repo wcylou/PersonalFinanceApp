@@ -4,7 +4,12 @@
   </head>
 <mat-toolbar color="primary">
 <mat-toolbar-row>
-    <span>Welcome to Moonlight Confetti Personal Finance!
+    <mat-slide-toggle
+    [(ngModel)]="opened"
+    [color]="color">
+  Toggle Nav
+  </mat-slide-toggle>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome to Moonlight Confetti Personal Finance!
       <i class="fas fa-moon fa-lg" ></i>&nbsp;
       <i class="fas fa-dollar-sign fa-lg"></i>&nbsp;
       <i class="fas fa-euro-sign fa-lg"></i>&nbsp;
@@ -16,7 +21,8 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened>
+    <mat-sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
+    (closed)="events.push('close!')">
       <br>
       <a [routerLink]="[{outlets:{frontPage:['frontPage'], home:null, user:null, formInput:null,
       allDataTable:null, categoryPieChart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Front</button></a><br><br>
@@ -31,7 +37,7 @@
       <a [routerLink]="['/home']"><button mat-raised-button color="primary"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Login</button></a><br><br>
       <a [routerLink]="['/home']"><button mat-raised-button color="primary"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</button></a><br><br>
     </mat-sidenav>
-    <body>
+    <body>&nbsp;
 
    <router-outlet name="frontPage"></router-outlet>
 <div class="container">

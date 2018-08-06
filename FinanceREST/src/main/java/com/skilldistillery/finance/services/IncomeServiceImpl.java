@@ -92,7 +92,7 @@ public class IncomeServiceImpl implements IncomeService{
 		e.setExpectedAmount(incomeStream.getExpectedAmount());
 		e.setStartDate(incomeStream.getStartDate());
 		e.setIncomeCategory(incomeStream.getIncomeCategory());
-		e.setYearlyOccurrences(incomeStream.getYearlyOccurrences());
+		e.setNumberOfOccurrences(incomeStream.getNumberOfOccurrences());
 		return inStreamRepo.saveAndFlush(e);
 	}
 	
