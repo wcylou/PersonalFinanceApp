@@ -122,6 +122,17 @@ export class ExpenseService {
     };
     return this.http.get<Map<string, number>>(this.url + '/piechart',  httpOptions);
   }
+
+  getExpenseByCategoryAndDate(dates) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.post<Map<string, number>>(this.url + '/piechart', dates,  httpOptions);
+  }
+
   getExpenseBetweenDates(dates) {
     const httpOptions = {
       headers: new HttpHeaders({
