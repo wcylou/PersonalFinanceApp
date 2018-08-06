@@ -43,6 +43,7 @@ export class AllDataTableComponent implements OnInit {
   expenses = [];
   filteredExpenses = [];
   expenseDataSource = new MatTableDataSource(this.filteredExpenses);
+  expenseByDate = [];
 
   futureExpenses = [];
   filteredFutureExpenses = [];
@@ -95,6 +96,7 @@ export class AllDataTableComponent implements OnInit {
   pageSizeOptions = [5, 10, 15];
 
   showExpensesTable = false;
+  showExpensesByDateTable = false;
   showFutureExpensesTable = false;
   showBudgetsTable = false;
   showIncomesTable = false;
@@ -470,7 +472,11 @@ export class AllDataTableComponent implements OnInit {
     console.log(this.dateObject);
     this.expenseService
       .getExpenseBetweenDates(this.dateObject)
-      .subscribe(data => { console.log(data);
+      .subscribe(data => {
+        console.log(data);
+        this.expenseByDate = data;
+        this.showExpensesByDateTable = true;
+        this.showExpensesTable = false;
        },
        err => console.log(err));
   }
