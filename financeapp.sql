@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `personal_finance_app`.`future_expense` (
   `date_expected` DATE NOT NULL,
   `recurring` TINYINT(1) NOT NULL,
   `description` TEXT NULL DEFAULT NULL,
+  `number_of_recurrences` INT(11) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_future_expense_user_idx` (`user_id` ASC),
   INDEX `fk_future_expense_expense_category_idx` (`category_id` ASC),
@@ -771,7 +772,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `personal_finance_app`;
-INSERT INTO `personal_finance_app`.`future_expense` (`id`, `user_id`, `category_id`, `amount`, `date_expected`, `recurring`, `description`) VALUES (1, 1, 3, '24.99', '2018-02-09', 0, NULL);
+INSERT INTO `personal_finance_app`.`future_expense` (`id`, `user_id`, `category_id`, `amount`, `date_expected`, `recurring`, `description`, `number_of_recurrences`) VALUES (1, 1, 3, '24.99', '2018-02-09', 0, NULL, 0);
 
 COMMIT;
 
