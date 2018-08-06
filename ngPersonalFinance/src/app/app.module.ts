@@ -38,8 +38,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select';
 
 import { AgmCoreModule } from '@agm/core';
+import { CategorySelectorPipe } from './pipes/category-selector.pipe';
+import { IncomeCategorySelectorPipe } from './pipes/income-category-selector.pipe';
 
 
 @NgModule({
@@ -57,6 +60,8 @@ import { AgmCoreModule } from '@agm/core';
     HomeComponent,
     AllDataTableComponent,
     FrontPageComponent,
+    CategorySelectorPipe,
+    IncomeCategorySelectorPipe,
   ],
   imports: [
     FormsModule,
@@ -80,6 +85,7 @@ import { AgmCoreModule } from '@agm/core';
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
+    MatSelectModule,
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyDu3z8H8wEptTmzLK1unAnBejz0QmTc_h8'
     // })
@@ -91,7 +97,9 @@ import { AgmCoreModule } from '@agm/core';
     UserService,
     DatePipe,
     PageEvent,
-    PagePipePipe
+    PagePipePipe,
+    CategorySelectorPipe,
+    IncomeCategorySelectorPipe
   ],
   bootstrap: [AppComponent]
 })
