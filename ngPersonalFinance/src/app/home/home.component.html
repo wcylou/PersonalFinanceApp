@@ -1,37 +1,31 @@
+<h2>
+  Last 30 Days</h2>
 
-<h2>Last 30 Days</h2>
+<table class="table table-striped table-dark">
+  <thead class="thead-dark">
+    <tr>
+      <th>Expenses</th>
+      <th>Budget</th>
+      <th>Income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{this.lastMonthExpenses | number: '1.2-2'}}</td>
+      <td>{{this.lastMonthBudget}}</td>
+      <td>{{this.lastMonthIncome}}</td>
+    </tr>
+  </tbody>
+</table>
+<button mat-raised-button (click)="openDialog()">Pick one</button>
 
-<table class = "table table-striped table-dark">
-    <thead class = "thead-dark">
-      <tr>
-          <th>Expenses</th>
-          <th>Budget</th>
-          <th>Income</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{this.lastMonthExpenses | number: '1.2-2'}}</td>
-        <td>{{this.lastMonthBudget}}</td>
-        <td>{{this.lastMonthIncome}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngIf="loadedMessage">
+  <h3 [style.color]="expenseAgainstIncome < 33 ? 'green' : expenseAgainstIncome > 66  ? 'red' : 'orange'">You have spent {{this.expenseAgainstIncome | number: '1.2'}}% of your income</h3>
+</div>
 
-  <div *ngIf="loadedMessage">
-      <h3 [style.color]="expenseAgainstIncome < 33 ? 'green' : expenseAgainstIncome > 66  ? 'red' : 'orange'">You have spent {{this.expenseAgainstIncome | number: '1.2'}}% of your income</h3>
+
+<div *ngIf="loadedMessage">
+  <div style="display: block">
+    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
   </div>
-
-
-  <div *ngIf="loadedMessage">
-      <div style="display: block">
-        <canvas baseChart
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [legend]="barChartLegend"
-                [chartType]="barChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
-      </div>
-    </div>
+</div>
