@@ -54,7 +54,9 @@
 
 <!-- expenses by date -->
 <div *ngIf="showExpensesByDateTable">
-    <mat-table class="all-data-table" [dataSource]="expenseByDate" matSort (matSortChange)="sortExpenses($event)" class="mat-elevation-z8">
+    <mat-paginator [length]="expensesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesByDateList($event)"></mat-paginator>
+
+    <mat-table class="all-data-table" [dataSource]="filteredExpensesByDate" matSort (matSortChange)="sortExpensesByDate($event)" class="mat-elevation-z8">
         <ng-container matColumnDef="amount">
           <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
           <mat-cell *matCellDef="let expense">{{expense.amount}}</mat-cell>
@@ -75,9 +77,9 @@
           <mat-cell *matCellDef="let expense">{{expense.description}}</mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumnsExpenses"></mat-header-row>
+        <mat-header-row *matHeaderRowDef="displayedColumnsExpensesByDate"></mat-header-row>
 
-        <mat-row *matRowDef="let row; columns: displayedColumnsExpenses" (click)="onExpenseRowClicked(row)"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsExpensesByDate" (click)="onExpenseRowClicked(row)"></mat-row>
 
 
       </mat-table>
