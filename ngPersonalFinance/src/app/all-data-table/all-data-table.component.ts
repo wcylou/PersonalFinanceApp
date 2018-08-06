@@ -34,6 +34,7 @@ export class AllDataTableComponent implements OnInit {
   endDate;
   startDate;
   loadedStartDate = false;
+  showAll = true;
 
   dateObject = {
     start: null,
@@ -142,12 +143,14 @@ export class AllDataTableComponent implements OnInit {
 
   // toggle switches for showing tables
     toggleBudgetsTable() {
-      if (this.showBudgetsTable === false) {
+      if (this.showBudgetsTable === false && this.showBudgetsTableByDate === false) {
         this.showExpensesTable = false;
         this.showExpensesByDateTable = false;
         this.showFutureExpensesTable = false;
         this.showBudgetsTable = true;
+        this.showBudgetsTableByDate = true;
         this.showIncomesTable = false;
+        this.showIncomesTableByDate = false;
         this.showIncomeStreamsTable = false;
       } else {
         this.showBudgetsTable = false;
@@ -162,6 +165,7 @@ export class AllDataTableComponent implements OnInit {
         this.showExpensesByDateTable = false;
         this.showFutureExpensesTable = false;
         this.showIncomesTable = false;
+        this.showIncomesTableByDate = false;
         this.showIncomeStreamsTable = false;
       } else {
         this.showBudgetsTableByDate = false;
@@ -169,15 +173,19 @@ export class AllDataTableComponent implements OnInit {
     }
 
   toggleExpensesTable() {
-    if (this.showExpensesTable === false) {
+    if (this.showExpensesTable === false && this.showExpensesByDateTable === false) {
       this.showExpensesTable = true;
-      this.showExpensesByDateTable = false;
+      this.showExpensesByDateTable = true;
       this.showFutureExpensesTable = false;
       this.showBudgetsTable = false;
+      this.showBudgetsTableByDate = false;
       this.showIncomesTable = false;
+      this.showIncomesTableByDate = false;
       this.showIncomeStreamsTable = false;
     } else {
       this.showExpensesTable = false;
+      this.showExpensesByDateTable = false;
+
     }
   }
 
@@ -187,8 +195,10 @@ export class AllDataTableComponent implements OnInit {
       this.showExpensesByDateTable = true;
       this.showFutureExpensesTable = false;
       this.showBudgetsTable = false;
+      this.showBudgetsTableByDate = false;
       this.showIncomesTable = false;
       this.showIncomeStreamsTable = false;
+      this.showIncomesTableByDate = false;
     } else {
       this.showExpensesByDateTable = false;
     }
@@ -200,7 +210,9 @@ export class AllDataTableComponent implements OnInit {
       this.showExpensesByDateTable = false;
       this.showFutureExpensesTable = true;
       this.showBudgetsTable = false;
+      this.showBudgetsTableByDate = false;
       this.showIncomesTable = false;
+      this.showIncomesTableByDate = false;
       this.showIncomeStreamsTable = false;
     } else {
       this.showFutureExpensesTable = false;
@@ -208,21 +220,25 @@ export class AllDataTableComponent implements OnInit {
   }
 
   toggleIncomesTable() {
-    if (this.showIncomesTable === false) {
+    if (this.showIncomesTable === false && this.showIncomesTableByDate === false) {
       this.showBudgetsTable = false;
+      this.showBudgetsTableByDate = false;
       this.showExpensesTable = false;
       this.showExpensesByDateTable = false;
       this.showFutureExpensesTable = false;
+      this.showIncomesTableByDate = true;
       this.showIncomesTable = true;
       this.showIncomeStreamsTable = false;
     } else {
       this.showIncomesTable = false;
+      this.showIncomesTableByDate = false;
     }
   }
 
   toggleIncomesByDateTable() {
     if (this.showIncomesTableByDate === false) {
       this.showBudgetsTable = false;
+      this.showBudgetsTableByDate = false;
       this.showExpensesTable = false;
       this.showExpensesByDateTable = false;
       this.showFutureExpensesTable = false;
@@ -236,11 +252,13 @@ export class AllDataTableComponent implements OnInit {
 
   toggleIncomeStreamsTable() {
     if (this.showIncomeStreamsTable === false) {
+      this.showBudgetsTable = false;
+      this.showBudgetsTableByDate = false;
       this.showExpensesTable = false;
       this.showExpensesByDateTable = false;
       this.showFutureExpensesTable = false;
-      this.showBudgetsTable = false;
       this.showIncomesTable = false;
+      this.showIncomesTableByDate = false;
       this.showIncomeStreamsTable = true;
     } else {
       this.showIncomeStreamsTable = false;
@@ -590,7 +608,6 @@ export class AllDataTableComponent implements OnInit {
         console.log(data);
         this.budgetsByDate = data;
         this.filteredBudgetsByDate = data;
-        this.toggleBudgetsByDateTable();
        },
        err => console.log(err));
   }
@@ -608,7 +625,6 @@ export class AllDataTableComponent implements OnInit {
         console.log(data);
         this.expensesByDate = data;
         this.filteredExpensesByDate = data;
-        this.toggleExpensesByDateTable();
        },
        err => console.log(err));
   }
@@ -626,7 +642,6 @@ export class AllDataTableComponent implements OnInit {
         console.log(data);
         this.incomesByDate = data;
         this.filteredIncomesByDate = data;
-        this.toggleIncomesByDateTable();
        },
        err => console.log(err));
   }
