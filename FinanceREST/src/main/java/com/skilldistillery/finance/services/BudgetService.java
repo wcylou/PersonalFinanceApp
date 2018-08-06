@@ -1,6 +1,8 @@
 package com.skilldistillery.finance.services;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.skilldistillery.finance.entities.Budget;
 
@@ -17,5 +19,9 @@ public interface BudgetService {
 	List<Budget> indexBudget(String username);
 
 	List<Budget> findBudgetByCategory(String username, int id);
+
+	Map<String, Double> sortBudgetByCategory(String username);
+
+	List<Budget> findBugetsBetweenDates(String username, Date startDate, Date endDate);
 
 }

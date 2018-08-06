@@ -1,10 +1,12 @@
 package com.skilldistillery.finance.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.finance.entities.Expense;
 import com.skilldistillery.finance.entities.Income;
 import com.skilldistillery.finance.entities.IncomeCategory;
 import com.skilldistillery.finance.entities.IncomeStream;
@@ -24,6 +26,11 @@ public class IncomeServiceImpl implements IncomeService{
 	IncomeStreamRepo inStreamRepo;
 	@Autowired
 	UserRepo userRepo;
+	
+	@Override
+	public List<Income> findIncomeBetweenDates(Date start, Date end, String username) {	
+		return inRepo.findByUser_UsernameAndDateReceivedBetween(start, end, username);
+	}
 	
 	@Override
 	public List<IncomeCategory> indexIncomeCategory() {
