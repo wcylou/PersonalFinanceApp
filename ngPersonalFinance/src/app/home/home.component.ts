@@ -1,3 +1,4 @@
+import { ExpenseCategory } from './../models/expense-category';
 import { DialogComponent } from './../dialog/dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AllDataTableComponent } from './../all-data-table/all-data-table.component';
@@ -42,9 +43,6 @@ export class HomeComponent implements OnInit {
     end: null
   };
 
-  animal: string;
-  name: string;
-
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -62,14 +60,33 @@ export class HomeComponent implements OnInit {
     { data: this.barChartData2, label: 'Budget' }
   ];
   // start of copy paste
-  openDialog(fexDesc, fexCat): void {
+  openDialog(fex): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
-      data: { desc: fexDesc, cat: fexCat, checked: false }
+      data: { desc: fex.description, cat: fex.expenseCategory.name, checked: false }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      return result;
+      if (result) {
+        const futureToExpense = new Expense();
+        futureToExpense.amount = fex.amount;
+        futureToExpense.expenseCategory = fex.expenseCategory;
+        futureToExpense.description = fex.description;
+        futureToExpense.date = fex.expectedDate;
+        this.exServ.create(futureToExpense).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => console.log(err)
+        );
+      }
+        this.fexServ.destroy(fex.id).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => console.log(err)
+        );
+
     });
   }
 
@@ -88,25 +105,27 @@ export class HomeComponent implements OnInit {
     console.log(new Date(fex.expectedDate).valueOf());
     console.log(Date.now());
     if (new Date(fex.expectedDate).valueOf() < Date.now()) {
-      if (this.openDialog(fex.description, fex.expenseCategory.name)) {
-        const futureToExpense = new Expense();
-        futureToExpense.amount = fex.amount;
-        futureToExpense.expenseCategory = fex.expenseCategory;
-        futureToExpense.description = fex.description;
-        futureToExpense.date = fex.expectedDate;
-        this.exServ.create(futureToExpense).subscribe(
-          data => {
-            console.log(data);
-          },
-          err => console.log(err)
-        );
-      }
-      this.fexServ.destroy(fex.id).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => console.log(err)
-      );
+     this.openDialog(fex);
+      // if (userConfirm) {
+      //   const futureToExpense = new Expense();
+      //   futureToExpense.amount = fex.amount;
+      //   futureToExpense.expenseCategory = fex.expenseCategory;
+      //   futureToExpense.description = fex.description;
+      //   futureToExpense.date = fex.expectedDate;
+      //   this.exServ.create(futureToExpense).subscribe(
+      //     data => {
+      //       console.log(data);
+      //     },
+      //     err => console.log(err)
+      //   );
+      // } else {
+      //   this.fexServ.destroy(fex.id).subscribe(
+      //     data => {
+      //       console.log(data);
+      //     },
+      //     err => console.log(err)
+      //   );
+      // }
     }
   }
 
