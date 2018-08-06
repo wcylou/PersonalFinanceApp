@@ -1,6 +1,8 @@
 package com.skilldistillery.finance.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,22 @@ public class BudgetServiceImpl implements BudgetService{
 	BudgetRepo budRepo;
 	@Autowired
 	UserRepo userRepo;
+	
+	@Override
+	public Map<String, Double> sortBudgetByCategory(String username) {
+	Map<String, Double> aggCat = new HashMap<>();
+	List<Budget> allBudgets = indexBudget(username);
+	for (int i = 0; i < allBudgets.size(); i++) {
+		if (!aggCat.containsKey(allBudgets.get(i).getExpenseCategory().getName())) {
+			aggCat.put(allBudgets.get(i).getExpenseCategory().getName(), allBudgets.get(i).getAmount());
+		}
+		else {
+			aggCat.put(allBudgets.get(i).getExpenseCategory().getName(), 
+			aggCat.get(allBudgets.get(i).getExpenseCategory().getName()) + allBudgets.get(i).getAmount());
+		}
+	}
+	return aggCat;
+	}
 	
 	@Override
 	public List<Budget> findBudgetByCategory(String username, int id) {

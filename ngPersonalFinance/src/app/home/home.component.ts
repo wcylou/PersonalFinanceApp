@@ -61,7 +61,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('In init');
     this.reload();
   }
 }
