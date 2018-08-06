@@ -12,17 +12,19 @@ export class CategoryPieChartComponent implements OnInit {
  public isDataLoaded = false;
  public pieChartData: number[] = [];
  dateToday = Date.now();
-
-//  public pieChartData: number[] = [];
- // tslint:disable-next-line:no-inferrable-types
  public pieChartType: string = 'pie';
   newMap: object;
 
+  public chartOptions: any = {
+    pieceLabel: {
+      render: function (args) {
+        const label = args.label,
+              value = args.value;
+        return label + ': ' + value;
+      }
+    }
+  };
 
-  public chartColors: any[] = [
-    {
-      backgroundColor: ['#FF7360', '#6FC8CE', '#FAFFF2', '#FFFCC4', '#B9E8E0']
-    }];
 
  // events
  public chartClicked(e: any): void {
@@ -33,10 +35,13 @@ export class CategoryPieChartComponent implements OnInit {
    console.log(e);
  }
 
+
+
  reload() {
     this.expenseService.getExpenseByCategory().subscribe(
             data => {
               this.newMap = data;
+              console.log(this.dateToday);
 
 
               // tslint:disable-next-line:prefer-const
