@@ -11,6 +11,8 @@ import { IncomeService } from '../income.service';
 import { DatePipe } from '../../../node_modules/@angular/common';
 import { logging } from '../../../node_modules/protractor';
 import { BudgetService } from '../budget.service';
+import { IncomeStream } from '../models/income-stream';
+import { Income } from '../models/income';
 
 export interface DialogData {
   checked: boolean;
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit {
   lastMonthExpenses = 0;
   expenseAgainstIncome = 0;
   futureExpeneseIndex = [];
+  incomeStreamIndex = [];
   loadedMessage = false;
   newMap: object;
 
@@ -89,6 +92,35 @@ export class HomeComponent implements OnInit {
 
     });
   }
+  openDialog2(fex): void {
+    console.log(fex.amount);
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: { desc: fex.description, cat: fex.incomeCategory.name, checked: false }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const futureToExpense = new Income();
+        futureToExpense.amount = fex.expectedAmount;
+        futureToExpense.incomeCategory = fex.incomeCategory;
+        futureToExpense.dateReceived = fex.startDate;
+        this.inServ.create(futureToExpense).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => console.log(err)
+        );
+      }
+        this.inServ.destroyIncomeStream(fex.id).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => console.log(err)
+        );
+
+    });
+  }
 
   // ENd of copypaste
 
@@ -101,31 +133,18 @@ export class HomeComponent implements OnInit {
     console.log(e);
   }
 
-  checkDate(fex: FutureExpense) {
+  checkExpenseDate(fex: FutureExpense) {
     console.log(new Date(fex.expectedDate).valueOf());
     console.log(Date.now());
     if (new Date(fex.expectedDate).valueOf() < Date.now()) {
      this.openDialog(fex);
-      // if (userConfirm) {
-      //   const futureToExpense = new Expense();
-      //   futureToExpense.amount = fex.amount;
-      //   futureToExpense.expenseCategory = fex.expenseCategory;
-      //   futureToExpense.description = fex.description;
-      //   futureToExpense.date = fex.expectedDate;
-      //   this.exServ.create(futureToExpense).subscribe(
-      //     data => {
-      //       console.log(data);
-      //     },
-      //     err => console.log(err)
-      //   );
-      // } else {
-      //   this.fexServ.destroy(fex.id).subscribe(
-      //     data => {
-      //       console.log(data);
-      //     },
-      //     err => console.log(err)
-      //   );
-      // }
+    }
+  }
+  checkIncomeDate(inStream: IncomeStream) {
+    console.log(new Date(inStream.startDate).valueOf());
+    console.log(inStream);
+    if (new Date(inStream.startDate).valueOf() < Date.now()) {
+     this.openDialog2(inStream);
     }
   }
 
@@ -134,7 +153,16 @@ export class HomeComponent implements OnInit {
       this.futureExpeneseIndex = data;
       this.futureExpeneseIndex.forEach(
         futureExpense => {
-          this.checkDate(futureExpense);
+          this.checkExpenseDate(futureExpense);
+        },
+        err => console.log(err)
+      );
+    });
+    this.inServ.indexIncomeStream().subscribe(data => {
+      this.incomeStreamIndex = data;
+      this.incomeStreamIndex.forEach(
+        incomeStream => {
+          this.checkIncomeDate(incomeStream);
         },
         err => console.log(err)
       );
