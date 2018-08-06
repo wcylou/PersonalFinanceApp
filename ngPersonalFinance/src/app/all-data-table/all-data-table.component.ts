@@ -539,6 +539,7 @@ export class AllDataTableComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.expensesByDate = data;
+        this.filteredExpensesByDate = data;
         this.toggleExpensesByDateTable();
        },
        err => console.log(err));
@@ -568,9 +569,4 @@ export class AllDataTableComponent implements OnInit {
     this.loadedStartDate = true;
   }
 
-  // ngAfterViewInit() {
-  //   this.paginator.page.pipe(
-  //     tap(() => this.reload())
-  //   ).subscribe();
-  // }
 }
