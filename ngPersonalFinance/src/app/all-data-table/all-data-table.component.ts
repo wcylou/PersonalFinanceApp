@@ -1,3 +1,5 @@
+import { CategorySelectorPipe } from './../pipes/category-selector.pipe';
+import { ExpenseCategory } from './../models/expense-category';
 import { IncomeStream } from './../models/income-stream';
 import { PagePipePipe } from './../pipes/page-pipe.pipe';
 import { Income } from './../models/income';
@@ -24,6 +26,7 @@ import {
 import { tap } from '../../../node_modules/rxjs/operators';
 import { PageEvent } from '@angular/material';
 import { Sort } from '@angular/material';
+import { IncomeCategorySelectorPipe } from '../pipes/income-category-selector.pipe';
 
 @Component({
   selector: 'app-all-data-table',
@@ -42,6 +45,9 @@ export class AllDataTableComponent implements OnInit {
   };
 
   expenses = [];
+  expensesCategories = new FormControl();
+  expenseCategorySelector = [];
+  selectedExpenseCategories = '';
   filteredExpenses = [];
   expenseDataSource = new MatTableDataSource(this.filteredExpenses);
   expensesByDate = [];
@@ -133,6 +139,16 @@ export class AllDataTableComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;
+
+  setExpenseCategoryFilter() {
+    console.log('testing testing');
+    this.sortedExpenses = this.expenseCategoryPipe.transform(
+      this.expenses,
+      this.selectedExpenseCategories
+    );
+
+    this.filteredExpenses = this.sortedExpenses;
+  }
 
   setInitialStartDate() {
     this.startDate = new Date();
@@ -653,6 +669,7 @@ export class AllDataTableComponent implements OnInit {
 
   // reload the various arrays
   reload() {
+
     this.budgetService.index().subscribe(
       data => {
         this.budgets = data;
@@ -698,6 +715,13 @@ export class AllDataTableComponent implements OnInit {
       }
     );
 
+    this.expenseService.indexExCat().subscribe(
+      data => {
+        this.expenseCategorySelector = data;
+      },
+      err => console.error('error inside of the category reload')
+    );
+
     this.incomeService.index().subscribe(
       data => {
         this.incomes = data;
@@ -738,7 +762,9 @@ export class AllDataTableComponent implements OnInit {
     private futureExpenseService: FutureExpenseService,
     private incomeService: IncomeService,
     private pageEvent: PageEvent,
-    private pagePipe: PagePipePipe
+    private pagePipe: PagePipePipe,
+    private expenseCategoryPipe: CategorySelectorPipe,
+    private incomeCategoryPipe: IncomeCategorySelectorPipe
   ) {
     this.sortedBudgets = this.budgets.slice();
     this.sortedExpenses = this.expenses.slice();

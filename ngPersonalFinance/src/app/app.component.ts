@@ -9,6 +9,6 @@ export class AppComponent {
   title = 'app';
   events: string[] = [];
   opened: boolean;
-  color = 'accent';
+  color = 'primary';
 
 }

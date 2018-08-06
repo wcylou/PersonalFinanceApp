@@ -24,6 +24,13 @@
 <div *ngIf="showAll">
   <div *ngIf="showExpensesTable">
     <h3>Expenses</h3>
+
+    <mat-form-field>
+        <mat-select placeholder="Category" [formControl]="expensesCategories" [(value)]='selectedExpenseCategories' multiple (selectionChange)='setExpenseCategoryFilter()'>
+          <mat-option *ngFor="let category of expenseCategorySelector" [value]='category.name'>{{category.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
     <mat-paginator [length]="expenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesList($event)"></mat-paginator>
 
     <mat-table class="all-data-table" [dataSource]="filteredExpenses" matSort (matSortChange)="sortExpenses($event)" class="mat-elevation-z8">

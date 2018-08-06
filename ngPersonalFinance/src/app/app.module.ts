@@ -49,10 +49,14 @@ import { ChartsModule } from 'ng2-charts';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatExpansionModule } from '@angular/material/expansion';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select';
 
 import { AgmCoreModule } from '@agm/core';
+import { CategorySelectorPipe } from './pipes/category-selector.pipe';
+import { IncomeCategorySelectorPipe } from './pipes/income-category-selector.pipe';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 import { DialogComponent } from './dialog/dialog.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
@@ -72,6 +76,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     HomeComponent,
     AllDataTableComponent,
     FrontPageComponent,
+    CategorySelectorPipe,
+    IncomeCategorySelectorPipe,
     DialogComponent,
   ],
   imports: [
@@ -96,6 +102,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
+    MatSelectModule,
     MatDialogModule,
     MatCheckboxModule,
     MatSlideToggleModule
@@ -110,7 +117,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     UserService,
     DatePipe,
     PageEvent,
-    PagePipePipe
+    PagePipePipe,
+    CategorySelectorPipe,
+    IncomeCategorySelectorPipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent]
