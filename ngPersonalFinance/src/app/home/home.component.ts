@@ -21,7 +21,9 @@ export class HomeComponent implements OnInit {
   lastMonthBudget = 0;
   lastMonthIncome = 0;
   lastMonthExpenses = 0;
+  expenseAgainstIncome = 0;
   futureExpeneseIndex = [];
+  loadedMessage = false;
 
   endDate;
   startDate;
@@ -30,6 +32,50 @@ export class HomeComponent implements OnInit {
     start: null,
     end: null
   };
+
+  public barChartOptions: any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartLabels: string[] = [];
+  public barChartType: string = 'bar';
+  public barChartLegend: boolean = true;
+  public barChartData2: number[] = [];
+
+  public barChartData: any[] = [
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Expense'},
+    {data: this.barChartData2, label: 'Budget'}
+  ];
+
+  // events
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
+
+  public randomize(): void {
+    // Only Change 3 values
+    let data = [
+      Math.round(Math.random() * 100),
+      59,
+      80,
+      (Math.random() * 100),
+      56,
+      (Math.random() * 100),
+      40];
+    let clone = JSON.parse(JSON.stringify(this.barChartData));
+    clone[0].data = data;
+    this.barChartData = clone;
+    /**
+     * (My guess), for Angular to recognize the change in the dataset
+     * it has to change the dataset variable directly,
+     * so one way around it, is to clone the data, change it and then
+     * assign it;
+     */
+  }
 
   checkDate(fex: FutureExpense) {
     console.log(new Date(fex.expectedDate).valueOf());
@@ -58,21 +104,17 @@ export class HomeComponent implements OnInit {
   }
 
 
+
   reload() {
-    console.log('in reload');
     this.fexServ.index().subscribe(data => {
       this.futureExpeneseIndex = data;
-      console.log(this.futureExpeneseIndex);
       this.futureExpeneseIndex.forEach(
         futureExpense => {
-          console.log('in for loop');
           this.checkDate(futureExpense);
         },
         err => console.log(err)
       );
     });
-
-
 
     this.startDate = new Date();
     this.endDate = new Date();
@@ -88,6 +130,20 @@ export class HomeComponent implements OnInit {
         for (let i = 0; i < this.allExpenses.length; i++) {
           this.lastMonthExpenses += this.allExpenses[i].amount;
         }
+        this.expenseAgainstIncome = this.lastMonthExpenses;
+
+            this.inServ
+            .getIncomeBetweenDates(this.dateObject)
+            .subscribe(data2 => {
+              this.allIncome = data2;
+              for (let i = 0; i < this.allIncome.length; i++) {
+                this.lastMonthIncome += this.allIncome[i].amount;
+              }
+              this.expenseAgainstIncome = this.expenseAgainstIncome / this.lastMonthIncome * 100;
+             this.loadedMessage = true;
+
+             },
+             err => console.log(err));
        },
        err => console.log(err));
 
@@ -97,20 +153,13 @@ export class HomeComponent implements OnInit {
          this.allBudgets = data;
          for (let i = 0; i < this.allBudgets.length; i++) {
            this.lastMonthBudget += this.allBudgets[i].amount;
+           this.barChartLabels.push(this.allBudgets[i].expenseCategory.name);
+           this.barChartData2.push(this.allBudgets[i].amount);
          }
+         console.log(this.allBudgets);
+
         },
         err => console.log(err));
-
-    this.inServ
-       .getIncomeBetweenDates(this.dateObject)
-       .subscribe(data => {
-         this.allIncome = data;
-         for (let i = 0; i < this.allIncome.length; i++) {
-           this.lastMonthIncome += this.allIncome[i].amount;
-         }
-        },
-        err => console.log(err));
-
   }
 
   constructor(
