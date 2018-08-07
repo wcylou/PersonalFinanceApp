@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -8,7 +9,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-
+  private url = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
   login(username, password) {
@@ -20,7 +21,7 @@ export class AuthService {
 
     // create request to authenticate credentials
     return this.http
-      .get('http://localhost:8080/api/login', {headers})
+      .get(this.url + 'api/login', {headers})
       .pipe(
         tap((res) => {
           localStorage.setItem('token' , token);
@@ -35,7 +36,7 @@ export class AuthService {
 
   register(user) {
     // create request to register a new account
-    return this.http.post('http://localhost:8080/api/register', user)
+    return this.http.post(this.url + 'api/register', user)
     .pipe(
         tap((res) => {  // create a user and then upon success, log them in
           this.login(user.username, user.password);
