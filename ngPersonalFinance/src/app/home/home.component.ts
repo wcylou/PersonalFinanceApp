@@ -18,6 +18,8 @@ export interface DialogData {
   checked: boolean;
   desc: string;
   cat: string;
+  amount: number;
+  catType: string;
 }
 
 @Component({
@@ -63,10 +65,10 @@ export class HomeComponent implements OnInit {
     { data: this.barChartData2, label: 'Budget' }
   ];
   // start of copy paste
-  openDialog(fex): void {
+  openDialogExpense(fex): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
-      data: { desc: fex.description, cat: fex.expenseCategory.name, checked: false }
+      data: { desc: fex.description, cat: fex.expenseCategory.name, amount: fex.amount, checked: false, catType: 'Expense' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -92,11 +94,11 @@ export class HomeComponent implements OnInit {
 
     });
   }
-  openDialog2(fex): void {
+  openDialogIncome(fex): void {
     console.log(fex.amount);
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
-      data: { desc: fex.description, cat: fex.incomeCategory.name, checked: false }
+      data: { desc: fex.description, cat: fex.incomeCategory.name, amount: fex.expectedAmount, checked: false, catType: 'Income' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -137,14 +139,14 @@ export class HomeComponent implements OnInit {
     console.log(new Date(fex.expectedDate).valueOf());
     console.log(Date.now());
     if (new Date(fex.expectedDate).valueOf() < Date.now()) {
-     this.openDialog(fex);
+     this.openDialogExpense(fex);
     }
   }
   checkIncomeDate(inStream: IncomeStream) {
     console.log(new Date(inStream.startDate).valueOf());
     console.log(inStream);
     if (new Date(inStream.startDate).valueOf() < Date.now()) {
-     this.openDialog2(inStream);
+     this.openDialogIncome(inStream);
     }
   }
 

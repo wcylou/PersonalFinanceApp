@@ -25,14 +25,15 @@
     (closed)="events.push('close!')">
       <br>
       <a [routerLink]="[{outlets:{frontPage:['frontPage'], home:null, user:null, formInput:null,
-      allDataTable:null, categoryPieChart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Front</button></a><br><br>
+      allDataTable:null, categoryPieChart:null, chart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Front</button></a><br><br>
       <a [routerLink]="[{outlets:{home:['home'], frontPage:null, user:null, formInput:null, allDataTable:null,
-      categoryPieChart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</button></a><br><br>
+      categoryPieChart:null, chart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</button></a><br><br>
       <a [routerLink]="[{outlets:{user:['user'], frontPage:null,  formInput:null, home:null, allDataTable:null,
-      categoryPieChart: null}}]"><button mat-raised-button color="primary"><i class="far fa-registered"></i>&nbsp;&nbsp;Sign Up</button></a><br><br>
+      categoryPieChart: null, chart:null}}]"><button mat-raised-button color="primary"><i class="far fa-registered"></i>&nbsp;&nbsp;Sign Up</button></a><br><br>
       <a [routerLink]="[{outlets:{formInput:['formInput'], frontPage:null,  allDataTable:['allDataTable'],
-      categoryPieChart:['categoryPieChart'], user:null, home:null}}]"><button mat-raised-button color="primary"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Expenses</button></a><br><br>
-      <a [routerLink]="['/chart']"><button mat-raised-button color="primary"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Chart</button></a><br><br>
+      categoryPieChart:['categoryPieChart'], user:null, home:null, chart:null}}]"><button mat-raised-button color="primary"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Expenses</button></a><br><br>
+      <a [routerLink]="[{outlets:{formInput:null, frontPage:null,  allDataTable:null,
+      categoryPieChart:null, user:null, home:null, chart:['chart']}}]"><button mat-raised-button color="primary"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Chart</button></a><br><br>
       <a [routerLink]="['/account']"><button mat-raised-button color="primary"><i class="far fa-user-circle"></i>&nbsp;&nbsp;Account</button></a><br><br>
       <a [routerLink]="['/home']"><button mat-raised-button color="primary"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Login</button></a><br><br>
       <a [routerLink]="['/home']"><button mat-raised-button color="primary"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</button></a><br><br>
@@ -46,6 +47,7 @@
       <div class="col-lg-12">
           <router-outlet name="home"></router-outlet>
           <router-outlet name="user"></router-outlet>
+          <router-outlet name="chart"></router-outlet>
         </div>
   </div>
   <div class="row">

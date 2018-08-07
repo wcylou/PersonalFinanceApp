@@ -131,7 +131,7 @@ switchView() {
 
     this.newIncomeStream.expectedAmount = newIncomeForm.value.expectedAmount;
     this.newIncomeStream.startDate = newIncomeForm.value.startDate;
-    this.newIncomeStream.yearlyOccurrences = newIncomeForm.value.yearlyOccurrences;
+    this.newIncomeStream.numberOfOccurrences = newIncomeForm.value.numberOfOccurrences;
     this.incomeCategories.forEach(category => {
       if (category.name === newIncomeForm.value.category) {
         this.newIncomeStream.incomeCategory = category;
