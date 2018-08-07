@@ -1,0 +1,39 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID. </th>
+      <td mat-cell *matCellDef="let budget"> {{budget.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expenseCategory">
+        <th mat-header-cell *matHeaderCellDef> Expense Category </th>
+        <td mat-cell *matCellDef="let budget"> {{budget.expenseCategory.name}} </td>
+      </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef> Amount </th>
+      <td mat-cell *matCellDef="let budget"> {{budget.amount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef> Start Date </th>
+      <td mat-cell *matCellDef="let budget"> {{budget.startDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell *matHeaderCellDef> End Date </th>
+      <td mat-cell *matCellDef="let budget"> {{budget.endDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let budget"> {{budget.description}} </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

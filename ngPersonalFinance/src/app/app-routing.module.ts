@@ -1,3 +1,4 @@
+import { ChartComponent } from './chart/chart.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { AllDataTableComponent } from './all-data-table/all-data-table.component';
 import { FormInputComponent } from './form-input/form-input.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
     {path: 'formInput', component: FormInputComponent, outlet: 'formInput'},
     {path: 'allDataTable', component: AllDataTableComponent, outlet: 'allDataTable'},
     {path: 'categoryPieChart', component: CategoryPieChartComponent, outlet: 'categoryPieChart'},
+    {path: 'chart', component: ChartComponent, outlet: 'chart'},
   ];
 
 @NgModule({
