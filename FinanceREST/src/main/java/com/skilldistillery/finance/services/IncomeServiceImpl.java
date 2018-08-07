@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.finance.entities.Expense;
 import com.skilldistillery.finance.entities.Income;
 import com.skilldistillery.finance.entities.IncomeCategory;
 import com.skilldistillery.finance.entities.IncomeStream;

@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.skilldistillery.finance.entities.Expense;
 import com.skilldistillery.finance.entities.Income;
-import com.skilldistillery.finance.entities.IncomeCategory;
 import com.skilldistillery.finance.entities.User;
 import com.skilldistillery.finance.repo.ExpenseRepo;
 import com.skilldistillery.finance.repo.IncomeRepo;

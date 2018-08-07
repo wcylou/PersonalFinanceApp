@@ -1,39 +1,65 @@
+
+<button mat-stroked-button (click)="showCurrency()">Live Currency Quotes</button>&nbsp;&nbsp;&nbsp;
+<button mat-stroked-button (click)="showBudgets()">Budgets</button>&nbsp;&nbsp;&nbsp;
+<br>
+
+<div *ngIf="isDataLoaded && currencyTableSelected">
+  <br>
+<table class = "table" id="currencyTable">
+    <thead class = "thead-dark">
+      <tr>
+        <th>Currency</th>
+        <th>Live Quote</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let currency of newMap | keyvalue">
+        <td>{{currency.key}}</td>
+        <td>{{currency.value}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <div *ngIf="budgetTableSelected">
+    <br>
 <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID. </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>
       <td mat-cell *matCellDef="let budget"> {{budget.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="expenseCategory">
-        <th mat-header-cell *matHeaderCellDef> Expense Category </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Expense Category </th>
         <td mat-cell *matCellDef="let budget"> {{budget.expenseCategory.name}} </td>
       </ng-container>
 
     <ng-container matColumnDef="amount">
-      <th mat-header-cell *matHeaderCellDef> Amount </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
       <td mat-cell *matCellDef="let budget"> {{budget.amount}} </td>
     </ng-container>
 
     <ng-container matColumnDef="startDate">
-      <th mat-header-cell *matHeaderCellDef> Start Date </th>
-      <td mat-cell *matCellDef="let budget"> {{budget.startDate}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+      <td mat-cell *matCellDef="let budget"> {{budget.startDate | date }} </td>
     </ng-container>
 
     <ng-container matColumnDef="endDate">
-      <th mat-header-cell *matHeaderCellDef> End Date </th>
-      <td mat-cell *matCellDef="let budget"> {{budget.endDate}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+      <td mat-cell *matCellDef="let budget"> {{budget.endDate | date}} </td>
     </ng-container>
 
     <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
         <td mat-cell *matCellDef="let budget"> {{budget.description}} </td>
       </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+</div>

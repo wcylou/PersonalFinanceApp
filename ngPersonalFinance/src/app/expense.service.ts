@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -20,7 +21,7 @@ export class ExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.get<Expense[]>(this.url, httpOptions).pipe(
@@ -30,20 +31,28 @@ export class ExpenseService {
       })
     );
   }
-
   findExpenses(
     pageNumber = 0, pageSize = 3): Observable<Expense[]> {
-      return this.http.get(this.url, {
-        params: new HttpParams()
-          .set('pageNumber', pageNumber.toString())
-          .set('pageSize', pageSize.toString())
-      }).pipe(
+      const httpOptions = { params: new HttpParams()
+        .set('pageNumber', pageNumber.toString())
+        .set('pageSize', pageSize.toString()),
+         headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Basic ${this.authService.getToken()}`
+        }) };
+      return this.http.get(this.url, httpOptions).pipe(
         map(res => res['payload'])
       );
     }
 
   indexExCat() {
-    return this.http.get<ExpenseCategory[]>(this.exCatUrl).pipe(
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.get<ExpenseCategory[]>(this.exCatUrl, httpOptions).pipe(
       catchError((err: any) => {
         console.log('category retrieval error');
         return throwError('error in index category');
@@ -55,7 +64,7 @@ export class ExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.get<Expense>(this.url + '/' + selectedExpenseId, httpOptions)
@@ -77,7 +86,7 @@ export class ExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.post<Expense>(this.url, newExpense, httpOptions).pipe(
@@ -95,7 +104,7 @@ export class ExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.patch<Expense>(
@@ -107,7 +116,7 @@ export class ExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.delete<Expense>(this.url + '/' + expenseId, httpOptions);
@@ -117,7 +126,7 @@ export class ExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.get<Map<string, number>>(this.url + '/piechart',  httpOptions);
@@ -127,7 +136,7 @@ export class ExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.post<Map<string, number>>(this.url + '/piechart', dates,  httpOptions);
@@ -137,7 +146,7 @@ export class ExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.post<Expense[]>(this.url + '/between', dates, httpOptions);
@@ -149,6 +158,7 @@ export class ExpenseService {
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 }

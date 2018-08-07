@@ -1,18 +1,32 @@
 package com.skilldistillery.finance.services;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skilldistillery.finance.entities.User;
 import com.skilldistillery.finance.repo.UserRepo;
 
+@Transactional
+@Repository 
 @Service
 public class UserServiceImpl implements UserService{
+	
+	@Autowired
+	private PasswordEncoder encoder;
 
 	@Autowired
 	UserRepo userRepo;
+	
+
 	
 	@Override
 	public List<User> indexUser() {

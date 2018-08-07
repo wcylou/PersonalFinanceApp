@@ -54,6 +54,7 @@ testRuntime('org.junit.jupiter:junit-jupiter-engine:5.0.1',
       'org.junit.platform:junit-platform-launcher:1.0.1',
       'org.junit.platform:junit-platform-runner:1.0.1')
       runtime group: 'org.hidetake', name: 'groovy-ssh', version: '2.9.0'
+         compile('org.springframework.boot:spring-boot-starter-security')
       
 }
 

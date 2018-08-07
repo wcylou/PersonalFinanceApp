@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { environment } from '../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -17,7 +18,13 @@ export class BudgetService {
   private url2 = environment.baseUrl + 'api/expenses/categories';
 
   index() {
-    return this.http.get<Budget[]>(this.url)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.get<Budget[]>(this.url, httpOptions)
        .pipe(
          catchError((err: any) => {
           console.log(err);
@@ -27,7 +34,13 @@ export class BudgetService {
   }
 
   show(bid) {
-    return this.http.get<Budget>(this.url + '/' + bid)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.get<Budget>(this.url + '/' + bid, httpOptions)
     .pipe(
       catchError((err: any) => {
        console.log(err);
@@ -37,7 +50,13 @@ export class BudgetService {
   }
 
   create(bid) {
-    return this.http.post<Budget>(this.url, bid)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.post<Budget>(this.url, bid, httpOptions)
     .pipe(
       catchError((err: any) => {
        console.log(err);
@@ -47,7 +66,13 @@ export class BudgetService {
   }
 
   update(budget: Budget) {
-    return this.http.patch<Budget>(this.url + '/' + budget.id, budget)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.patch<Budget>(this.url + '/' + budget.id, budget, httpOptions)
     .pipe(
       catchError((err: any) => {
        console.log(err);
@@ -55,9 +80,16 @@ export class BudgetService {
       })
     );
   }
-
+// Another potential broken spot
   destroy(budget: Budget) {
-    return this.http.delete(this.url + '/' + budget.id, {responseType: 'text'})
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`,
+        responseType: 'text'
+      })
+    };
+    return this.http.delete(this.url + '/' + budget.id, httpOptions)
     .pipe(
       catchError((err: any) => {
        console.log(err);
@@ -67,7 +99,13 @@ export class BudgetService {
   }
 
   indexExpenseCategories() {
-    return this.http.get<ExpenseCategory[]>(this.url2)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.get<ExpenseCategory[]>(this.url2, httpOptions)
     .pipe(
       catchError((err: any) => {
        console.log(err);
@@ -80,12 +118,12 @@ export class BudgetService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.post<Budget[]>(this.url + '/between', dates, httpOptions);
 
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 }

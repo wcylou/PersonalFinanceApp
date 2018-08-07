@@ -1,3 +1,5 @@
+import { AuthService } from './../auth.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {NgForm, FormControl} from '@angular/forms';
 import { UserService } from '../user.service';
@@ -46,15 +48,16 @@ export class UserComponent implements OnInit {
 
   addUser() {
 
-    this.userService.create(this.newUser).subscribe(
+    this.authService.register(this.newUser).subscribe(
             data => {
               this.newUser = new User();
               this.createNewUser = null;
               this.reload();
+              this.authService.checkLogin();
+              this.router.navigate([{ outlets: { frontPage: 'frontPage' } }]);
             },
             err => console.error('User create error' + err)
           );
-
   }
 
   setEditUser() {
@@ -104,7 +107,8 @@ export class UserComponent implements OnInit {
   }
 
 
-  constructor(private userService: UserService, private _formBuilder: FormBuilder) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private userService: UserService, private _formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.reload();
