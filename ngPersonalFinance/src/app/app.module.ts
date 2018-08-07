@@ -63,6 +63,7 @@ import { ChartComponent } from './chart/chart.component';
 import 'hammerjs';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { AccountComponent } from './account/account.component';
 
 
 
@@ -87,6 +88,7 @@ import { LogoutComponent } from './logout/logout.component';
     ChartComponent,
     LoginComponent,
     LogoutComponent,
+    AccountComponent,
   ],
   imports: [
     FormsModule,

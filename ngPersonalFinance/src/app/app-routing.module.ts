@@ -1,3 +1,4 @@
+import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { ChartComponent } from './chart/chart.component';
 import { FrontPageComponent } from './front-page/front-page.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
     {path: '', pathMatch: 'full', redirectTo: 'home'},
     {path: 'home', component: HomeComponent, outlet: 'home'},
     {path: 'frontPage', component: FrontPageComponent, outlet: 'frontPage'},
+    {path: 'account', component: AccountComponent, outlet: 'account'},
     {path: 'expense', component: ExpenseComponent, outlet: 'expense'},
     {path: 'login', component: LoginComponent, outlet: 'login'},
     {path: 'logout', component: LogoutComponent, outlet: 'logout'},
