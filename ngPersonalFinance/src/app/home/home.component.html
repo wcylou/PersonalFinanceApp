@@ -17,7 +17,6 @@
     </tr>
   </tbody>
 </table>
-<button mat-raised-button (click)="openDialog()">Pick one</button>
 
 <div *ngIf="loadedMessage">
   <h3 [style.color]="expenseAgainstIncome < 33 ? 'green' : expenseAgainstIncome > 66  ? 'red' : 'orange'">You have spent {{this.expenseAgainstIncome | number: '1.2'}}% of your income</h3>

@@ -1,12 +1,16 @@
-<h1 mat-dialog-title>Expense Category: {{data.cat}}</h1>
-<div mat-dialog-content>
-  <h2>Can you confirm this transaction took place?</h2>
-  <p *ngIf="data.desc">Description: {{data.desc}}</p>
+<div class = "background">
+  <h1 mat-dialog-title class="dialogTitle" > Confirm {{data.catType}}? </h1>
+  <div mat-dialog-content class="dialogContent">
+    <h5>Category: {{data.cat}}</h5>
+    <h5>Transaction Amount: {{data.amount}}</h5>
+    <p *ngIf="data.desc">Description: {{data.desc}}</p>
 
-  <section class="example-section">
-      <mat-checkbox class="example-margin" [(ngModel)]="data.checked">Checked</mat-checkbox>
+    <section class="example-section">
+      Confirm:
+      <mat-checkbox class="example-margin" [(ngModel)]="data.checked"></mat-checkbox>
     </section>
-</div>
-<div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data.checked" cdkFocusInitial>Ok</button>
+  </div>
+  <div mat-dialog-actions class="dialogButton">
+    <button mat-button [mat-dialog-close]="data.checked" cdkFocusInitial>Ok</button>
+  </div>
 </div>

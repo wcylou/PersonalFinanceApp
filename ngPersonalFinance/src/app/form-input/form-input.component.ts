@@ -303,14 +303,14 @@ export class FormInputComponent implements OnInit {
       );
     }
 
-    this.incServ.createIncomeStream(this.newIncomeStream).subscribe(
-      data => {
-        this.loadIncomeData();
-        this.newIncomeStream = new IncomeStream();
-        newIncomeForm.reset();
-      },
-      err => console.log(err)
-    );
+    // this.incServ.createIncomeStream(this.newIncomeStream).subscribe(
+    //   data => {
+    //     this.loadIncomeData();
+    //     this.newIncomeStream = new IncomeStream();
+    //     newIncomeForm.reset();
+    //   },
+    //   err => console.log(err)
+    // );
   }
 
   // loading of categories
