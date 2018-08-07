@@ -1,0 +1,66 @@
+<br>
+<div *ngIf="selected">
+      <button (click)="displayTable()" class="btn btn-danger">Display All User</button>
+</div>
+<div *ngIf="!createNewUser && !selected">
+  <button (click)="createNewUserItem()" class="btn btn-danger">Create New User</button>
+</div>
+<br>
+
+<table *ngIf="!selected && !createNewUser" class = "table table-striped table-dark">
+<thead class = "thead-dark">
+<tr>
+  <th>ID</th>
+  <th>Username</th>
+  <th>Password</th>
+  <th>Email</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let user of users">
+  <td><h3>{{user.id}}</h3></td>
+  <td>{{user.username}}</td>
+  <td>{{user.password}}</td>
+  <td>{{user.email}}</td>
+  <td><button (click)="displayUser(user)" class="btn btn-success">Detailed View</button></td>
+  <td><button (click)="destroyUser(user)" class="btn btn-success">Destroy</button></td>
+</tr>
+</tbody>
+</table>
+
+<table *ngIf="selected && !editUser" class = "table table-striped table-dark">
+<thead class = "thead-dark">
+  <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Email</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><h3>{{selected.id}}</h3></td>
+    <td>{{selected.username}}</td>
+    <td>{{selected.password}}</td>
+    <td>{{selected.email}}</td>
+    <td><button (click)="setEditUser()" class="btn btn-success">Edit</button></td>
+  </tr>
+</tbody>
+</table>
+
+<div *ngIf="selected && editUser">
+<form #editUser= "ngForm">
+<div class="form-group">
+Username<input type="text" name="username" [ngModel]="selected.username" ngModel/><br />
+</div>
+<div class="form-group">
+Password<input type="text" name="password" [ngModel]="selected.password" ngModel/><br />
+</div>
+<div class="form-group">
+Email <input type="text" name="email" [ngModel]="selected.email" ngModel/><br />
+</div>
+<button (click)="updateUser(editUser)" class="btn btn-success">Update</button>&nbsp;
+<button (click)="resetUser()" class="btn btn-danger">Cancel</button>
+</form>
+</div>
