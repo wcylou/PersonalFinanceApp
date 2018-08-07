@@ -1,3 +1,30 @@
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+
+<button mat-stroked-button (click)="showCurrency()">Live Currency Quotes</button>&nbsp;&nbsp;&nbsp;
+<button mat-stroked-button (click)="showBudgets()">Budgets</button>&nbsp;&nbsp;&nbsp;
+<br>
+
+<div *ngIf="isDataLoaded && currencyTableSelected">
+  <br>
+<table class = "table" id="currencyTable">
+    <thead class = "thead-dark">
+      <tr>
+        <th>Currency</th>
+        <th>Live Quote</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let currency of newMap | keyvalue">
+        <td>{{currency.key}}</td>
+        <td>{{currency.value}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <div *ngIf="budgetTableSelected">
+    <br>
 <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
@@ -37,3 +64,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+</div>
