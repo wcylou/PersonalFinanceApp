@@ -53,11 +53,11 @@ export class UserComponent implements OnInit {
               this.newUser = new User();
               this.createNewUser = null;
               this.reload();
+              this.authService.checkLogin();
+              this.router.navigate([{ outlets: { frontPage: 'frontPage' } }]);
             },
             err => console.error('User create error' + err)
           );
-          this.router.navigate([{ outlets: { frontPage: 'frontPage' } }]);
-
   }
 
   setEditUser() {
