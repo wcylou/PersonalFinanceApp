@@ -6,20 +6,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CategorySelectorPipe implements PipeTransform {
 
-  transform(inputArray: any[], categoryString?: string): any {
+  transform(inputArray: any[], categoryString?: any): any {
+
     if (!categoryString) {
       return inputArray;
     }
-    const categories = categoryString.split(',');
+
     const outputArray = [];
     for (let i = 0; i < inputArray.length; i++) {
       const element = inputArray[i];
-      if (categories.indexOf(element.expenseCategory.name)) {
+      if (categoryString.includes(element.expenseCategory.name)) {
         outputArray.push(element);
       }
     }
-
-
     return outputArray;
   }
 
