@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {NgForm, FormControl} from '@angular/forms';
 import { UserService } from '../user.service';
@@ -104,7 +105,7 @@ export class UserComponent implements OnInit {
   }
 
 
-  constructor(private userService: UserService, private _formBuilder: FormBuilder) { }
+  constructor(private userService: UserService, private _formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.reload();
