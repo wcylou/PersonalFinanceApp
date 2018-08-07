@@ -13,18 +13,19 @@ import { CategoryPieChartComponent } from './category-pie-chart/category-pie-cha
 import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
-    {path: '', pathMatch: 'full', redirectTo: 'home'},
+    {path: '', pathMatch: 'full', redirectTo: 'frontPage'},
     {path: 'home', component: HomeComponent, outlet: 'home'},
     {path: 'frontPage', component: FrontPageComponent, outlet: 'frontPage'},
     {path: 'account', component: AccountComponent, outlet: 'account'},
     {path: 'expense', component: ExpenseComponent, outlet: 'expense'},
     {path: 'login', component: LoginComponent, outlet: 'login'},
-    {path: 'logout', component: LogoutComponent, outlet: 'logout'},
+    {path: 'logout', pathMatch: 'full', redirectTo: 'frontPage'},
     {path: 'user', component: UserComponent, outlet: 'user'},
     {path: 'formInput', component: FormInputComponent, outlet: 'formInput'},
     {path: 'allDataTable', component: AllDataTableComponent, outlet: 'allDataTable'},
     {path: 'categoryPieChart', component: CategoryPieChartComponent, outlet: 'categoryPieChart'},
     {path: 'chart', component: ChartComponent, outlet: 'chart'},
+    {path: '**', pathMatch: 'full', redirectTo: 'frontPage' }
   ];
 
 @NgModule({

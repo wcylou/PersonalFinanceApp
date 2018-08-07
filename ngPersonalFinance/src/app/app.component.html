@@ -26,20 +26,20 @@
       <br>
       <a [routerLink]="[{outlets:{frontPage:['frontPage'], home:null, account: null, logout: null, login: null,  user:null, formInput:null,
       allDataTable:null, categoryPieChart:null, chart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Front</button></a><br><br>
-      <a [routerLink]="[{outlets:{home:['home'], account: null,logout: null, login: null, frontPage:null, user:null, formInput:null, allDataTable:null,
-      categoryPieChart:null, chart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</button></a><br><br>
-      <a [routerLink]="[{outlets:{user:['user'], account: null, logout: null, frontPage:null,  formInput:null, home:null, allDataTable:null,
-      categoryPieChart: null, login: null, account: null, chart:null}}]"><button mat-raised-button color="primary"><i class="far fa-registered"></i>&nbsp;&nbsp;Sign Up</button></a><br><br>
-      <a [routerLink]="[{outlets:{formInput:['formInput'], account: null, logout: null, frontPage:null,  allDataTable:['allDataTable'],
-      categoryPieChart:['categoryPieChart'], user:null, home:null, logout: null, login: null, chart:null}}]"><button mat-raised-button color="primary"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Expenses</button></a><br><br>
-      <a [routerLink]="[{outlets:{formInput:null, account: null, frontPage:null, logout: null, allDataTable:null,
-      categoryPieChart:null, user:null, home:null, login: null, chart:['chart']}}]"><button mat-raised-button color="primary"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Chart</button></a><br><br>
-      <a [routerLink]="[{outlets:{formInput:null, logout: null, frontPage:null,  allDataTable:null,
-        categoryPieChart:null, user:null, home:null, chart:null, login: null, account:['account']}}]"><button mat-raised-button color="primary"><i class="far fa-user-circle"></i>&nbsp;&nbsp;Account</button></a><br><br>
-      <a [routerLink]="[{outlets:{formInput:null, account: null, logout: null, frontPage:null,  allDataTable:null,
-        categoryPieChart:null, user:null, home:null, chart:null, login:['login']}}]"><button mat-raised-button color="primary"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Login</button></a><br><br>
-      <a [routerLink]="[{outlets:{formInput:null, account: null, frontPage:null,  allDataTable:null,
-        categoryPieChart:null, user:null, home:null, chart:null, login: null, logout:['logout']}}]"><button mat-raised-button color="primary"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</button></a><br><br>
+      <div *ngIf= "checkLoggedIn()"><a [routerLink]="[{outlets:{home:['home'], account: null,logout: null, login: null, frontPage:null, user:null, formInput:null, allDataTable:null,
+      categoryPieChart:null, chart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</button></a><br><br></div>
+      <div *ngIf= "!checkLoggedIn()"><a [routerLink]="[{outlets:{user:['user'], account: null, logout: null, frontPage:null,  formInput:null, home:null, allDataTable:null,
+      categoryPieChart: null, login: null, account: null, chart:null}}]" *ngIf="!checkLoggedIn()"><button mat-raised-button color="primary"><i class="far fa-registered"></i>&nbsp;&nbsp;Sign Up</button></a><br><br></div>
+      <div *ngIf= "checkLoggedIn()"><a [routerLink]="[{outlets:{formInput:['formInput'], account: null, logout: null, frontPage:null,  allDataTable:['allDataTable'],
+      categoryPieChart:['categoryPieChart'], user:null, home:null, logout: null, login: null, chart:null}}]"><button mat-raised-button color="primary"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Expenses</button></a><br><br></div>
+      <div *ngIf= "checkLoggedIn()"><a [routerLink]="[{outlets:{formInput:null, account: null, frontPage:null, logout: null, allDataTable:null,
+      categoryPieChart:null, user:null, home:null, login: null, chart:['chart']}}]"><button mat-raised-button color="primary"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;Chart</button></a><br><br></div>
+      <div *ngIf= "checkLoggedIn()"><a [routerLink]="[{outlets:{formInput:null, logout: null, frontPage:null,  allDataTable:null,
+        categoryPieChart:null, user:null, home:null, chart:null, login: null, account:['account']}}]"><button mat-raised-button color="primary"><i class="far fa-user-circle"></i>&nbsp;&nbsp;Account</button></a><br><br></div>
+     <div *ngIf= "!checkLoggedIn()"><a [routerLink]="[{outlets:{formInput:null, account: null, logout: null, frontPage:null,  allDataTable:null,
+        categoryPieChart:null, user:null, home:null, chart:null, login:['login']}}]"><button mat-raised-button color="primary"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Login</button></a><br><br></div>
+     <div *ngIf="checkLoggedIn()"> <a [routerLink]="[{outlets:{formInput:null, account: null, frontPage:null,  allDataTable:null,
+        categoryPieChart:null, user:null, home:null, chart:null, login: null, logout:['logout']}}]"><button mat-raised-button color="primary" (click) = logout() ><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</button></a></div>
     </mat-sidenav>
     <body>&nbsp;
 

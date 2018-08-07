@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import {NgForm, FormControl} from '@angular/forms';
 import { UserService } from '../user.service';
@@ -28,6 +29,9 @@ export class AccountComponent implements OnInit {
   showComplete = false;
   userId = false;
 
+  checkLoggedIn() {
+    return this.authService.checkLogin();
+    }
   countUsers() {
      return this.users.length;
   }
@@ -104,7 +108,7 @@ export class AccountComponent implements OnInit {
     );
   }
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
   }

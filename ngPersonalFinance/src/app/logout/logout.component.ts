@@ -7,20 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent implements OnInit {
-
-
   logout() {
     this.authService.logout();
     if (this.authService.checkLogin()) {
-        console.log('they did not get logged out');
+      console.log('they did not get logged out');
     } else {
     }
-
+  }
+  checkLoggedIn() {
+    return this.authService.checkLogin();
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
