@@ -220,7 +220,7 @@ GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `personal_finance_app`.* 
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `personal_finance_app`;
-INSERT INTO `personal_finance_app`.`user` (`id`, `username`, `password`, `email`, `role`, `active`) VALUES (1, 'user', 'user', 'user@gmail.com', DEFAULT, DEFAULT);
+INSERT INTO `personal_finance_app`.`user` (`id`, `username`, `password`, `email`, `role`, `active`) VALUES (1, 'user', '$2a$10$tKGxGS6Lro9.iGnL9mCThun/P99mMfo9ppx.OmVm9i7StZD7URqrO', 'user@gmail.com', DEFAULT, DEFAULT);
 
 COMMIT;
 
