@@ -43,6 +43,13 @@ export class AllDataTableComponent implements OnInit {
     start: null,
     end: null
   };
+  budgets = [];
+  filteredBudgets = [];
+  budgetsByDate = [];
+  filteredBudgetsByDate = [];
+  selectedBudgetsCategories = '';
+  budgetsCategories = new FormControl();
+  budgetsCategorySelector = [];
 
   expenses = [];
   expensesCategories = new FormControl();
@@ -55,19 +62,23 @@ export class AllDataTableComponent implements OnInit {
 
   futureExpenses = [];
   filteredFutureExpenses = [];
+  selectedFutureExpensesCategories = '';
+  futureExpensesCategories = new FormControl();
+  futureExpensesCategorySelector = [];
 
   incomes = [];
   filteredIncomes = [];
   incomesByDate = [];
   filteredIncomesByDate = [];
+  selectedIncomeCategories = '';
+  incomesCategories = new FormControl();
+  incomesCategoriesSelector = [];
 
   incomeStreams = [];
   filteredIncomeStreams = [];
-
-  budgets = [];
-  filteredBudgets = [];
-  budgetsByDate = [];
-  filteredBudgetsByDate = [];
+  selectedIncomeStreamsCategories = '';
+  incomeStreamsCategories = new FormControl();
+  incomeStreamsCategoriesSelector = [];
 
   // display column order for each table
   displayedColumnsExpenses = [
@@ -137,17 +148,77 @@ export class AllDataTableComponent implements OnInit {
   showIncomesTableByDate = false;
   showIncomeStreamsTable = false;
 
+  // selected by category toggles
+  budgetsSelectedByCategory = false;
+  expensesSelectedByCategory = false;
+  futureExpensesSelectedByCategory = false;
+  incomesSelectedByCategory = false;
+  incomeStreamsSelectedByCategory = false;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;
 
-  setExpenseCategoryFilter() {
-    console.log('testing testing');
+  // category filters
+  setBudgetsCategoryFilter() {
+    console.log(this.selectedBudgetsCategories);
+
+    this.sortedBudgets = this.expenseCategoryPipe.transform(
+      this.budgets,
+      this.selectedBudgetsCategories
+    );
+
+    this.budgetsSelectedByCategory = true;
+
+    this.filteredBudgets = this.sortedBudgets;
+    return this.sortedBudgets;
+  }
+
+  setExpensesCategoryFilter() {
     this.sortedExpenses = this.expenseCategoryPipe.transform(
       this.expenses,
       this.selectedExpenseCategories
     );
 
+    this.expensesSelectedByCategory = true;
+
     this.filteredExpenses = this.sortedExpenses;
+    return this.sortedExpenses;
+  }
+
+  setFutureExpensesCategoryFilter() {
+    this.sortedFutureExpenses = this.expenseCategoryPipe.transform(
+      this.futureExpenses,
+      this.selectedFutureExpensesCategories
+    );
+
+    this.futureExpensesSelectedByCategory = true;
+
+    this.filteredExpenses = this.sortedFutureExpenses;
+    return this.sortedFutureExpenses;
+  }
+
+  setIncomesCategoryFilter() {
+    this.sortedIncomes = this.incomeCategoryPipe.transform(
+      this.incomes,
+      this.selectedIncomeCategories
+    );
+
+    this.expensesSelectedByCategory = true;
+
+    this.filteredIncomes = this.sortedIncomes;
+    return this.sortedIncomes;
+  }
+
+  setIncomeStreamsCategoryFilter() {
+    this.sortedIncomeStreams = this.incomeCategoryPipe.transform(
+      this.incomeStreams,
+      this.selectedIncomeStreamsCategories
+    );
+
+    this.incomeStreamsSelectedByCategory = true;
+
+    this.filteredIncomeStreams = this.sortedIncomeStreams;
+    return this.sortedIncomeStreams;
   }
 
   setInitialStartDate() {
@@ -158,38 +229,54 @@ export class AllDataTableComponent implements OnInit {
   }
 
   // toggle switches for showing tables
-    toggleBudgetsTable() {
-      if (this.showBudgetsTable === false && this.showBudgetsTableByDate === false) {
-        this.showExpensesTable = false;
-        this.showExpensesByDateTable = false;
-        this.showFutureExpensesTable = false;
-        this.showBudgetsTable = true;
-        this.showBudgetsTableByDate = true;
-        this.showIncomesTable = false;
-        this.showIncomesTableByDate = false;
-        this.showIncomeStreamsTable = false;
-      } else {
-        this.showBudgetsTable = false;
-      }
+  toggleBudgetsTable() {
+    if (
+      this.showBudgetsTable === false &&
+      this.showBudgetsTableByDate === false
+    ) {
+      this.showExpensesTable = false;
+      this.showExpensesByDateTable = false;
+      this.showFutureExpensesTable = false;
+      this.showBudgetsTable = true;
+      this.showBudgetsTableByDate = true;
+      this.showIncomesTable = false;
+      this.showIncomesTableByDate = false;
+      this.showIncomeStreamsTable = false;
+      this.budgetsSelectedByCategory = false;
+      this.expensesSelectedByCategory = false;
+      this.futureExpensesSelectedByCategory = false;
+      this.incomesSelectedByCategory = false;
+      this.incomeStreamsSelectedByCategory = false;
+    } else {
+      this.showBudgetsTable = false;
     }
+  }
 
-    toggleBudgetsByDateTable() {
-      if (this.showBudgetsTableByDate === false) {
-        this.showBudgetsTable = false;
-        this.showBudgetsTableByDate = true;
-        this.showExpensesTable = false;
-        this.showExpensesByDateTable = false;
-        this.showFutureExpensesTable = false;
-        this.showIncomesTable = false;
-        this.showIncomesTableByDate = false;
-        this.showIncomeStreamsTable = false;
-      } else {
-        this.showBudgetsTableByDate = false;
-      }
+  toggleBudgetsByDateTable() {
+    if (this.showBudgetsTableByDate === false) {
+      this.showBudgetsTable = false;
+      this.showBudgetsTableByDate = true;
+      this.showExpensesTable = false;
+      this.showExpensesByDateTable = false;
+      this.showFutureExpensesTable = false;
+      this.showIncomesTable = false;
+      this.showIncomesTableByDate = false;
+      this.showIncomeStreamsTable = false;
+      this.budgetsSelectedByCategory = false;
+      this.expensesSelectedByCategory = false;
+      this.futureExpensesSelectedByCategory = false;
+      this.incomesSelectedByCategory = false;
+      this.incomeStreamsSelectedByCategory = false;
+    } else {
+      this.showBudgetsTableByDate = false;
     }
+  }
 
   toggleExpensesTable() {
-    if (this.showExpensesTable === false && this.showExpensesByDateTable === false) {
+    if (
+      this.showExpensesTable === false &&
+      this.showExpensesByDateTable === false
+    ) {
       this.showExpensesTable = true;
       this.showExpensesByDateTable = true;
       this.showFutureExpensesTable = false;
@@ -198,10 +285,14 @@ export class AllDataTableComponent implements OnInit {
       this.showIncomesTable = false;
       this.showIncomesTableByDate = false;
       this.showIncomeStreamsTable = false;
+      this.budgetsSelectedByCategory = false;
+      this.expensesSelectedByCategory = false;
+      this.futureExpensesSelectedByCategory = false;
+      this.incomesSelectedByCategory = false;
+      this.incomeStreamsSelectedByCategory = false;
     } else {
       this.showExpensesTable = false;
       this.showExpensesByDateTable = false;
-
     }
   }
 
@@ -215,6 +306,11 @@ export class AllDataTableComponent implements OnInit {
       this.showIncomesTable = false;
       this.showIncomeStreamsTable = false;
       this.showIncomesTableByDate = false;
+      this.budgetsSelectedByCategory = false;
+      this.expensesSelectedByCategory = false;
+      this.futureExpensesSelectedByCategory = false;
+      this.incomesSelectedByCategory = false;
+      this.incomeStreamsSelectedByCategory = false;
     } else {
       this.showExpensesByDateTable = false;
     }
@@ -230,13 +326,21 @@ export class AllDataTableComponent implements OnInit {
       this.showIncomesTable = false;
       this.showIncomesTableByDate = false;
       this.showIncomeStreamsTable = false;
+      this.budgetsSelectedByCategory = false;
+      this.expensesSelectedByCategory = false;
+      this.futureExpensesSelectedByCategory = false;
+      this.incomesSelectedByCategory = false;
+      this.incomeStreamsSelectedByCategory = false;
     } else {
       this.showFutureExpensesTable = false;
     }
   }
 
   toggleIncomesTable() {
-    if (this.showIncomesTable === false && this.showIncomesTableByDate === false) {
+    if (
+      this.showIncomesTable === false &&
+      this.showIncomesTableByDate === false
+    ) {
       this.showBudgetsTable = false;
       this.showBudgetsTableByDate = false;
       this.showExpensesTable = false;
@@ -245,6 +349,11 @@ export class AllDataTableComponent implements OnInit {
       this.showIncomesTableByDate = true;
       this.showIncomesTable = true;
       this.showIncomeStreamsTable = false;
+      this.budgetsSelectedByCategory = false;
+      this.expensesSelectedByCategory = false;
+      this.futureExpensesSelectedByCategory = false;
+      this.incomesSelectedByCategory = false;
+      this.incomeStreamsSelectedByCategory = false;
     } else {
       this.showIncomesTable = false;
       this.showIncomesTableByDate = false;
@@ -261,6 +370,11 @@ export class AllDataTableComponent implements OnInit {
       this.showIncomesTable = false;
       this.showIncomesTableByDate = true;
       this.showIncomeStreamsTable = false;
+      this.budgetsSelectedByCategory = false;
+      this.expensesSelectedByCategory = false;
+      this.futureExpensesSelectedByCategory = false;
+      this.incomesSelectedByCategory = false;
+      this.incomeStreamsSelectedByCategory = false;
     } else {
       this.showIncomesTableByDate = false;
     }
@@ -276,6 +390,11 @@ export class AllDataTableComponent implements OnInit {
       this.showIncomesTable = false;
       this.showIncomesTableByDate = false;
       this.showIncomeStreamsTable = true;
+      this.budgetsSelectedByCategory = false;
+      this.expensesSelectedByCategory = false;
+      this.futureExpensesSelectedByCategory = false;
+      this.incomesSelectedByCategory = false;
+      this.incomeStreamsSelectedByCategory = false;
     } else {
       this.showIncomeStreamsTable = false;
     }
@@ -382,294 +501,562 @@ export class AllDataTableComponent implements OnInit {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
-
   sortBudgets(sort: Sort) {
     const budgetsData = this.budgets.slice();
-    if (!sort.active || sort.direction === '') {
+    const budgetsByCategory = this.setBudgetsCategoryFilter();
+    if (
+      !sort.active ||
+      (sort.direction === '' && !this.budgetsSelectedByCategory)
+    ) {
       this.sortedBudgets = budgetsData;
       return;
     }
 
-    this.sortedBudgets = budgetsData.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'amount':
-          return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory.name':
-          return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
-        case 'startDate':
-          return this.compare(a.startDate, b.startDate, isAsc);
-        case 'endDate':
-          return this.compare(a.endDate, b.endDate, isAsc);
-        default:
-          return 0;
-      }
-    });
+    if (this.budgetsSelectedByCategory) {
+      this.sortedBudgets = budgetsByCategory.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name':
+            return this.compare(
+              a.expenseCategory.name,
+              b.expenseCategory.name,
+              isAsc
+            );
+          case 'startDate':
+            return this.compare(a.startDate, b.startDate, isAsc);
+          case 'endDate':
+            return this.compare(a.endDate, b.endDate, isAsc);
+          default:
+            return 0;
+        }
+      });
 
-    this.filteredBudgets = this.pagePipe.transform(
-      this.sortedBudgets,
-      this.currentPage,
-      this.pageSize
-    );
+      this.filteredBudgets = this.pagePipe.transform(
+        this.sortedBudgets,
+        this.currentPage,
+        this.pageSize
+      );
+    } else {
+      this.sortedBudgets = budgetsData.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name':
+            return this.compare(
+              a.expenseCategory.name,
+              b.expenseCategory.name,
+              isAsc
+            );
+          case 'startDate':
+            return this.compare(a.startDate, b.startDate, isAsc);
+          case 'endDate':
+            return this.compare(a.endDate, b.endDate, isAsc);
+          default:
+            return 0;
+        }
+      });
+
+      this.filteredBudgets = this.pagePipe.transform(
+        this.sortedBudgets,
+        this.currentPage,
+        this.pageSize
+      );
+    }
   }
 
   sortBudgetsByDate(sort: Sort) {
     const budgetsDataByDate = this.budgets.slice();
-    if (!sort.active || sort.direction === '') {
+    const budgetsByDateAndCategory = this.setBudgetsCategoryFilter();
+    if (
+      !sort.active ||
+      (sort.direction === '' && !this.budgetsSelectedByCategory)
+    ) {
       this.sortedBudgetsByDate = budgetsDataByDate;
       return;
     }
 
-    this.sortedBudgetsByDate = budgetsDataByDate.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'amount':
-          return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory.name':
-          return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
-        case 'startDate':
-          return this.compare(a.startDate, b.startDate, isAsc);
-        case 'endDate':
-          return this.compare(a.endDate, b.endDate, isAsc);
-        default:
-          return 0;
-      }
-    });
-
-    this.filteredBudgetsByDate = this.pagePipe.transform(
-      this.sortedBudgetsByDate,
-      this.currentPage,
-      this.pageSize
-    );
+    if (this.budgetsSelectedByCategory) {
+      this.sortedBudgetsByDate = budgetsByDateAndCategory.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name':
+            return this.compare(
+              a.expenseCategory.name,
+              b.expenseCategory.name,
+              isAsc
+            );
+          case 'startDate':
+            return this.compare(a.startDate, b.startDate, isAsc);
+          case 'endDate':
+            return this.compare(a.endDate, b.endDate, isAsc);
+          default:
+            return 0;
+        }
+      });
+      this.filteredBudgetsByDate = this.pagePipe.transform(
+        this.sortedBudgetsByDate,
+        this.currentPage,
+        this.pageSize
+      );
+    } else {
+      this.sortedBudgetsByDate = budgetsDataByDate.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name':
+            return this.compare(
+              a.expenseCategory.name,
+              b.expenseCategory.name,
+              isAsc
+            );
+          case 'startDate':
+            return this.compare(a.startDate, b.startDate, isAsc);
+          case 'endDate':
+            return this.compare(a.endDate, b.endDate, isAsc);
+          default:
+            return 0;
+        }
+      });
+      this.filteredBudgetsByDate = this.pagePipe.transform(
+        this.sortedBudgetsByDate,
+        this.currentPage,
+        this.pageSize
+      );
+    }
   }
 
   sortExpenses(sort: Sort) {
     const expensesData = this.expenses.slice();
-    if (!sort.active || sort.direction === '') {
+    const expensesByCategory = this.setExpensesCategoryFilter();
+    if (
+      !sort.active ||
+      (sort.direction === '' && !this.expensesSelectedByCategory)
+    ) {
       this.sortedExpenses = expensesData;
       return;
     }
 
-    this.sortedExpenses = expensesData.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'amount':
-          return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory.name':
-          return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
-        case 'date':
-          return this.compare(a.date, b.date, isAsc);
-        default:
-          return 0;
-      }
-    });
+    if (this.expensesSelectedByCategory) {
+      this.sortedExpenses = expensesByCategory.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name':
+            return this.compare(
+              a.expenseCategory.name,
+              b.expenseCategory.name,
+              isAsc
+            );
+          case 'date':
+            return this.compare(a.date, b.date, isAsc);
+          default:
+            return 0;
+        }
+      });
 
-    this.filteredExpenses = this.pagePipe.transform(
-      this.sortedExpenses,
-      this.currentPage,
-      this.pageSize
-    );
+      this.filteredExpenses = this.pagePipe.transform(
+        this.sortedExpenses,
+        this.currentPage,
+        this.pageSize
+      );
+    } else {
+      this.sortedExpenses = expensesData.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name':
+            return this.compare(
+              a.expenseCategory.name,
+              b.expenseCategory.name,
+              isAsc
+            );
+          case 'date':
+            return this.compare(a.date, b.date, isAsc);
+          default:
+            return 0;
+        }
+      });
+
+      this.filteredExpenses = this.pagePipe.transform(
+        this.sortedExpenses,
+        this.currentPage,
+        this.pageSize
+      );
+    }
   }
 
   sortExpensesByDate(sort: Sort) {
     const expensesDataByDate = this.expensesByDate.slice();
-    if (!sort.active || sort.direction === '') {
+    const expensesByDateAndCategory = this.setExpensesCategoryFilter();
+    if (
+      !sort.active ||
+      (sort.direction === '' && !this.expensesSelectedByCategory)
+    ) {
       this.sortedExpensesByDate = expensesDataByDate;
       return;
     }
 
-    this.sortedExpensesByDate = expensesDataByDate.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'amount':
-          return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory.name':
-          return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
-        case 'date':
-          return this.compare(a.date, b.date, isAsc);
-        default:
-          return 0;
-      }
-    });
+    if (this.expensesSelectedByCategory) {
+      this.sortedExpensesByDate = expensesByDateAndCategory.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name':
+            return this.compare(
+              a.expenseCategory.name,
+              b.expenseCategory.name,
+              isAsc
+            );
+          case 'date':
+            return this.compare(a.date, b.date, isAsc);
+          default:
+            return 0;
+        }
+      });
 
-    this.filteredExpensesByDate = this.pagePipe.transform(
-      this.sortedExpensesByDate,
-      this.currentPage,
-      this.pageSize
-    );
+      this.filteredExpensesByDate = this.pagePipe.transform(
+        this.sortedExpensesByDate,
+        this.currentPage,
+        this.pageSize
+      );
+    } else {
+      this.sortedExpensesByDate = expensesDataByDate.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name':
+            return this.compare(
+              a.expenseCategory.name,
+              b.expenseCategory.name,
+              isAsc
+            );
+          case 'date':
+            return this.compare(a.date, b.date, isAsc);
+          default:
+            return 0;
+        }
+      });
+
+      this.filteredExpensesByDate = this.pagePipe.transform(
+        this.sortedExpensesByDate,
+        this.currentPage,
+        this.pageSize
+      );
+    }
   }
 
   sortFutureExpenses(sort: Sort) {
     const futureExpensesData = this.futureExpenses.slice();
-    if (!sort.active || sort.direction === '') {
+    const futureExpensesByCategory = this.setFutureExpensesCategoryFilter();
+    if (
+      !sort.active ||
+      (sort.direction === '' && !this.futureExpensesSelectedByCategory)
+    ) {
       this.sortedFutureExpenses = futureExpensesData;
       return;
     }
 
-    this.sortedFutureExpenses = futureExpensesData.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'amount':
-          return this.compare(a.amount, b.amount, isAsc);
-        case 'expenseCategory.name':
-          return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
-        case 'expectedDate':
-          return this.compare(a.expectedDate, b.expectedDate, isAsc);
-        default:
-          return 0;
-      }
-    });
+    if (this.futureExpensesSelectedByCategory) {
+      this.sortedFutureExpenses = futureExpensesByCategory.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name':
+            return this.compare(
+              a.expenseCategory.name,
+              b.expenseCategory.name,
+              isAsc
+            );
+          case 'expectedDate':
+            return this.compare(a.expectedDate, b.expectedDate, isAsc);
+          default:
+            return 0;
+        }
+      });
 
-    this.filteredFutureExpenses = this.pagePipe.transform(
-      this.sortedFutureExpenses,
-      this.currentPage,
-      this.pageSize
-    );
+      this.filteredFutureExpenses = this.pagePipe.transform(
+        this.sortedFutureExpenses,
+        this.currentPage,
+        this.pageSize
+      );
+    } else {
+      this.sortedFutureExpenses = futureExpensesData.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name':
+            return this.compare(
+              a.expenseCategory.name,
+              b.expenseCategory.name,
+              isAsc
+            );
+          case 'expectedDate':
+            return this.compare(a.expectedDate, b.expectedDate, isAsc);
+          default:
+            return 0;
+        }
+      });
+
+      this.filteredFutureExpenses = this.pagePipe.transform(
+        this.sortedFutureExpenses,
+        this.currentPage,
+        this.pageSize
+      );
+    }
   }
 
   sortIncomes(sort: Sort) {
     const incomesData = this.incomes.slice();
-    if (!sort.active || sort.direction === '') {
+    const incomesByCategory = this.setIncomesCategoryFilter();
+    if (
+      !sort.active ||
+      (sort.direction === '' && !this.incomesSelectedByCategory)
+    ) {
       this.sortedIncomes = incomesData;
       return;
     }
 
-    this.sortedIncomes = incomesData.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'amount':
-          return this.compare(a.amount, b.amount, isAsc);
-        case 'incomeCategory.name':
-          return this.compare(a.incomeCategory.name, b.incomeCategory.name, isAsc);
-        case 'dateReceived':
-          return this.compare(a.dateReceived, b.dateReceived, isAsc);
-        default:
-          return 0;
-      }
-    });
+    if (this.incomesSelectedByCategory) {
+      this.sortedIncomes = incomesByCategory.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'incomeCategory.name':
+            return this.compare(
+              a.incomeCategory.name,
+              b.incomeCategory.name,
+              isAsc
+            );
+          case 'dateReceived':
+            return this.compare(a.dateReceived, b.dateReceived, isAsc);
+          default:
+            return 0;
+        }
+      });
 
-    this.filteredIncomes = this.pagePipe.transform(
-      this.sortedIncomes,
-      this.currentPage,
-      this.pageSize
-    );
+      this.filteredIncomes = this.pagePipe.transform(
+        this.sortedIncomes,
+        this.currentPage,
+        this.pageSize
+      );
+    } else {
+      this.sortedIncomes = incomesData.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'incomeCategory.name':
+            return this.compare(
+              a.incomeCategory.name,
+              b.incomeCategory.name,
+              isAsc
+            );
+          case 'dateReceived':
+            return this.compare(a.dateReceived, b.dateReceived, isAsc);
+          default:
+            return 0;
+        }
+      });
+
+      this.filteredIncomes = this.pagePipe.transform(
+        this.sortedIncomes,
+        this.currentPage,
+        this.pageSize
+      );
+    }
   }
 
   sortIncomesByDate(sort: Sort) {
     const incomesDataByDate = this.incomes.slice();
-    if (!sort.active || sort.direction === '') {
+    const incomesByDateAndCategory = this.setIncomesCategoryFilter();
+    if (
+      !sort.active ||
+      (sort.direction === '' && !this.incomesSelectedByCategory)
+    ) {
       this.sortedIncomesByDate = incomesDataByDate;
       return;
     }
 
-    this.sortedIncomesByDate = incomesDataByDate.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'amount':
-          return this.compare(a.amount, b.amount, isAsc);
-        case 'incomeCategory.name':
-          return this.compare(a.incomeCategory.name, b.incomeCategory.name, isAsc);
-        case 'dateReceived':
-          return this.compare(a.dateReceived, b.dateReceived, isAsc);
-        default:
-          return 0;
-      }
-    });
+    if (this.incomesSelectedByCategory) {
+      this.sortedIncomesByDate = incomesByDateAndCategory.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'incomeCategory.name':
+            return this.compare(
+              a.incomeCategory.name,
+              b.incomeCategory.name,
+              isAsc
+            );
+          case 'dateReceived':
+            return this.compare(a.dateReceived, b.dateReceived, isAsc);
+          default:
+            return 0;
+        }
+      });
 
-    this.filteredIncomesByDate = this.pagePipe.transform(
-      this.sortedIncomesByDate,
-      this.currentPage,
-      this.pageSize
-    );
+      this.filteredIncomesByDate = this.pagePipe.transform(
+        this.sortedIncomesByDate,
+        this.currentPage,
+        this.pageSize
+      );
+    } else {
+      this.sortedIncomesByDate = incomesDataByDate.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'amount':
+            return this.compare(a.amount, b.amount, isAsc);
+          case 'incomeCategory.name':
+            return this.compare(
+              a.incomeCategory.name,
+              b.incomeCategory.name,
+              isAsc
+            );
+          case 'dateReceived':
+            return this.compare(a.dateReceived, b.dateReceived, isAsc);
+          default:
+            return 0;
+        }
+      });
+
+      this.filteredIncomesByDate = this.pagePipe.transform(
+        this.sortedIncomesByDate,
+        this.currentPage,
+        this.pageSize
+      );
+    }
   }
 
   sortIncomeStreams(sort: Sort) {
     const futureIncomesData = this.incomeStreams.slice();
-    if (!sort.active || sort.direction === '') {
+    const futureIncomesByCategory = this.setIncomeStreamsCategoryFilter();
+    if (
+      !sort.active ||
+      (sort.direction === '' && !this.incomeStreamsSelectedByCategory)
+    ) {
       this.sortedIncomeStreams = futureIncomesData;
       return;
     }
 
-    this.sortedIncomeStreams = futureIncomesData.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'expectedAmount':
-          return this.compare(a.expectedAmount, b.expectedAmount, isAsc);
-        case 'incomeCategory.name':
-          return this.compare(a.incomeCategory.name, b.incomeCategory.name, isAsc);
-        case 'startDate':
-          return this.compare(a.startDate, b.startDate, isAsc);
-        default:
-          return 0;
-      }
-    });
+    if (this.incomeStreamsSelectedByCategory) {
+      this.sortedIncomeStreams = futureIncomesByCategory.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'expectedAmount':
+            return this.compare(a.expectedAmount, b.expectedAmount, isAsc);
+          case 'incomeCategory.name':
+            return this.compare(
+              a.incomeCategory.name,
+              b.incomeCategory.name,
+              isAsc
+            );
+          case 'startDate':
+            return this.compare(a.startDate, b.startDate, isAsc);
+          default:
+            return 0;
+        }
+      });
 
-    this.filteredIncomeStreams = this.pagePipe.transform(
-      this.sortedIncomeStreams,
-      this.currentPage,
-      this.pageSize
-    );
+      this.filteredIncomeStreams = this.pagePipe.transform(
+        this.sortedIncomeStreams,
+        this.currentPage,
+        this.pageSize
+      );
+    } else {
+      this.sortedIncomeStreams = futureIncomesData.sort((a, b) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'expectedAmount':
+            return this.compare(a.expectedAmount, b.expectedAmount, isAsc);
+          case 'incomeCategory.name':
+            return this.compare(
+              a.incomeCategory.name,
+              b.incomeCategory.name,
+              isAsc
+            );
+          case 'startDate':
+            return this.compare(a.startDate, b.startDate, isAsc);
+          default:
+            return 0;
+        }
+      });
+
+      this.filteredIncomeStreams = this.pagePipe.transform(
+        this.sortedIncomeStreams,
+        this.currentPage,
+        this.pageSize
+      );
+    }
   }
 
   // subscribe functions between dates
   findBudgetsBetweenDates() {
-
     const date1 = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
     this.dateObject.start = date1;
     const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
     this.dateObject.end = date2;
     console.log(this.dateObject);
-    this.budgetService
-      .getBudgetBetweenDates(this.dateObject)
-      .subscribe(data => {
+    this.budgetService.getBudgetBetweenDates(this.dateObject).subscribe(
+      data => {
         console.log(data);
         this.budgetsByDate = data;
         this.sortedBudgetsByDate = data;
         this.filteredBudgetsByDate = data;
-       },
-       err => console.log(err));
+      },
+      err => console.log(err)
+    );
   }
 
   findExpensesBetweenDates() {
-
     const date1 = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
     this.dateObject.start = date1;
     const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
     this.dateObject.end = date2;
     console.log(this.dateObject);
-    this.expenseService
-      .getExpenseBetweenDates(this.dateObject)
-      .subscribe(data => {
+    this.expenseService.getExpenseBetweenDates(this.dateObject).subscribe(
+      data => {
         console.log(data);
         this.expensesByDate = data;
         this.sortedExpensesByDate = data;
         this.filteredExpensesByDate = data;
-       },
-       err => console.log(err));
+      },
+      err => console.log(err)
+    );
   }
 
   findIncomesBetweenDates() {
-
     const date1 = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
     this.dateObject.start = date1;
     const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
     this.dateObject.end = date2;
     console.log(this.dateObject);
-    this.incomeService
-      .getIncomeBetweenDates(this.dateObject)
-      .subscribe(data => {
+    this.incomeService.getIncomeBetweenDates(this.dateObject).subscribe(
+      data => {
         console.log(data);
         this.incomesByDate = data;
         this.sortedIncomesByDate = data;
         this.filteredIncomesByDate = data;
-       },
-       err => console.log(err));
+      },
+      err => console.log(err)
+    );
   }
-
 
   // reload the various arrays
   reload() {
-
     this.budgetService.index().subscribe(
       data => {
         this.budgets = data;
@@ -683,6 +1070,13 @@ export class AllDataTableComponent implements OnInit {
       err => {
         console.error('data table component could not load budgets');
       }
+    );
+
+    this.budgetService.indexExpenseCategories().subscribe(
+      data => {
+        this.budgetsCategorySelector = data;
+      },
+      err => console.error('error inside of budget category reload')
     );
 
     this.expenseService.index().subscribe(
@@ -700,6 +1094,13 @@ export class AllDataTableComponent implements OnInit {
       }
     );
 
+    this.expenseService.indexExCat().subscribe(
+      data => {
+        this.expenseCategorySelector = data;
+      },
+      err => console.error('error inside of the category reload')
+    );
+
     this.futureExpenseService.index().subscribe(
       data => {
         this.futureExpenses = data;
@@ -715,11 +1116,11 @@ export class AllDataTableComponent implements OnInit {
       }
     );
 
-    this.expenseService.indexExCat().subscribe(
+    this.futureExpenseService.indexExCat().subscribe(
       data => {
-        this.expenseCategorySelector = data;
+        this.futureExpensesCategorySelector = data;
       },
-      err => console.error('error inside of the category reload')
+      err => console.error('error inside of the future expense category reload')
     );
 
     this.incomeService.index().subscribe(
@@ -736,6 +1137,13 @@ export class AllDataTableComponent implements OnInit {
       }
     );
 
+    this.incomeService.indexInCat().subscribe(
+      data => {
+        this.incomesCategoriesSelector = data;
+      },
+      err => console.error('error inside of the income category reload')
+    );
+
     this.incomeService.indexIncomeStream().subscribe(
       data => {
         this.incomeStreams = data;
@@ -749,9 +1157,14 @@ export class AllDataTableComponent implements OnInit {
         console.error('data table component could not load income streams');
       }
     );
+
+    this.incomeService.indexInCat().subscribe(
+      data => {
+        this.incomeStreamsCategoriesSelector = data;
+      },
+      err => console.error('error inside of the income stream category reload')
+    );
   }
-
-
 
   constructor(
     private datePipe: DatePipe,
@@ -778,5 +1191,4 @@ export class AllDataTableComponent implements OnInit {
     this.reload();
     this.loadedStartDate = true;
   }
-
 }
