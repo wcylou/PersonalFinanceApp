@@ -105,10 +105,10 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatSelectModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatSlideToggleModule
-    // AgmCoreModule.forRoot({
-    //   apiKey: 'AIzaSyDu3z8H8wEptTmzLK1unAnBejz0QmTc_h8'
-    // })
+    MatSlideToggleModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDu3z8H8wEptTmzLK1unAnBejz0QmTc_h8'
+    })
   ],
   providers: [
     BudgetService,

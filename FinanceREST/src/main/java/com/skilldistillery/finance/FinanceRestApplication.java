@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+import com.skilldistillery.finance.services.StockServiceImpl;
+
 @SpringBootApplication
 public class FinanceRestApplication extends SpringBootServletInitializer {
 
@@ -15,5 +17,7 @@ public class FinanceRestApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FinanceRestApplication.class, args);
+		StockServiceImpl simp = new StockServiceImpl();
+		simp.getCurrencies();
 	}
 }
