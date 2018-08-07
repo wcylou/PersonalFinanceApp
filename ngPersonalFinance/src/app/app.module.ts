@@ -59,6 +59,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { DialogComponent } from './dialog/dialog.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     CategorySelectorPipe,
     IncomeCategorySelectorPipe,
     DialogComponent,
+    DialogEditComponent,
   ],
   imports: [
     FormsModule,
