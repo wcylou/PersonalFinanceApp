@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { ChartComponent } from './chart/chart.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { AllDataTableComponent } from './all-data-table/all-data-table.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
     {path: '', pathMatch: 'full', redirectTo: 'home'},
     {path: 'home', component: HomeComponent, outlet: 'home'},
     {path: 'frontPage', component: FrontPageComponent, outlet: 'frontPage'},
-    {path: 'expense', component: ExpenseComponent},
+    {path: 'expense', component: ExpenseComponent, outlet: 'expense'},
+    {path: 'login', component: LoginComponent, outlet: 'login'},
     {path: 'user', component: UserComponent, outlet: 'user'},
     {path: 'formInput', component: FormInputComponent, outlet: 'formInput'},
     {path: 'allDataTable', component: AllDataTableComponent, outlet: 'allDataTable'},

@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.finance.entities.Budget;
 import com.skilldistillery.finance.entities.User;
-import com.skilldistillery.finance.services.ExpenseService;
 import com.skilldistillery.finance.services.UserService;
 
 @CrossOrigin({"*", "http://localhost:4200"})

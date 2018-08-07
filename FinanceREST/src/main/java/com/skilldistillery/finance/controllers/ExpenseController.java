@@ -1,5 +1,6 @@
 package com.skilldistillery.finance.controllers;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,10 +29,9 @@ public class ExpenseController {
 	@Autowired
 	ExpenseService exServ;
 	
-	String username = "user";
 	
 	@RequestMapping(path="expenses/between", method= RequestMethod.POST)
-	public List<Expense> expensesBetweenMonths(@RequestBody DateDTO dateDTO) throws ParseException {
+	public List<Expense> expensesBetweenMonths(@RequestBody DateDTO dateDTO, Principal principal) throws ParseException {
 		String start = dateDTO.getStart();
 		String end = dateDTO.getEnd();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -41,90 +41,90 @@ public class ExpenseController {
 		
 		System.out.println(startDate);
 		System.out.println(endDate);
-		return exServ.findExpensesBetweenDates(startDate, endDate, username);
+		return exServ.findExpensesBetweenDates(startDate, endDate, principal.getName());
 	}
 	
 	@RequestMapping(path="expenses/categories/{id}", method = RequestMethod.GET)
-	public List<Expense> expensesByCategory(@PathVariable int id) {
+	public List<Expense> expensesByCategory(@PathVariable int id, Principal principal) {
 		System.out.println(id);
-		return exServ.findExpensesByCategory(username, id);
+		return exServ.findExpensesByCategory(principal.getName(), id);
 	}
 	
 	@RequestMapping(path="expenses/categories", method= RequestMethod.GET)
-	public List<ExpenseCategory> indexExpenseCategories() {
+	public List<ExpenseCategory> indexExpenseCategories(Principal principal) {
 		return exServ.indexExpenseCategory();
 	}
 	
 	//Expense CRUD Routes
 	
 	@RequestMapping(path="expenses", method= RequestMethod.GET)
-	public List<Expense> index() {
-		return exServ.indexExpenses(username);
+	public List<Expense> index(Principal principal) {
+		return exServ.indexExpenses(principal.getName());
 	}
 	
 	@RequestMapping(path="expenses/{id}", method = RequestMethod.GET) 
-	public Expense getOneExpense(@PathVariable int id) {
-		return exServ.show(username, id);
+	public Expense getOneExpense(@PathVariable int id, Principal principal) {
+		return exServ.show(principal.getName(), id);
 	}
 	
 	@RequestMapping(path="expenses", method = RequestMethod.POST) 
-	public Expense createExpense(@RequestBody Expense expense) {
+	public Expense createExpense(@RequestBody Expense expense, Principal principal) {
 		System.out.println("+++++++ controller print out create");
 		System.out.println(expense);
 		System.out.println(expense.getExpenseCategory());
 		System.out.println(expense.getExpenseCategory().getId());
-		return exServ.create(username, expense);
+		return exServ.create(principal.getName(), expense);
 	}
 	
 	@RequestMapping(path="expenses/{id}", method = RequestMethod.PATCH) 
-	public Expense updateExpense(@RequestBody Expense expense, @PathVariable int id) {
-		return exServ.update(username, id, expense);
+	public Expense updateExpense(@RequestBody Expense expense, @PathVariable int id, Principal principal) {
+		return exServ.update(principal.getName(), id, expense);
 	}
 	
 	@RequestMapping(path="expenses/{id}", method = RequestMethod.DELETE)
-	public boolean deleteExpense(@PathVariable int id) {
-		return exServ.destroy(username, id);
+	public boolean deleteExpense(@PathVariable int id, Principal principal) {
+		return exServ.destroy(principal.getName(), id);
 	}
 	
 	// Future Expense CRUD Routes
 	
 	@RequestMapping(path="futureExpense", method= RequestMethod.GET)
-	public List<FutureExpense> indexFutureExpenses() {
-		return exServ.indexFutureExpenses(username);
+	public List<FutureExpense> indexFutureExpenses(Principal principal) {
+		return exServ.indexFutureExpenses(principal.getName());
 	}
 	
 	@RequestMapping(path="futureExpense/{id}", method = RequestMethod.GET) 
-	public FutureExpense getOneFutureExpense(@PathVariable int id) {
-		return exServ.showFex(username, id);
+	public FutureExpense getOneFutureExpense(@PathVariable int id, Principal principal) {
+		return exServ.showFex(principal.getName(), id);
 	}
 	
 	@RequestMapping(path="futureExpense", method = RequestMethod.POST) 
-	public FutureExpense createExpense(@RequestBody FutureExpense futureExpense) {
-		return exServ.createFex(username, futureExpense);
+	public FutureExpense createExpense(@RequestBody FutureExpense futureExpense, Principal principal) {
+		return exServ.createFex(principal.getName(), futureExpense);
 	}
 	
 	@RequestMapping(path="futureExpense/{id}", method = RequestMethod.PATCH) 
-	public FutureExpense updateFutureExpense(@RequestBody FutureExpense futureExpense, @PathVariable int id) {
-		return exServ.updateFex(username, id, futureExpense);	
+	public FutureExpense updateFutureExpense(@RequestBody FutureExpense futureExpense, @PathVariable int id, Principal principal) {
+		return exServ.updateFex(principal.getName(), id, futureExpense);	
 	}
 	
 	@RequestMapping(path="futureExpense/{id}", method = RequestMethod.DELETE)
-	public boolean deleteFutureExpense(@PathVariable int id) {
-		return exServ.destroyFex(username, id);
+	public boolean deleteFutureExpense(@PathVariable int id, Principal principal) {
+		return exServ.destroyFex(principal.getName(), id);
 	}
 	
 	@RequestMapping(path="expenses/piechart", method = RequestMethod.GET)
-	public Map<String, Double> sortExpensesByCategory() {
-		return exServ.sortExpensesByCategory(username);
+	public Map<String, Double> sortExpensesByCategory(Principal principal) {
+		return exServ.sortExpensesByCategory(principal.getName());
 	}
 	
 	@RequestMapping(path="expenses/piechart", method = RequestMethod.POST)
-	public Map<String, Double> sortExpensesByCategoryAndDate(@RequestBody DateDTO dateDTO) throws ParseException {
+	public Map<String, Double> sortExpensesByCategoryAndDate(@RequestBody DateDTO dateDTO, Principal principal) throws ParseException {
 		String start = dateDTO.getStart();
 		String end = dateDTO.getEnd();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date startDate = df.parse(start);
 		Date endDate = df.parse(end);
-		return exServ.sortExpensesByCategoryAndDate(username, startDate, endDate);
+		return exServ.sortExpensesByCategoryAndDate(principal.getName(), startDate, endDate);
 	}
 }

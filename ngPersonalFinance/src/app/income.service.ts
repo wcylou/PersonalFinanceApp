@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { IncomeStream } from './models/income-stream';
 import { IncomeCategory } from './models/income-category';
 import { Injectable } from '@angular/core';
@@ -21,7 +22,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.get<Income[]>(this.url, httpOptions).pipe(
@@ -32,7 +33,13 @@ export class IncomeService {
     );
   }
   indexInCat() {
-    return this.http.get<IncomeCategory[]>(this.url + '/categories').pipe(
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.get<IncomeCategory[]>(this.url + '/categories', httpOptions).pipe(
       catchError((err: any) => {
         console.log('category retrieval error');
         return throwError('error in index category');
@@ -44,7 +51,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.get<Income>(this.url + '/' + selectedExpenseId, httpOptions)
@@ -64,7 +71,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.post<Income>(this.url, newIncome, httpOptions).pipe(
@@ -79,7 +86,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.patch<Income>(
@@ -91,7 +98,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.delete<Income>(this.url + '/' + incomeId, httpOptions);
@@ -100,7 +107,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.get<IncomeStream[]>(this.streamUrl, httpOptions).pipe(
@@ -115,7 +122,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.get<IncomeStream>(this.streamUrl + '/' + selectedExpenseId, httpOptions)
@@ -135,7 +142,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.post<IncomeStream>(this.streamUrl, newIncome, httpOptions).pipe(
@@ -150,7 +157,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.patch<IncomeStream>(
@@ -163,7 +170,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.delete<IncomeStream>(this.streamUrl + '/' + incomeId, httpOptions);
@@ -173,7 +180,7 @@ export class IncomeService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.post<Income[]>(this.url + '/between', dates, httpOptions);
@@ -182,6 +189,7 @@ export class IncomeService {
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 }

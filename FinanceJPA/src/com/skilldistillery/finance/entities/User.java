@@ -18,6 +18,8 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+	private String role;
+	private boolean active;
 	@OneToMany(mappedBy ="user")
 	private List<Budget> budgets;
 	@OneToMany(mappedBy ="user")
@@ -157,13 +159,32 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (active ? 1231 : 1237);
+		result = prime * result + ((budgets == null) ? 0 : budgets.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((expenses == null) ? 0 : expenses.hashCode());
+		result = prime * result + ((futureExpenses == null) ? 0 : futureExpenses.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((incomeStreams == null) ? 0 : incomeStreams.hashCode());
+		result = prime * result + ((incomes == null) ? 0 : incomes.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -176,17 +197,49 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
+		if (active != other.active)
+			return false;
+		if (budgets == null) {
+			if (other.budgets != null)
+				return false;
+		} else if (!budgets.equals(other.budgets))
+			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (expenses == null) {
+			if (other.expenses != null)
+				return false;
+		} else if (!expenses.equals(other.expenses))
+			return false;
+		if (futureExpenses == null) {
+			if (other.futureExpenses != null)
+				return false;
+		} else if (!futureExpenses.equals(other.futureExpenses))
+			return false;
 		if (id != other.id)
+			return false;
+		if (incomeStreams == null) {
+			if (other.incomeStreams != null)
+				return false;
+		} else if (!incomeStreams.equals(other.incomeStreams))
+			return false;
+		if (incomes == null) {
+			if (other.incomes != null)
+				return false;
+		} else if (!incomes.equals(other.incomes))
 			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
 			return false;
 		if (username == null) {
 			if (other.username != null)

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.finance.entities.Budget;
-import com.skilldistillery.finance.entities.Expense;
 import com.skilldistillery.finance.repo.BudgetRepo;
 import com.skilldistillery.finance.repo.UserRepo;
 

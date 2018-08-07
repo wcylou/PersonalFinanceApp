@@ -61,6 +61,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ChartComponent } from './chart/chart.component';
 import 'hammerjs';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -83,6 +84,7 @@ import 'hammerjs';
     IncomeCategorySelectorPipe,
     DialogComponent,
     ChartComponent,
+    LoginComponent,
   ],
   imports: [
     FormsModule,

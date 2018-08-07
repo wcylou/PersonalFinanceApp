@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { ExpenseService } from './expense.service';
 import { FutureExpense } from './models/future-expense';
 import { Injectable } from '@angular/core';
@@ -23,7 +24,7 @@ export class FutureExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.get<FutureExpense[]>(this.url, httpOptions).pipe(
@@ -35,7 +36,13 @@ export class FutureExpenseService {
   }
 
   indexExCat() {
-    return this.http.get<ExpenseCategory[]>(this.exCatUrl).pipe(
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.get<ExpenseCategory[]>(this.exCatUrl, httpOptions).pipe(
       catchError((err: any) => {
         console.log('category retrieval error');
         return throwError('error in index category');
@@ -46,7 +53,7 @@ export class FutureExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.get<FutureExpense>(this.url + '/' + selectedExpenseId, httpOptions)
@@ -68,7 +75,7 @@ export class FutureExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.post<FutureExpense>(this.url, newFutureExpense, httpOptions).pipe(
@@ -86,7 +93,7 @@ export class FutureExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.patch<FutureExpense>(
@@ -98,7 +105,7 @@ export class FutureExpenseService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: `Basic ${this.authService.getToken()}`
+        Authorization: `Basic ${this.authService.getToken()}`
       })
     };
     return this.http.delete<FutureExpense>(this.url + '/' + expenseId, httpOptions);
@@ -107,6 +114,7 @@ export class FutureExpenseService {
     private http: HttpClient,
     private datePipe: DatePipe,
     private router: Router,
-    private exServ: ExpenseService
+    private exServ: ExpenseService,
+    private authService: AuthService
   ) { }
 }

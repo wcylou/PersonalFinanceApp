@@ -1,5 +1,6 @@
 package com.skilldistillery.finance.controllers;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.finance.entities.Budget;
 import com.skilldistillery.finance.entities.DateDTO;
 import com.skilldistillery.finance.entities.Income;
 import com.skilldistillery.finance.entities.IncomeCategory;
@@ -28,69 +28,68 @@ public class IncomeController {
 	@Autowired
 	IncomeService inServ;
 	
-	String username = "user";
 	
 	@RequestMapping(path="income/between", method= RequestMethod.POST)
-	public List<Income> incomeBetweenMonths(@RequestBody DateDTO dateDTO) throws ParseException  {
+	public List<Income> incomeBetweenMonths(@RequestBody DateDTO dateDTO, Principal principal) throws ParseException  {
 		String start = dateDTO.getStart();
 		String end = dateDTO.getEnd();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date startDate = df.parse(start);
 		Date endDate = df.parse(end);
-		return inServ.findIncomeBetweenDates(startDate, endDate, username);
+		return inServ.findIncomeBetweenDates(startDate, endDate, principal.getName());
 	}
 	
 	@RequestMapping(path="income/categories", method= RequestMethod.GET)
-	public List<IncomeCategory> indexCategories() {
+	public List<IncomeCategory> indexCategories(Principal principal) {
 		return inServ.indexIncomeCategory();
 	}
 	@RequestMapping(path="income", method= RequestMethod.GET)
-	public List<Income> index() {
-		return inServ.indexIncome(username);
+	public List<Income> index(Principal principal) {
+		return inServ.indexIncome(principal.getName());
 	}
 	
 	@RequestMapping(path="income/{id}", method = RequestMethod.GET) 
-	public Income getOneIncome(@PathVariable int id) {
-		return inServ.show(username, id);
+	public Income getOneIncome(@PathVariable int id, Principal principal) {
+		return inServ.show(principal.getName(), id);
 	}
 	
 	@RequestMapping(path="income", method = RequestMethod.POST) 
-	public Income createIncome(@RequestBody Income income) {
-		return inServ.create(username, income);
+	public Income createIncome(@RequestBody Income income, Principal principal) {
+		return inServ.create(principal.getName(), income);
 	}
 	
 	@RequestMapping(path="income/{id}", method = RequestMethod.PATCH) 
-	public Income updateIncome(@RequestBody Income income, @PathVariable int id) {
-		return inServ.update(username, id, income);
+	public Income updateIncome(@RequestBody Income income, @PathVariable int id, Principal principal) {
+		return inServ.update(principal.getName(), id, income);
 	}
 	
 	@RequestMapping(path="income/{id}", method = RequestMethod.DELETE)
-	public boolean deleteIncome(@PathVariable int id) {
-		return inServ.destroy(username, id);
+	public boolean deleteIncome(@PathVariable int id, Principal principal) {
+		return inServ.destroy(principal.getName(), id);
 	}
 	@RequestMapping(path="incomeStream", method= RequestMethod.GET)
-	public List<IncomeStream> indexIncomeStream() {
-		return inServ.indexIncomeStream(username);
+	public List<IncomeStream> indexIncomeStream(Principal principal) {
+		return inServ.indexIncomeStream(principal.getName());
 	}
 	
 	@RequestMapping(path="incomeStream/{id}", method = RequestMethod.GET) 
-	public IncomeStream getOneIncomeStream(@PathVariable int id) {
-		return inServ.showIncomeStream(username, id);
+	public IncomeStream getOneIncomeStream(@PathVariable int id, Principal principal) {
+		return inServ.showIncomeStream(principal.getName(), id);
 	}
 	
 	@RequestMapping(path="incomeStream", method = RequestMethod.POST) 
-	public IncomeStream createIncomeStream(@RequestBody IncomeStream incomeStream) {
-		return inServ.createIncomeStream(username, incomeStream);
+	public IncomeStream createIncomeStream(@RequestBody IncomeStream incomeStream, Principal principal) {
+		return inServ.createIncomeStream(principal.getName(), incomeStream);
 	}
 	
 	@RequestMapping(path="incomeStream/{id}", method = RequestMethod.PATCH) 
-	public IncomeStream updateIncomeStream(@RequestBody IncomeStream incomeStream, @PathVariable int id) {
-		return inServ.updateIncomeStream(username, id, incomeStream);
+	public IncomeStream updateIncomeStream(@RequestBody IncomeStream incomeStream, @PathVariable int id, Principal principal) {
+		return inServ.updateIncomeStream(principal.getName(), id, incomeStream);
 	}
 	
 	@RequestMapping(path="incomeStream/{id}", method = RequestMethod.DELETE)
-	public boolean deleteIncomeStream(@PathVariable int id) {
-		return inServ.destroyIncomeStream(username, id);
+	public boolean deleteIncomeStream(@PathVariable int id, Principal principal) {
+		return inServ.destroyIncomeStream(principal.getName(), id);
 	}
 	
 	
