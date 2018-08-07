@@ -62,6 +62,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ChartComponent } from './chart/chart.component';
 import 'hammerjs';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 
@@ -85,6 +86,7 @@ import { LoginComponent } from './login/login.component';
     DialogComponent,
     ChartComponent,
     LoginComponent,
+    LogoutComponent,
   ],
   imports: [
     FormsModule,

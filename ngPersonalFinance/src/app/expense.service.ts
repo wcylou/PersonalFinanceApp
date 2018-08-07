@@ -31,20 +31,16 @@ export class ExpenseService {
       })
     );
   }
-// probably where it is broken
   findExpenses(
     pageNumber = 0, pageSize = 3): Observable<Expense[]> {
-       const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${this.authService.getToken()}`
-      })
-    };
-      return this.http.get(this.url, {
-        params: new HttpParams()
-          .set('pageNumber', pageNumber.toString())
-          .set('pageSize', pageSize.toString())
-      }).pipe(
+      const httpOptions = { params: new HttpParams()
+        .set('pageNumber', pageNumber.toString())
+        .set('pageSize', pageSize.toString()),
+         headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Basic ${this.authService.getToken()}`
+        }) };
+      return this.http.get(this.url, httpOptions).pipe(
         map(res => res['payload'])
       );
     }
