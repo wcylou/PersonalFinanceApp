@@ -1,5 +1,6 @@
+import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
-import { HttpClient} from '../../node_modules/@angular/common/http';
+import { HttpClient, HttpHeaders} from '../../node_modules/@angular/common/http';
 import { environment } from '../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -11,8 +12,14 @@ import { User } from './models/user';
 export class UserService {
   private url = environment.baseUrl + 'api/users';
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${this.authService.getToken()}`
+    })
+  };
   index() {
-    return this.http.get<User[]>(this.url)
+    return this.http.get<User[]>(this.url, this.httpOptions)
        .pipe(
          catchError((err: any) => {
           console.log(err);
@@ -22,7 +29,7 @@ export class UserService {
   }
 
   show(uid) {
-    return this.http.get<User>(this.url + '/' + uid)
+    return this.http.get<User>(this.url + '/' + uid, this.httpOptions)
     .pipe(
       catchError((err: any) => {
        console.log(err);
@@ -32,7 +39,7 @@ export class UserService {
   }
 
   create(uid) {
-    return this.http.post<User>(this.url, uid)
+    return this.http.post<User>(this.url, uid, this.httpOptions)
     .pipe(
       catchError((err: any) => {
        console.log(err);
@@ -42,7 +49,7 @@ export class UserService {
   }
 
   update(user: User) {
-    return this.http.patch<User>(this.url + '/' + user.id, user)
+    return this.http.patch<User>(this.url + '/' + user.id, user, this.httpOptions)
     .pipe(
       catchError((err: any) => {
        console.log(err);
@@ -52,7 +59,14 @@ export class UserService {
   }
 
   destroy(user: User) {
-    return this.http.delete(this.url + '/' + user.id, {responseType: 'text'})
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`,
+        responseType: 'text'
+      })
+    };
+    return this.http.delete(this.url + '/' + user.id, httpOptions)
     .pipe(
       catchError((err: any) => {
        console.log(err);
@@ -62,6 +76,7 @@ export class UserService {
   }
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) { }
 }
