@@ -11,6 +11,7 @@ import { User } from './models/user';
 })
 export class UserService {
   private url = environment.baseUrl + 'api/users';
+  private environUrl = environment.baseUrl;
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -39,7 +40,7 @@ export class UserService {
   }
 
   create(uid) {
-    return this.http.post<User>(this.url, uid, this.httpOptions)
+    return this.http.post<User>(this.environUrl + 'api/register', uid, this.httpOptions)
     .pipe(
       catchError((err: any) => {
        console.log(err);
