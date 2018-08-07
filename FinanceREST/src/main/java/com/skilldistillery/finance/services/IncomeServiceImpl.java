@@ -1,11 +1,14 @@
 package com.skilldistillery.finance.services;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.finance.entities.Expense;
 import com.skilldistillery.finance.entities.Income;
 import com.skilldistillery.finance.entities.IncomeCategory;
 import com.skilldistillery.finance.entities.IncomeStream;
@@ -25,6 +28,23 @@ public class IncomeServiceImpl implements IncomeService{
 	IncomeStreamRepo inStreamRepo;
 	@Autowired
 	UserRepo userRepo;
+	
+	@Override
+	public Map<String, Double> sortIncomeByCategoryAndDate(String username, Date inputDate, Date todayDate) {
+		Map<String, Double> aggCat = new HashMap<>();
+		List<Income> allIncome = findIncomeBetweenDates(inputDate, todayDate, username);
+		for (int i = 0; i < allIncome.size(); i++) {
+			if (!aggCat.containsKey(allIncome.get(i).getIncomeCategory().getName())) {
+				aggCat.put(allIncome.get(i).getIncomeCategory().getName(), allIncome.get(i).getAmount());
+			}
+			else {
+				aggCat.put(allIncome.get(i).getIncomeCategory().getName(), 
+				aggCat.get(allIncome.get(i).getIncomeCategory().getName()) + allIncome.get(i).getAmount());
+			}
+		}
+		return aggCat;
+	}
+	
 	
 	@Override
 	public List<Income> findIncomeBetweenDates(Date start, Date end, String username) {	

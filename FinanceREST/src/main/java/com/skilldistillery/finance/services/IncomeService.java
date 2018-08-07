@@ -2,6 +2,7 @@ package com.skilldistillery.finance.services;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.skilldistillery.finance.entities.Income;
 import com.skilldistillery.finance.entities.IncomeCategory;
@@ -31,5 +32,6 @@ public interface IncomeService {
 
 	List<IncomeCategory> indexIncomeCategory();
 	List<Income> findIncomeBetweenDates(Date start, Date end, String username);
+	Map<String, Double> sortIncomeByCategoryAndDate(String username, Date inputDate, Date todayDate);
 
 }

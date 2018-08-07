@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,6 +29,15 @@ public class IncomeController {
 	@Autowired
 	IncomeService inServ;
 	
+	@RequestMapping(path="income/categories", method = RequestMethod.POST)
+	public Map<String, Double> sortExpensesByCategoryAndDate(@RequestBody DateDTO dateDTO, Principal principal) throws ParseException {
+		String start = dateDTO.getStart();
+		String end = dateDTO.getEnd();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = df.parse(start);
+		Date endDate = df.parse(end);
+		return inServ.sortIncomeByCategoryAndDate(principal.getName(), startDate, endDate);
+	}
 	
 	@RequestMapping(path="income/between", method= RequestMethod.POST)
 	public List<Income> incomeBetweenMonths(@RequestBody DateDTO dateDTO, Principal principal) throws ParseException  {
