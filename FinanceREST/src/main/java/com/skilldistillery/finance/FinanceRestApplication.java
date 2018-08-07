@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.skilldistillery.finance.services.StockServiceImpl;
+import com.skilldistillery.finance.services.CurrencyServiceImpl;
 
 @SpringBootApplication
 public class FinanceRestApplication extends SpringBootServletInitializer {
@@ -20,7 +20,7 @@ public class FinanceRestApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FinanceRestApplication.class, args);
-		StockServiceImpl simp = new StockServiceImpl();
+		CurrencyServiceImpl simp = new CurrencyServiceImpl();
 		simp.getCurrencies();
 	}
 	@Bean
