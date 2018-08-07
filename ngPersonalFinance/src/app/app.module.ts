@@ -59,6 +59,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { DialogComponent } from './dialog/dialog.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ChartComponent } from './chart/chart.component';
+import 'hammerjs';
+
 
 
 @NgModule({
@@ -79,6 +82,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     CategorySelectorPipe,
     IncomeCategorySelectorPipe,
     DialogComponent,
+    ChartComponent,
   ],
   imports: [
     FormsModule,
