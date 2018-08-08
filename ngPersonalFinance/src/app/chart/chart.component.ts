@@ -29,6 +29,8 @@ export class ChartComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+
+
   showCurrency() {
     this.currencyTableSelected = true;
     this.budgetTableSelected = false;
