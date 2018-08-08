@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -119,7 +120,7 @@ public class ExpenseController {
 	}
 	
 	@RequestMapping(path="expenses/piechart", method = RequestMethod.POST)
-	public Map<String, Double> sortExpensesByCategoryAndDate(@RequestBody DateDTO dateDTO, Principal principal) throws ParseException {
+	public TreeMap<String, Double> sortExpensesByCategoryAndDate(@RequestBody DateDTO dateDTO, Principal principal) throws ParseException {
 		String start = dateDTO.getStart();
 		String end = dateDTO.getEnd();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");

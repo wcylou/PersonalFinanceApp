@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +48,8 @@ public class ExpenseServiceImpl implements ExpenseService{
 	}
 	
 	@Override
-	public Map<String, Double> sortExpensesByCategoryAndDate(String username, Date inputDate, Date todayDate) {
-		Map<String, Double> aggCat = new HashMap<>();
+	public TreeMap<String, Double> sortExpensesByCategoryAndDate(String username, Date inputDate, Date todayDate) {
+		TreeMap<String, Double> aggCat = new TreeMap<>();
 		List<Expense> allExpenses = findExpensesBetweenDates(inputDate, todayDate, username);
 		for (int i = 0; i < allExpenses.size(); i++) {
 			if (!aggCat.containsKey(allExpenses.get(i).getExpenseCategory().getName())) {

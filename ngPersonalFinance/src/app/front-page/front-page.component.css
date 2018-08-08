@@ -1,5 +1,5 @@
 .banner {
-	background: url(../images/money.jpg);
+	background: url(/assets/images/money.jpg);
 	background-attachment: fixed center;
 	background-repeat: no-repeat;
 	min-height: 680px;
@@ -18,4 +18,16 @@ agm-map {
 
 body {
   text-align:center;
+}
+
+.example-card {
+  max-width: 350px;
+}
+
+mat-card {
+  margin:25px;
+}
+
+#teamRow {
+  margin-left:100px;
 }

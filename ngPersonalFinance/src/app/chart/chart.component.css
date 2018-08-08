@@ -12,3 +12,7 @@ table {
   width: 50%;
   text-align:center;
 }
+
+th {
+  color:pink;
+}

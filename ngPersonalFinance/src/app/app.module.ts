@@ -64,6 +64,7 @@ import 'hammerjs';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AccountComponent } from './account/account.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -118,7 +119,8 @@ import { AccountComponent } from './account/account.component';
     MatSlideToggleModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDu3z8H8wEptTmzLK1unAnBejz0QmTc_h8'
-    })
+    }),
+    MatCardModule
   ],
   providers: [
     BudgetService,

@@ -3,6 +3,7 @@ package com.skilldistillery.finance.services;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.skilldistillery.finance.entities.Expense;
 import com.skilldistillery.finance.entities.ExpenseCategory;
@@ -25,6 +26,6 @@ public interface ExpenseService {
 	List<ExpenseCategory> indexExpenseCategory();
 	List<Expense> findExpensesByCategory(String username, int id);
 	Map<String, Double> sortExpensesByCategory(String username);
-	Map<String, Double> sortExpensesByCategoryAndDate(String username, Date inputDate, Date todayDate);
+	TreeMap<String, Double> sortExpensesByCategoryAndDate(String username, Date inputDate, Date todayDate);
 
 }

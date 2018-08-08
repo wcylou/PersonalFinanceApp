@@ -23,13 +23,12 @@ export class ChartComponent implements OnInit {
   currencyTableSelected = false;
   budgetTableSelected = false;
 
-  @ViewChild(MatSort) sort: MatSort;
+  today: number = Date.now();
+
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
-
 
   showCurrency() {
     this.currencyTableSelected = true;
@@ -48,7 +47,6 @@ export class ChartComponent implements OnInit {
         data => {
           this.budgets = data;
           this.dataSource = new MatTableDataSource(this.budgets);
-          this.dataSource.sort = this.sort;
         },
         err => console.log(err)
         );
@@ -60,5 +58,7 @@ export class ChartComponent implements OnInit {
           },
           err => console.error('User create error' + err)
         );
+
+
   }
 }

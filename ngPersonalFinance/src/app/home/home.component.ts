@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
   incomeStreamIndex = [];
   loadedMessage = false;
   newMap: object;
+  budgetMap: object;
 
   endDate;
   startDate;
@@ -48,9 +49,31 @@ export class HomeComponent implements OnInit {
     end: null
   };
 
+
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    legend: {
+      labels: {
+           fontColor: 'pink',
+           fontSize: 14
+          }
+       },
+       scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true,
+                fontColor: 'pink',
+                fontSize: 14
+            },
+        }],
+      xAxes: [{
+            ticks: {
+                fontColor: 'white',
+                fontSize: 14
+            },
+        }]
+    }
   };
   public barChartLabels: string[] = [];
   // tslint:disable-next-line:no-inferrable-types
@@ -201,15 +224,15 @@ export class HomeComponent implements OnInit {
       err => console.log(err)
     );
 
-    this.budServ.getBudgetBetweenDates(this.dateObject).subscribe(
+    this.budServ.getBudgetByCategoryAndDate(this.dateObject).subscribe(
       data => {
-        this.allBudgets = data;
-        for (let i = 0; i < this.allBudgets.length; i++) {
-          this.lastMonthBudget += this.allBudgets[i].amount;
-          this.barChartLabels.push(this.allBudgets[i].expenseCategory.name);
-          this.barChartData2.push(this.allBudgets[i].amount);
+        this.budgetMap = data;
+        for (const p in this.budgetMap) {
+          if (this.budgetMap.hasOwnProperty(p)) {
+            this.barChartData2.push(this.budgetMap[p]);
+            this.lastMonthBudget += this.budgetMap[p];
+          }
         }
-        console.log(this.allBudgets);
       },
       err => console.log(err)
     );
@@ -219,11 +242,10 @@ export class HomeComponent implements OnInit {
         this.newMap = data;
         for (const p in this.newMap) {
           if (this.newMap.hasOwnProperty(p)) {
-            // this.barChartLabels.push(p);
+            this.barChartLabels.push(p);
             this.barChartData3.push(this.newMap[p]);
           }
         }
-        console.log(this.barChartData3);
       },
       err => console.error('User create error' + err)
     );
@@ -240,5 +262,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.reload();
+
   }
 }

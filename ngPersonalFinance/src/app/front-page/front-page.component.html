@@ -3,13 +3,39 @@
   <section class ="banner">
     </section>
 
-    <section id = "aboutUs">
-        <div class = "darkSection">
-          <h1>Who are we</h1><br>
-        <p>Lorem  </p>
-        <h4>Where you take things is completely up to you!</h4>
-          </div>
-        </section>
+    <div class="darkSection team">
+      <br>
+      <h1>TEAM</h1><br>
+<div class = "row" id="teamRow">
+
+  <mat-card class="example-card">
+    <img mat-card-image src="assets/images/wilson.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        <span>Likes: Football <br>Hates: People who call football "soccer."</span>
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="example-card">
+    <img mat-card-image src="assets/images/jeremy.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        <span>Likes: Football <br>Hates: People who call football "soccer."</span>
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="example-card">
+    <img mat-card-image src="assets/images/tom.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        <span>Likes: Football <br>Hates: People who call football "soccer."</span>
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
 
         <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng">
             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>

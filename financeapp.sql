@@ -253,16 +253,16 @@ INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `use
 INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (2, 2, 200, 1, '2018-6-1', '2018-7-1', NULL);
 INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (3, 1, 500, 1, '2018-6-1', '2018-7-1', NULL);
 INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (4, 5, 50, 1, '2018-6-1', '2018-7-1', NULL);
-INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (5, 6, 200, 1, '2018-7-14', '2018-8-14', NULL);
-INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (6, 9, 400, 1, '2018-7-14', '2018-8-14', NULL);
-INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (7, 4, 250, 1, '2018-7-14', '2018-8-14', NULL);
-INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (8, 7, 400, 1, '2018-7-14', '2018-8-14', NULL);
-INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (9, 8, 800, 1, '2018-7-14', '2018-8-14', NULL);
-INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (10, 0, 50, 1, '2018-7-14', '2018-8-14', NULL);
-INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (11, 1, 360, 1, '2018-7-14', '2018-8-14', NULL);
-INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (12, 2, 200, 1, '2018-7-14', '2018-8-14', NULL);
-INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (13, 3, 105, 1, '2018-7-14', '2018-8-14', NULL);
-INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (14, 5, 200, 1, '2018-7-14', '2018-8-14', NULL);
+INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (5, 6, 200, 1, '2018-7-14', '2018-8-07', NULL);
+INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (6, 9, 400, 1, '2018-7-14', '2018-8-07', NULL);
+INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (7, 4, 250, 1, '2018-7-14', '2018-8-07', NULL);
+INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (8, 7, 400, 1, '2018-7-14', '2018-8-07', NULL);
+INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (9, 8, 800, 1, '2018-7-14', '2018-8-07', NULL);
+INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (10, 0, 50, 1, '2018-7-14', '2018-8-07', NULL);
+INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (11, 1, 360, 1, '2018-7-14', '2018-8-07', NULL);
+INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (12, 2, 200, 1, '2018-7-14', '2018-8-07', NULL);
+INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (13, 3, 105, 1, '2018-7-14', '2018-8-07', NULL);
+INSERT INTO `personal_finance_app`.`budget` (`id`, `category_id`, `amount`, `user_id`, `start_date`, `end_date`, `description`) VALUES (14, 5, 200, 1, '2018-7-14', '2018-8-07', NULL);
 
 COMMIT;
 
@@ -722,11 +722,11 @@ INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `da
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (457, 23, 2, '2018-07-06', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (458, 2, 1, '2018-07-15', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (459, 14, 6, '2018-07-13', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (460, 50, 3, '2018-07-06', '', 1);
+INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (460, 50, 3, '2018-07-06', 'Electricity', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (461, 2, 0, '2018-07-20', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (462, 2, 1, '2018-07-06', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (463, 3, 1, '2018-08-02', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (464, 21, 5, '2018-07-07', '', 1);
+INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (464, 21, 5, '2018-07-07', 'Groceries', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (465, 4, 6, '2018-07-13', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (466, 8, 1, '2018-07-13', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (467, 47, 4, '2018-07-30', '', 1);
@@ -737,32 +737,20 @@ INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `da
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (472, 26, 4, '2018-07-06', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (473, 48, 8, '2018-07-20', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (474, 9, 7, '2018-07-13', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (475, 44, 2, '2018-07-07', '', 1);
+INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (475, 44, 2, '2018-07-07', 'Overdraft payment', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (476, 31, 1, '2018-07-18', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (477, 2, 6, '2018-07-11', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (478, 9, 4, '2018-07-29', '', 1);
+INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (478, 9, 4, '2018-07-29', 'Subway', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (479, 26, 5, '2018-07-07', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (480, 11, 1, '2018-07-13', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (481, 10, 0, '2018-07-10', '', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (482, 29, 2, '2018-07-17', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (483, 10, 6, '2018-07-06', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (484, 29, 6, '2018-08-04', '', 1);
+INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (483, 10, 6, '2018-07-06', 'Uber', 1);
+INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (484, 29, 6, '2018-08-04', 'Light rail pass', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (485, 2, 0, '2018-07-13', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (486, 9, 9, '2018-08-01', '', 1);
+INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (486, 9, 9, '2018-08-01', 'Fedora', 1);
 INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (487, 27, 7, '2018-07-20', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (488, 6, 2, '2018-07-22', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (489, 2, 8, '2018-07-16', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (490, 44, 6, '2018-07-27', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (491, 14, 1, '2018-08-02', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (492, 2, 2, '2018-07-21', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (493, 1, 7, '2018-07-29', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (494, 20, 9, '2018-07-25', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (495, 39, 6, '2018-08-04', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (496, 4, 7, '2018-07-13', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (497, 37, 1, '2018-07-27', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (498, 36, 8, '2018-07-18', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (499, 3, 5, '2018-07-08', '', 1);
-INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (500, 25, 4, '2018-07-26', '', 1);
+INSERT INTO `personal_finance_app`.`expense` (`id`, `amount`, `category_id`, `date`, `description`, `user_id`) VALUES (488, 400, 9, '2018-08-08', 'Holiday - Brazil', 1);
 
 COMMIT;
 
@@ -810,7 +798,7 @@ INSERT INTO `personal_finance_app`.`income` (`id`, `user_id`, `category_id`, `am
 INSERT INTO `personal_finance_app`.`income` (`id`, `user_id`, `category_id`, `amount`, `date_received`) VALUES (10, 1, 1, 2000, '2018-04-25');
 INSERT INTO `personal_finance_app`.`income` (`id`, `user_id`, `category_id`, `amount`, `date_received`) VALUES (11, 1, 1, 2000, '2018-05-25');
 INSERT INTO `personal_finance_app`.`income` (`id`, `user_id`, `category_id`, `amount`, `date_received`) VALUES (12, 1, 1, 2000, '2018-06-25');
-INSERT INTO `personal_finance_app`.`income` (`id`, `user_id`, `category_id`, `amount`, `date_received`) VALUES (13, 1, 1, 2000, '2018-07-25');
+INSERT INTO `personal_finance_app`.`income` (`id`, `user_id`, `category_id`, `amount`, `date_received`) VALUES (13, 1, 1, 4000, '2018-07-25');
 INSERT INTO `personal_finance_app`.`income` (`id`, `user_id`, `category_id`, `amount`, `date_received`) VALUES (14, 1, 3, 500, '2018-05-01');
 
 COMMIT;

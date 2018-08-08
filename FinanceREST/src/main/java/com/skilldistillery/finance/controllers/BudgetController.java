@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,14 +30,15 @@ public class BudgetController {
 	String username = "user";
 	
 	@RequestMapping(path="budget/between", method= RequestMethod.POST)
-	public List<Budget> budgetBetweenMonths(@RequestBody DateDTO dateDTO, Principal principal) throws ParseException  {
+	public TreeMap<String, Double> budgetBetweenMonths(@RequestBody DateDTO dateDTO, Principal principal) throws ParseException  {
 		String start = dateDTO.getStart();
 		String end = dateDTO.getEnd();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date startDate = df.parse(start);
 		Date endDate = df.parse(end);
-		return budServ.findBugetsBetweenDates(principal.getName(), endDate, startDate);
+		return budServ.sortBudgetsByCategoryAndDate(username, startDate, endDate);
 	}
+
 
 	
 	@RequestMapping(path="budget/categories/{id}", method = RequestMethod.GET)
@@ -69,5 +71,4 @@ public class BudgetController {
 	public boolean deleteExpense(@PathVariable int id, Principal principal) {
 		return budServ.destroy(principal.getName(), id);
 	}
-	
 }
