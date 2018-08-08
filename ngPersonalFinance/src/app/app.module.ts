@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { FutureExpenseComponent } from './future-expense/future-expense.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -116,6 +116,7 @@ import { AccountComponent } from './account/account.component';
     MatDialogModule,
     MatCheckboxModule,
     MatSlideToggleModule,
+    NgbModalModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDu3z8H8wEptTmzLK1unAnBejz0QmTc_h8'
     })
