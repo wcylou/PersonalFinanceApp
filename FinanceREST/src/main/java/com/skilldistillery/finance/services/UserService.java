@@ -11,5 +11,6 @@ public interface UserService {
 	User update(int id, User user);
 	boolean destroy(int id);
 	List<User> indexUser();
+	User findByUserName(String username);
 
 }

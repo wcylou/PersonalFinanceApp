@@ -1,3 +1,4 @@
+import { UserService } from './../user.service';
 import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,15 +11,14 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   login(form) {
-    console.log(form.controls['password'].value);
-    console.log(form.controls['username'].value);
     this.authService.login(form.controls['username'].value, form.controls['password'].value).subscribe(
-        data => this.router.navigate([{outlets: {frontPage: 'frontPage'}}]),
+        data => {this.router.navigate([{outlets: {home: 'home', login: null}}]);
+      },
         err => console.log(err)
     );
   }
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private userServ: UserService) { }
 
   ngOnInit() {
   }

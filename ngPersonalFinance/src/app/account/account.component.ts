@@ -28,6 +28,7 @@ export class AccountComponent implements OnInit {
   editUser: null;
   showComplete = false;
   userId = false;
+  showPage = false;
 
   checkLoggedIn() {
     return this.authService.checkLogin();
@@ -36,8 +37,14 @@ export class AccountComponent implements OnInit {
      return this.users.length;
   }
 
-  displayUser(budget) {
-    this.selected = budget;
+  displayUser() {
+    console.log(this.authService.getUsername());
+    this.userService.findByUserName(this.authService.getUsername()).subscribe(
+      data => {this.selected = data;
+      this.showPage = true;
+      },
+      err => console.log(err)
+    );
   }
 
   displayTable() {
@@ -111,6 +118,7 @@ export class AccountComponent implements OnInit {
   constructor(private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
+    this.displayUser();
   }
 
 }

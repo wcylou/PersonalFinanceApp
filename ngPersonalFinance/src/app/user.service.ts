@@ -12,7 +12,7 @@ import { User } from './models/user';
 export class UserService {
   private url = environment.baseUrl + 'api/users';
   private environUrl = environment.baseUrl;
-
+  private user: User = new User();
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -26,6 +26,23 @@ export class UserService {
           console.log(err);
           return throwError('KABOOM');
         })
+    );
+  }
+
+  findByUserName(username) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    console.log(username);
+    return this.http.get<User>(this.url + '/' + username, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Kaboom');
+      })
     );
   }
 
@@ -47,6 +64,15 @@ export class UserService {
        return throwError('KABOOM');
       })
     );
+  }
+
+  setCurrentUser(user) {
+    console.log(user);
+    this.user = user;
+    console.log(typeof this.user);
+  }
+  getCurrentUser() {
+    return this.user;
   }
 
   update(user: User) {
