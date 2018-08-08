@@ -15,6 +15,7 @@ export class AuthService {
   login(username, password) {
     // Make token
     const token = this.generateBasicAuthToken(username, password);
+    console.log(token);
     // Send token as Authorization header (this is spring security convention for basic auth)
     const headers = new HttpHeaders()
       .set('Authorization', `Basic ${token}`);
@@ -38,8 +39,10 @@ export class AuthService {
     // create request to register a new account
     return this.http.post(this.url + 'api/register', user)
     .pipe(
-        tap((res) => {  // create a user and then upon success, log them in
+        tap((res) => {
+          console.log(user.username + ' ======= ' + user.password);  // create a user and then upon success, log them in
           this.login(user.username, user.password);
+          return res;
         }),
         catchError((err: any) => {
           console.log(err);

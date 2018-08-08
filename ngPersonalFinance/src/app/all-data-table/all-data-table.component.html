@@ -16,9 +16,10 @@
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
-  <button (click)="findExpensesBetweenDates(); findIncomesBetweenDates(); findBudgetsBetweenDates(); showAll = false">Click</button>
+  <button (click)="findExpensesBetweenDates(); findIncomesBetweenDates(); findBudgetsBetweenDates(); showAll = false">Set Dates</button>
+  <button (click)="showAll = true">Clear Dates</button>
+  <button (click)="resetAllCategories(); showAll = true">Clear Categories</button>
 </div>
-<button (click)="showAll = true">Show All</button>
 
 <!-- Expenses table -->
 <div *ngIf="showAll">
@@ -28,6 +29,7 @@
     <mat-form-field>
         <mat-select placeholder="Category" [formControl]="expensesCategories" [(value)]='selectedExpenseCategories' multiple (selectionChange)='setExpensesCategoryFilter()'>
           <mat-option *ngFor="let category of expenseCategorySelector" [value]='category.name'>{{category.name}}</mat-option>
+          <mat-option>None</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -69,13 +71,13 @@
   <div *ngIf="showExpensesByDateTable">
 
       <mat-form-field>
-          <mat-select placeholder="Category" [formControl]="expensesCategories" [(value)]='selectedExpenseCategories' multiple (selectionChange)='setExpensesCategoryFilter()'>
+          <mat-select placeholder="Category" [formControl]="expensesCategories" [(value)]='selectedExpenseCategories' multiple (selectionChange)='setExpensesCategoryFilterByDate()'>
             <mat-option *ngFor="let category of expenseCategorySelector" [value]='category.name'>{{category.name}}</mat-option>
           </mat-select>
         </mat-form-field>
 
-    <mat-paginator *ngIf="!expensesSelectedByCategory" [length]="expensesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesByDateList($event)"></mat-paginator>
-    <mat-paginator *ngIf="expensesSelectedByCategory" [length]="sortedExpensesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesByDateList($event)"></mat-paginator>
+    <mat-paginator *ngIf="!expensesSelectedByCategoryAndDate" [length]="expensesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesByDateList($event)"></mat-paginator>
+    <mat-paginator *ngIf="expensesSelectedByCategoryAndDate" [length]="sortedExpensesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesByDateList($event)"></mat-paginator>
 
     <mat-table class="all-data-table" [dataSource]="filteredExpensesByDate" matSort (matSortChange)="sortExpensesByDate($event)" class="mat-elevation-z8">
       <ng-container matColumnDef="amount">
@@ -209,13 +211,13 @@
     <h3>Budget</h3>
 
     <mat-form-field>
-        <mat-select placeholder="Category" [formControl]="budgetsCategories" [(value)]='selectedBudgetsCategories' multiple (selectionChange)='setBudgetsCategoryFilter()'>
+        <mat-select placeholder="Category" [formControl]="budgetsCategories" [(value)]='selectedBudgetsCategories' multiple (selectionChange)='setBudgetsCategoryFilterByDate()'>
           <mat-option *ngFor="let category of budgetsCategorySelector" [value]='category.name'>{{category.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-    <mat-paginator *ngIf="!budgetsSelectedByCategory" [length]="budgetsByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterBudgetListByDate($event)"></mat-paginator>
-    <mat-paginator *ngIf="!budgetsSelectedByCategory" [length]="sortedBudgetsByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterBudgetListByDate($event)"></mat-paginator>
+    <mat-paginator *ngIf="!budgetsSelectedByCategoryAndDate" [length]="budgetsByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterBudgetListByDate($event)"></mat-paginator>
+    <mat-paginator *ngIf="budgetsSelectedByCategoryAndDate" [length]="sortedBudgetsByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterBudgetListByDate($event)"></mat-paginator>
 
     <mat-table class="all-data-table" [dataSource]="filteredBudgetsByDate" matSort (matSortChange)="sortBudgetsByDate($event)" class="mat-elevation-z8">
 
@@ -299,13 +301,13 @@
     <h3>Income</h3>
 
     <mat-form-field>
-        <mat-select placeholder="Category" [formControl]="incomesCategories" [(value)]='selectedIncomeCategories' multiple (selectionChange)='setIncomesCategoryFilter()'>
+        <mat-select placeholder="Category" [formControl]="incomesCategories" [(value)]='selectedIncomeCategories' multiple (selectionChange)='setIncomesCategoryFilterByDate()'>
           <mat-option *ngFor="let category of incomesCategoriesSelector" [value]='category.name'>{{category.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-    <mat-paginator *ngIf="!incomesSelectedByCategory" [length]="incomesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomesListByDate($event)"></mat-paginator>
-    <mat-paginator *ngIf="incomesSelectedByCategory" [length]="sortedIncomesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomesListByDate($event)"></mat-paginator>
+    <mat-paginator *ngIf="!incomesSelectedByCategoryAndDate" [length]="incomesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomesListByDate($event)"></mat-paginator>
+    <mat-paginator *ngIf="incomesSelectedByCategoryAndDate" [length]="sortedIncomesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomesListByDate($event)"></mat-paginator>
 
     <mat-table class="all-data-table" [dataSource]="filteredIncomesByDate" matSort (matSortChange)="sortIncomesByDate($event)" class="mat-elevation-z8">
 
