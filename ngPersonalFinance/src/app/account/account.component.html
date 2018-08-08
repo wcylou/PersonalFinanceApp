@@ -33,7 +33,6 @@
       <tr>
         <th>ID</th>
         <th>Username</th>
-        <th>Password</th>
         <th>Email</th>
         <th></th>
       </tr>
@@ -44,7 +43,6 @@
           <h3>{{selected.id}}</h3>
         </td>
         <td>{{selected.username}}</td>
-        <td>{{selected.password}}</td>
         <td>{{selected.email}}</td>
         <td>
           <button (click)="setEditUser()" class="btn btn-success">Edit</button>
@@ -62,7 +60,7 @@
       </div>
       <div class="form-group">
         Password
-        <input type="text" name="password" [ngModel]="selected.password" ngModel/>
+        <input type="text" name="password" ngModel/>
         <br />
       </div>
       <div class="form-group">

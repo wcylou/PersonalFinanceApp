@@ -1,9 +1,9 @@
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
-import {NgForm, FormControl} from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
 import { UserService } from '../user.service';
 import { User } from '../models/user';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-account',
@@ -11,15 +11,14 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   emailFormControl = new FormControl('', [
-  Validators.required,
-  Validators.email, ]);
-
+    Validators.required,
+    Validators.email
+  ]);
 
   users = [];
   selected = null;
@@ -32,16 +31,17 @@ export class AccountComponent implements OnInit {
 
   checkLoggedIn() {
     return this.authService.checkLogin();
-    }
+  }
   countUsers() {
-     return this.users.length;
+    return this.users.length;
   }
 
   displayUser() {
     console.log(this.authService.getUsername());
     this.userService.findByUserName(this.authService.getUsername()).subscribe(
-      data => {this.selected = data;
-      this.showPage = true;
+      data => {
+        this.selected = data;
+        this.showPage = true;
       },
       err => console.log(err)
     );
@@ -52,21 +52,19 @@ export class AccountComponent implements OnInit {
     this.createNewUser = null;
   }
 
-  createNewUserItem () {
+  createNewUserItem() {
     this.createNewUser = true;
   }
 
   addUser() {
-
     this.userService.create(this.newUser).subscribe(
-            data => {
-              this.newUser = new User();
-              this.createNewUser = null;
-              this.reload();
-            },
-            err => console.error('User create error' + err)
-          );
-
+      data => {
+        this.newUser = new User();
+        this.createNewUser = null;
+        this.reload();
+      },
+      err => console.error('User create error' + err)
+    );
   }
 
   setEditUser() {
@@ -77,21 +75,20 @@ export class AccountComponent implements OnInit {
     this.editUser = null;
   }
 
-
-
   updateUser(form: NgForm) {
     this.selected.username = form.value.username;
+    if (form.value.password !== '') {
+      console.log('in update if here');
     this.selected.password = form.value.password;
+    }
     this.selected.email = form.value.email;
     this.userService.update(this.selected).subscribe(
       data => {
         this.resetUser();
-        this.selected = null;
-        this.reload();
+        this.selected = data;
       },
       err => console.error('Post error' + err)
     );
-
   }
 
   destroyUser(user) {
@@ -105,20 +102,21 @@ export class AccountComponent implements OnInit {
     );
   }
 
-
   reload() {
     this.userService.index().subscribe(
-      (data) => {
-            this.users = data;
-    },
-      (err) => console.log('Budget error' + err)
+      data => {
+        this.users = data;
+      },
+      err => console.log('Budget error' + err)
     );
   }
 
-  constructor(private userService: UserService, private authService: AuthService) { }
+  constructor(
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.displayUser();
   }
-
 }
