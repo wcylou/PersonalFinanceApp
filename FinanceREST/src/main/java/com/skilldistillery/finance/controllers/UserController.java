@@ -22,15 +22,22 @@ public class UserController {
 	@Autowired
 	UserService userServ;	
 	
+	@RequestMapping(path="users/{username}", method = RequestMethod.GET)
+	public User findUserByUserName(@PathVariable String username, Principal principal){
+		
+		return userServ.findByUserName(username);
+		
+	}
+	
 	@RequestMapping(path="users", method= RequestMethod.GET)
 	public List<User> index(Principal principal) {
 		return userServ.indexUser();
 	}
 	
-	@RequestMapping(path="users/{id}", method = RequestMethod.GET) 
-	public User getOneUser(@PathVariable int id, Principal principal) {
-		return userServ.show(id);
-	}
+//	@RequestMapping(path="users/{id}", method = RequestMethod.GET) 
+//	public User getOneUser(@PathVariable int id, Principal principal) {
+//		return userServ.show(id);
+//	}
 	
 	@RequestMapping(path="users", method = RequestMethod.POST) 
 	public User createUser(@RequestBody User user, Principal principal) {

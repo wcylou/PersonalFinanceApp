@@ -14,7 +14,7 @@ import { ExpenseService } from './../expense.service';
 import { FutureExpenseService } from './../future-expense.service';
 import { IncomeService } from './../income.service';
 import { BudgetService } from './../budget.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm, FormControl } from '@angular/forms';
@@ -24,9 +24,10 @@ import {
   MatTableDataSource
 } from '../../../node_modules/@angular/material';
 import { tap } from '../../../node_modules/rxjs/operators';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { Sort } from '@angular/material';
 import { IncomeCategorySelectorPipe } from '../pipes/income-category-selector.pipe';
+import { NgbModal, ModalDismissReasons } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-all-data-table',
@@ -85,13 +86,15 @@ export class AllDataTableComponent implements OnInit {
     'amount',
     'expenseCategory',
     'date',
-    'description'
+    'description',
+    'delete'
   ];
   displayedColumnsExpensesByDate = [
     'amount',
     'expenseCategory',
     'date',
-    'description'
+    'description',
+    'delete'
   ];
 
   displayedColumnsFutureExpenses = [
@@ -99,7 +102,8 @@ export class AllDataTableComponent implements OnInit {
     'expenseCategory',
     'expectedDate',
     'recurring',
-    'description'
+    'description',
+    'delete'
   ];
 
   displayedColumnsBudgets = [
@@ -107,7 +111,8 @@ export class AllDataTableComponent implements OnInit {
     'expenseCategory',
     'startDate',
     'endDate',
-    'description'
+    'description',
+    'delete'
   ];
 
   displayedColumnsBudgetsByDate = [
@@ -115,15 +120,17 @@ export class AllDataTableComponent implements OnInit {
     'expenseCategory',
     'startDate',
     'endDate',
-    'description'
+    'description',
+    'delete'
   ];
 
-  displayedColumnsIncomes = ['amount', 'incomeCategory', 'dateReceived'];
-  displayedColumnsIncomesByDate = ['amount', 'incomeCategory', 'dateReceived'];
+  displayedColumnsIncomes = ['amount', 'incomeCategory', 'dateReceived', 'delete'];
+  displayedColumnsIncomesByDate = ['amount', 'incomeCategory', 'dateReceived', 'delete'];
   displayedColumnsIncomeStreams = [
     'expectedAmount',
     'incomeCategory',
-    'startDate'
+    'startDate',
+    'delete'
   ];
 
   sortedBudgets: Budget[];
@@ -159,9 +166,71 @@ export class AllDataTableComponent implements OnInit {
   expensesSelectedByCategoryAndDate = false;
   incomesSelectedByCategoryAndDate = false;
 
+  closeResult: string;
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;
+
+  deleteBudgetRow(budget) {
+    this.budgetService.destroy(budget).subscribe(
+      data => {
+        this.reload();
+      },
+      err => {
+        console.error('womp, budget delete did not work');
+        this.reload();
+      }
+    );
+  }
+
+  deleteExpenseRow(expense) {
+    this.expenseService.destroy(expense.id).subscribe(
+      data => {
+        this.reload();
+      },
+      err => {
+        console.error('womp, expense delete did not work');
+        this.reload();
+      }
+    );
+  }
+
+  deleteFutureExpenseRow(futureExpense) {
+    this.futureExpenseService.destroy(futureExpense.id).subscribe(
+      data => {
+        this.reload();
+      },
+      err => {
+        console.error('womp, future expense delete did not work');
+        this.reload();
+      }
+    );
+  }
+
+  deleteIncomeRow(income) {
+    this.incomeService.destroy(income.id).subscribe(
+      data => {
+        this.reload();
+      },
+      err => {
+        console.error('womp, income delete did not work');
+        this.reload();
+      }
+    );
+  }
+
+  deleteIncomeStreamRow(incomeStream) {
+    this.incomeService.destroyIncomeStream(incomeStream.id).subscribe(
+      data => {
+        this.reload();
+      },
+      err => {
+        console.error('womp, income stream delete did not work');
+        this.reload();
+      }
+    );
+  }
 
   resetAllCategories() {
     this.budgetsCategories.reset();
@@ -1123,6 +1192,18 @@ export class AllDataTableComponent implements OnInit {
     this.budgetService.getBudgetBetweenDates(this.dateObject).subscribe(
       data => {
         console.log(data);
+        if (this.selectedBudgetsCategories !== '') {
+          this.budgetsByDate = data;
+          this.sortedBudgetsByDate = this.expenseCategoryPipe.transform(
+            this.budgetsByDate,
+            this.selectedBudgetsCategories
+          );
+          this.filteredBudgetsByDate = this.pagePipe.transform(
+            this.sortedBudgetsByDate,
+            0,
+            this.pageSize
+          );
+        } else {
         this.budgetsByDate = data;
         this.sortedBudgetsByDate = data;
         this.filteredBudgetsByDate = this.pagePipe.transform(
@@ -1130,6 +1211,7 @@ export class AllDataTableComponent implements OnInit {
           0,
           this.pageSize
         );
+      }
       },
       err => console.log(err)
     );
@@ -1178,13 +1260,26 @@ export class AllDataTableComponent implements OnInit {
     this.incomeService.getIncomeBetweenDates(this.dateObject).subscribe(
       data => {
         console.log(data);
-        this.incomesByDate = data;
-        this.sortedIncomesByDate = data;
-        this.filteredIncomesByDate = this.pagePipe.transform(
-          this.sortedIncomesByDate,
-          0,
-          this.pageSize
-        );
+        if (this.selectedIncomeCategories !== '') {
+          this.incomesByDate = data;
+          this.sortedIncomesByDate = this.incomeCategoryPipe.transform(
+            this.incomesByDate,
+            this.selectedIncomeCategories
+          );
+          this.filterIncomesListByDate = this.pagePipe.transform(
+            this.sortedIncomesByDate,
+            0,
+            this.pageSize
+          );
+        } else {
+          this.incomesByDate = data;
+          this.sortedIncomesByDate = data;
+          this.filteredIncomesByDate = this.pagePipe.transform(
+            this.sortedIncomesByDate,
+            0,
+            this.pageSize
+          );
+        }
       },
       err => console.log(err)
     );
@@ -1313,7 +1408,9 @@ export class AllDataTableComponent implements OnInit {
     private pageEvent: PageEvent,
     private pagePipe: PagePipePipe,
     private expenseCategoryPipe: CategorySelectorPipe,
-    private incomeCategoryPipe: IncomeCategorySelectorPipe
+    private incomeCategoryPipe: IncomeCategorySelectorPipe,
+    private dialog: MatDialog,
+    private modalService: NgbModal
   ) {
     this.sortedBudgets = this.budgets.slice();
     this.sortedExpenses = this.expenses.slice();

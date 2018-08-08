@@ -57,6 +57,11 @@
         <mat-cell *matCellDef="let expense">{{expense.description}}</mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+        <mat-cell *matCellDef="let expense"><button mat-button (click)="deleteExpenseRow(expense)">Delete Row</button></mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumnsExpenses"></mat-header-row>
 
       <mat-row *matRowDef="let row; columns: displayedColumnsExpenses" (click)="onExpenseRowClicked(row)"></mat-row>
@@ -99,6 +104,11 @@
         <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
         <mat-cell *matCellDef="let expense">{{expense.description}}</mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let expense"><button mat-button (click)="deleteExpenseRow(expense)">Delete Row</button></mat-cell>
+        </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumnsExpensesByDate"></mat-header-row>
 
@@ -149,6 +159,11 @@
       <mat-cell *matCellDef="let futureExpense">{{futureExpense.description}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+        <mat-cell *matCellDef="let futureExpense"><button mat-button (click)="deleteFutureExpenseRow(futureExpense)">Delete Row</button></mat-cell>
+      </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumnsFutureExpenses"></mat-header-row>
 
     <mat-row *matRowDef="let row; columns: displayedColumnsFutureExpenses" (click)="onFutureExpenseRowClicked(row)"></mat-row>
@@ -198,6 +213,11 @@
         <mat-cell *matCellDef="let budget">{{budget.description}}</mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let budget"><button mat-button (click)="deleteBudgetRow(budget)">Delete Row</button></mat-cell>
+        </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumnsBudgets"></mat-header-row>
 
       <mat-row *matRowDef="let row; columns: displayedColumnsBudgets" (click)="onBudgetRowClicked(row)"></mat-row>
@@ -246,6 +266,11 @@
         <mat-cell *matCellDef="let budget">{{budget.description}}</mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let budget"><button mat-button (click)="deleteBudgetRow(budget)">Delete Row</button></mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumnsBudgetsByDate"></mat-header-row>
 
       <mat-row *matRowDef="let row; columns: displayedColumnsBudgetsByDate" (click)="onBudgetRowClicked(row)"></mat-row>
@@ -284,6 +309,11 @@
       <ng-container matColumnDef="dateReceived">
         <mat-header-cell *matHeaderCellDef mat-sort-header="dateReceived">Date</mat-header-cell>
         <mat-cell *matCellDef="let incomes">{{incomes.dateReceived | date:'mediumDate'}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let incomes"><button mat-button (click)="deleteIncomeRow(incomes)">Delete Row</button></mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumnsIncomes"></mat-header-row>
@@ -326,6 +356,11 @@
         <mat-cell *matCellDef="let incomes">{{incomes.dateReceived | date:'mediumDate'}}</mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let incomes"><button mat-button (click)="deleteIncomeRow(incomes)">Delete Row</button></mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumnsIncomesByDate"></mat-header-row>
 
       <mat-row *matRowDef="let row; columns: displayedColumnsIncomesByDate" (click)="onIncomeRowClicked(row)"></mat-row>
@@ -363,6 +398,11 @@
     <ng-container matColumnDef="startDate">
       <mat-header-cell *matHeaderCellDef mat-sort-header="startDate">Date</mat-header-cell>
       <mat-cell *matCellDef="let incomeStream">{{incomeStream.startDate | date:'mediumDate'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+        <mat-cell *matCellDef="let incomeStream"><button mat-button (click)="deleteIncomeStreamRow(incomeStream)">Delete Row</button></mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumnsIncomeStreams"></mat-header-row>

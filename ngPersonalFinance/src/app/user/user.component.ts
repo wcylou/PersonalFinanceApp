@@ -50,11 +50,12 @@ export class UserComponent implements OnInit {
 
     this.authService.register(this.newUser).subscribe(
             data => {
-              this.newUser = new User();
+              this.authService.login(this.newUser.username, this.newUser.password).subscribe(
+                data2 => this.router.navigate([{outlets: {home: 'home', user: null} }]),
+                err2 => console.log(err2)
+              );
               this.createNewUser = null;
-              this.reload();
-              this.authService.checkLogin();
-              this.router.navigate([{ outlets: { frontPage: 'frontPage' } }]);
+              this.newUser = new User();
             },
             err => console.error('User create error' + err)
           );
@@ -111,7 +112,6 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService, private _formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.reload();
     this.firstFormGroup = this._formBuilder.group({
       username: ['', Validators.required]
     });
