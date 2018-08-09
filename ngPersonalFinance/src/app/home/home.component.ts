@@ -111,6 +111,7 @@ export class HomeComponent implements OnInit {
         this.fexServ.destroy(fex.id).subscribe(
           data => {
             console.log(data);
+            this.reload();
           },
           err => console.log(err)
         );
@@ -140,6 +141,7 @@ export class HomeComponent implements OnInit {
         this.inServ.destroyIncomeStream(fex.id).subscribe(
           data => {
             console.log(data);
+            this.reload();
           },
           err => console.log(err)
         );
