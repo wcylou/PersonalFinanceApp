@@ -228,6 +228,7 @@ export class HomeComponent implements OnInit {
 
     this.budServ.getBudgetByCategoryAndDate(this.dateObject).subscribe(
       data => {
+        this.budgetMap = null;
         this.budgetMap = data;
         for (const p in this.budgetMap) {
           if (this.budgetMap.hasOwnProperty(p)) {

@@ -53,7 +53,7 @@ export class CategoryPieChartComponent implements OnInit {
               for (let p in this.newMap) {
                 if (this.newMap.hasOwnProperty(p)) {
                   this.pieChartLabels.push(p);
-                  this.pieChartData.push(this.newMap[p]);
+                  this.pieChartData.push(this.newMap[p].toFixed(0));
                 }
               }
             this.isDataLoaded = true;

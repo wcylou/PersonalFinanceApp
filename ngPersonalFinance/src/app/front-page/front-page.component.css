@@ -1,11 +1,10 @@
 .banner {
 	background: url(/assets/images/money.jpg);
-	background-attachment: fixed bottom;
+	background-attachment: fixed center;
 	background-repeat: no-repeat;
-	min-height: 680px;
+	min-height: 720px;
 	background-size: cover;
 	color: black;
-  text-align: center;
   margin:0;
 }
 

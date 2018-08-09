@@ -31,3 +31,7 @@ html, body, material-app, mat-sidenav-container {
 .mat-form-field {
   margin-right: 8px;
 }
+
+th, .mat-sort-header-button {
+  color:pink;
+}
