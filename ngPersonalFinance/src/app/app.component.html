@@ -9,14 +9,8 @@
     [color]="color">
   Toggle Nav
   </mat-slide-toggle>
-    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome to Moonlight Confetti Personal Finance!
-      <i class="fas fa-moon fa-lg" ></i>&nbsp;
-      <i class="fas fa-dollar-sign fa-lg"></i>&nbsp;
-      <i class="fas fa-euro-sign fa-lg"></i>&nbsp;
-      <i class="fas fa-pound-sign fa-lg"></i>&nbsp;
-      <i class="fab fa-btc fa-lg"></i>&nbsp;
-      <i class="fas fa-yen-sign fa-lg"></i>&nbsp;
-    </span>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Moonlight Confetti Personal Finance&nbsp;&nbsp;&nbsp;
+      <i class="fas fa-moon fa-lg" style="color:yellow"></i>&nbsp;
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -24,8 +18,8 @@
     <mat-sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
     (closed)="events.push('close!')">
       <br>
-      <a [routerLink]="[{outlets:{frontPage:['frontPage'], home:null, account: null, logout: null, login: null,  user:null, formInput:null,
-      allDataTable:null, categoryPieChart:null, chart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Front</button></a><br><br>
+      <div *ngIf= "!checkLoggedIn()"><a [routerLink]="[{outlets:{frontPage:['frontPage'], home:null, account: null, logout: null, login: null,  user:null, formInput:null,
+      allDataTable:null, categoryPieChart:null, chart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</button></a><br><br></div>
       <div *ngIf= "checkLoggedIn()"><a [routerLink]="[{outlets:{home:['home'], account: null,logout: null, login: null, frontPage:null, user:null, formInput:null, allDataTable:null,
       categoryPieChart:null, chart:null}}]"><button mat-raised-button color="primary"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</button></a><br><br></div>
       <div *ngIf= "!checkLoggedIn()"><a [routerLink]="[{outlets:{user:['user'], account: null, logout: null, frontPage:null,  formInput:null, home:null, allDataTable:null,
@@ -60,12 +54,6 @@
     <div class="col-lg-7">
         <router-outlet></router-outlet>
         <router-outlet name="categoryPieChart"></router-outlet>
-
-<!-- <app-expense>  expense...</app-expense> -->
-<!-- <app-income>loading income...</app-income> -->
-<!-- <app-user>loading user...</app-user> -->
-<!-- <app-user>loading user...</app-user> -->
-<!-- <app-future-expense>loading future expenses</app-future-expense> -->
     </div>
 
     <div class="col-lg-5">

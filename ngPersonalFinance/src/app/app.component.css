@@ -22,7 +22,6 @@ backgroundMain {
   background-color:black;
 }
 
-span {
-  text-align:center;
+#toolbar {
   justify-content: center;
 }
