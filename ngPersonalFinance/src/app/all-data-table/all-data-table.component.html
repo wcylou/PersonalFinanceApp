@@ -43,7 +43,7 @@
     <mat-table class="all-data-table" [dataSource]="filteredExpenses" matSort (matSortChange)="sortExpenses($event)" class="mat-elevation-z8">
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
-        <mat-cell *matCellDef="let expense">{{expense.amount}}</mat-cell>
+        <mat-cell *matCellDef="let expense">{{expense.amount | currency:'GBP'}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="expenseCategory">
@@ -92,7 +92,7 @@
     <mat-table class="all-data-table" [dataSource]="filteredExpensesByDate" matSort (matSortChange)="sortExpensesByDate($event)" class="mat-elevation-z8">
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
-        <mat-cell *matCellDef="let expense">{{expense.amount}}</mat-cell>
+        <mat-cell *matCellDef="let expense">{{expense.amount | currency:'GBP'}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="expenseCategory">
@@ -142,7 +142,7 @@
 
     <ng-container matColumnDef="amount">
       <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
-      <mat-cell *matCellDef="let futureExpense">{{futureExpense.amount}}</mat-cell>
+      <mat-cell *matCellDef="let futureExpense">{{futureExpense.amount | currency:'GBP'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="expenseCategory">
@@ -197,7 +197,7 @@
 
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
-        <mat-cell *matCellDef="let budget">{{budget.amount}}</mat-cell>
+        <mat-cell *matCellDef="let budget">{{budget.amount | currency:'GBP'}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="expenseCategory">
@@ -251,7 +251,7 @@
 
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
-        <mat-cell *matCellDef="let budget">{{budget.amount}}</mat-cell>
+        <mat-cell *matCellDef="let budget">{{budget.amount | currency:'GBP'}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="expenseCategory">
@@ -307,7 +307,7 @@
 
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
-        <mat-cell *matCellDef="let incomes">{{incomes.amount}}</mat-cell>
+        <mat-cell *matCellDef="let incomes">{{incomes.amount | currency:'GBP'}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="incomeCategory">
@@ -353,7 +353,7 @@
 
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</mat-header-cell>
-        <mat-cell *matCellDef="let incomes">{{incomes.amount}}</mat-cell>
+        <mat-cell *matCellDef="let incomes">{{incomes.amount | currency:'GBP'}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="incomeCategory">
@@ -398,7 +398,7 @@
 
     <ng-container matColumnDef="expectedAmount">
       <mat-header-cell *matHeaderCellDef mat-sort-header="expectedAmount">Expected Amount</mat-header-cell>
-      <mat-cell *matCellDef="let incomeStream">{{incomeStream.expectedAmount}}</mat-cell>
+      <mat-cell *matCellDef="let incomeStream">{{incomeStream.expectedAmount | currency:'GBP'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="incomeCategory">
