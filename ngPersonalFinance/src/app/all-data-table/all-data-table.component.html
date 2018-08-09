@@ -1,25 +1,28 @@
-<button mat-stroked-button (click)="toggleExpensesTable()">Expense Table</button>
-<button mat-stroked-button (click)="toggleFutureExpensesTable()">Future Expense Table</button>
-<button mat-stroked-button (click)="toggleBudgetsTable()">Budget Table</button>
-<button mat-stroked-button (click)="toggleIncomesTable()">Income Table</button>
-<button mat-stroked-button (click)="toggleIncomeStreamsTable()">Incomes Stream Table</button>
-
-
 <div *ngIf="loadedStartDate">
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker3" placeholder="Start Date" [(ngModel)]="startDate" [value]="startDate.value">
-    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-    <mat-datepicker #picker3></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker2" placeholder="End Date" [(ngModel)]="endDate" [value]="endDate.value">
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-  </mat-form-field>
-  <button (click)="findExpensesBetweenDates(); findIncomesBetweenDates(); findBudgetsBetweenDates(); showAll = false">Set Dates</button>
-  <button (click)="showAll = true">Clear Dates</button>
-  <button (click)="resetAllCategories(); showAll = true">Clear Categories</button>
-</div>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker3" placeholder="Start Date" [(ngModel)]="startDate" [value]="startDate.value">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="End Date" [(ngModel)]="endDate" [value]="endDate.value">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field> <span class="button-row">
+    <button mat-raised-button color="primary" (click)="findExpensesBetweenDates(); findIncomesBetweenDates(); findBudgetsBetweenDates(); showAll = false">Set Dates</button>
+    <button mat-raised-button color="primary" (click)="showAll = true">Clear Dates</button>
+  </span>
+  </div>
+
+<div class="button-row">
+<button mat-raised-button color="primary" (click)="toggleExpensesTable()">Expense Table</button>
+<button mat-raised-button color="primary" (click)="toggleFutureExpensesTable()">Future Expense Table</button>
+<button mat-raised-button color="primary" (click)="toggleBudgetsTable()">Budget Table</button>
+<button mat-raised-button color="primary" (click)="toggleIncomesTable()">Income Table</button>
+<button mat-raised-button color="primary" (click)="toggleIncomeStreamsTable()">Incomes Stream Table</button>
+</div><br>
+
+
 
 <!-- Expenses table -->
 <div *ngIf="showAll">
@@ -32,6 +35,7 @@
           <mat-option>None</mat-option>
         </mat-select>
       </mat-form-field>
+      <button class="button-row" mat-raised-button color="primary" (click)="resetAllCategories(); showAll = true">Clear Categories</button>
 
     <mat-paginator *ngIf="!expensesSelectedByCategory" [length]="expenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesList($event)"></mat-paginator>
     <mat-paginator *ngIf="expensesSelectedByCategory"[length]="sortedExpenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesList($event)"></mat-paginator>
@@ -80,6 +84,7 @@
             <mat-option *ngFor="let category of expenseCategorySelector" [value]='category.name'>{{category.name}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <button class="button-row" mat-raised-button color="primary" (click)="resetAllCategories(); showAll = true">Clear Categories</button>
 
     <mat-paginator *ngIf="!expensesSelectedByCategoryAndDate" [length]="expensesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesByDateList($event)"></mat-paginator>
     <mat-paginator *ngIf="expensesSelectedByCategoryAndDate" [length]="sortedExpensesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterExpensesByDateList($event)"></mat-paginator>
@@ -128,6 +133,7 @@
         <mat-option *ngFor="let category of futureExpensesCategorySelector" [value]='category.name'>{{category.name}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <button class="button-row" mat-raised-button color="primary" (click)="resetAllCategories(); showAll = true">Clear Categories</button>
 
   <mat-paginator *ngIf="!futureExpensesSelectedByCategory" [length]="futureExpenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterFutureExpensesList($event)"></mat-paginator>
   <mat-paginator *ngIf="futureExpensesSelectedByCategory" [length]="sortedFutureExpenses.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterFutureExpensesList($event)"></mat-paginator>
@@ -182,6 +188,7 @@
           <mat-option *ngFor="let category of budgetsCategorySelector" [value]='category.name'>{{category.name}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <button class="button-row" mat-raised-button color="primary" (click)="resetAllCategories(); showAll = true">Clear Categories</button>
 
     <mat-paginator *ngIf="!budgetsSelectedByCategory" [length]="budgets.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterBudgetList($event)"></mat-paginator>
     <mat-paginator *ngIf="budgetsSelectedByCategory" [length]="sortedBudgets.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterBudgetList($event)"></mat-paginator>
@@ -235,6 +242,7 @@
           <mat-option *ngFor="let category of budgetsCategorySelector" [value]='category.name'>{{category.name}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <button class="button-row" mat-raised-button color="primary" (click)="resetAllCategories(); showAll = true">Clear Categories</button>
 
     <mat-paginator *ngIf="!budgetsSelectedByCategoryAndDate" [length]="budgetsByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterBudgetListByDate($event)"></mat-paginator>
     <mat-paginator *ngIf="budgetsSelectedByCategoryAndDate" [length]="sortedBudgetsByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterBudgetListByDate($event)"></mat-paginator>
@@ -290,6 +298,7 @@
           <mat-option *ngFor="let category of incomesCategoriesSelector" [value]='category.name'>{{category.name}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <button class="button-row" mat-raised-button color="primary" (click)="resetAllCategories(); showAll = true">Clear Categories</button>
 
     <mat-paginator *ngIf="!incomesSelectedByCategory" [length]="incomes.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomesList($event)"></mat-paginator>
     <mat-paginator *ngIf="incomesSelectedByCategory" [length]="sortedIncomes.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomesList($event)"></mat-paginator>
@@ -335,6 +344,7 @@
           <mat-option *ngFor="let category of incomesCategoriesSelector" [value]='category.name'>{{category.name}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <button class="button-row" mat-raised-button color="primary" (click)="resetAllCategories(); showAll = true">Clear Categories</button>
 
     <mat-paginator *ngIf="!incomesSelectedByCategoryAndDate" [length]="incomesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomesListByDate($event)"></mat-paginator>
     <mat-paginator *ngIf="incomesSelectedByCategoryAndDate" [length]="sortedIncomesByDate.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomesListByDate($event)"></mat-paginator>
@@ -379,6 +389,7 @@
         <mat-option *ngFor="let category of incomeStreamsCategoriesSelector" [value]='category.name'>{{category.name}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <button class="button-row" mat-raised-button color="primary" (click)="resetAllCategories(); showAll = true">Clear Categories</button>
 
   <mat-paginator *ngIf="!incomeStreamsSelectedByCategory" [length]="incomeStreams.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomeStreamsList($event)"></mat-paginator>
   <mat-paginator *ngIf="incomeStreamsSelectedByCategory" [length]="incomeStreams.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; filterIncomeStreamsList($event)"></mat-paginator>

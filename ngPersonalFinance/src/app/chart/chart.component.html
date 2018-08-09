@@ -5,6 +5,12 @@
 
 <div *ngIf="isDataLoaded && currencyTableSelected">
   <br>
+  <i class="fas fa-dollar-sign fa-lg" ></i>&nbsp;
+  <i class="fas fa-euro-sign fa-lg" ></i>&nbsp;
+  <i class="fas fa-pound-sign fa-lg"></i>&nbsp;
+  <i class="fas fa-yen-sign fa-lg"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span>Time updated: {{today | date: 'shortTime'}}</span>
+  <br><br>
 <table class = "table" id="currencyTable">
     <thead class = "thead-dark">
       <tr>
@@ -19,7 +25,6 @@
       </tr>
     </tbody>
   </table>
-  <span>Time updated: {{today | date: 'shortTime'}}</span>
   <img src="assets/images/bloomberg.png">
 </div>
 
