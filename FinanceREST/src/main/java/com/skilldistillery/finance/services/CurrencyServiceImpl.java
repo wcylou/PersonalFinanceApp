@@ -36,19 +36,19 @@ public class CurrencyServiceImpl implements CurrencyService {
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
-		String newQuote = sb.toString();
+		String currencyScrape = sb.toString();
 		for (int i = 0; i < currencies.length; i++) {
-			String regex2 = currencies[i]
+			String currencyRegex = currencies[i]
 					+ " </div> </a>  </td>  <td class=\"data-table-row-cell\" data-type=\"value\">......";
-			Pattern pattern2 = Pattern.compile(regex2);
-			Matcher matcher2 = pattern2.matcher(newQuote);
+			Pattern pattern = Pattern.compile(currencyRegex);
+			Matcher matcher = pattern.matcher(currencyScrape);
+			matcher.find();
+			String currencyScrape2 = matcher.group(0);
+			String currencyPositiveLookBack = "(?<=\"value\">).*";
+			Pattern pattern2 = Pattern.compile(currencyPositiveLookBack);
+			Matcher matcher2 = pattern2.matcher(currencyScrape2);
 			matcher2.find();
-			String match2 = matcher2.group(0);
-			String regex4 = "(?<=\"value\">).*";
-			Pattern pattern4 = Pattern.compile(regex4);
-			Matcher matcher4 = pattern4.matcher(match2);
-			matcher4.find();
-			currencyMap.put(currencies[i], Double.parseDouble(matcher4.group(0)));
+			currencyMap.put(currencies[i], Double.parseDouble(matcher2.group(0)));
 		}
 		return currencyMap;
 	}
