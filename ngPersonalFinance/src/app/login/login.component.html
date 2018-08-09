@@ -1,6 +1,30 @@
-<h1>Login Page</h1>
-<form action=""  #loginForm = "ngForm" (ngSubmit)="login(loginForm)">
-  <input type="text" name= "username" placeholder="Username" ngModel>
-  <input type="text" name= "password" placeholder="Password" ngModel>
- <button mat-raised-button color="primary" (click)="login(loginForm)">Submit</button>
-</form>
+<div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col">
+      <h1>Login Page</h1>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+  <form action="" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+    <div class="row">
+      <div class="col">
+        <div class = "form-group">
+          <input type="text" name="username" class = "form-control" placeholder="Username" ngModel>
+        </div>
+      </div>
+      <div class="col">
+        <div class = "form-group">
+          <input type="password" name="password" class = "form-control" placeholder="Password" ngModel>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button mat-raised-button color="primary" (click)="login(loginForm)">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

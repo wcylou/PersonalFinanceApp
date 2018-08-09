@@ -1,232 +1,3 @@
-<!-- <h3>Add Income/Expenses/Budgets</h3>
-<ngb-accordion [closeOthers]="true">
-  <ngb-panel id="static-1" title="Add Income">
-    <ng-template ngbPanelContent>
-      <ngb-tabset>
-        <ngb-tab title="Single Income">
-          <ng-template ngbTabContent>
-            <div class="container">
-              <form #createIncomeRecord="ngForm">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      Category:
-                      <select name="category" required ngModel>
-                        <option *ngFor="let category of incomeCategories">{{category.name}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      Amount:
-                      <input type="number" name="amount" placeholder="amount" required ngModel />
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    Date Received:
-                    <input type="date" name="dateReceived" placeholder="date" required ngModel/>
-                  </div>
-                </div>
-                <br>
-                <button type="submit" (click)="createNewIncome(createIncomeRecord)">Add New Record</button>
-              </form>
-            </div>
-          </ng-template>
-        </ngb-tab>
-        <ngb-tab>
-          <ng-template ngbTabTitle>Income Stream</ng-template>
-          <ng-template ngbTabContent>
-            <div class="container">
-              <form #createIncomeStreamRecord="ngForm">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      Category:
-                      <select name="category" ngModel>
-                        <option *ngFor="let category of incomeCategories">{{category.name}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      Amount:
-                      <input type="number" name="expectedAmount" placeholder="Expected Amount" ngModel />
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    Start Date:
-                    <input type="date" name="startDate" placeholder="Start Date" ngModel/>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    Yearly Occurences:
-                    <input type="number" name="yearlyOccurrences" placeholder="Yearly Occurrences" ngModel/>
-                  </div>
-                </div>
-                <br>
-                <button type="submit" (click)="createNewIncomeStream(createIncomeStreamRecord)">Add New Record</button>
-              </form>
-            </div>
-          </ng-template>
-        </ngb-tab>
-      </ngb-tabset>
-    </ng-template>
-  </ngb-panel>
-  <ngb-panel id="static-2" title="Expenses">
-    <!-- <ng-template ngbPanelTitle>
-        <span> <b>Fancy</b> </span>
-      </ng-template> -->
-    <!-- <ng-template ngbPanelContent>
-      <ngb-tabset>
-        <ngb-tab title="Single Expense">
-          <ng-template ngbTabContent>
-            <div class="container">
-              <form #createExpenseRecord="ngForm">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      Category
-                      <select name="category" ngModel>
-                        <option *ngFor="let category of expenseCategories" [value]="category.name">{{ category.name }}</option>
-                      </select>
-                      <br>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      Amount:
-                      <input type="number" class="form-control" name="amount" ngModel/>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    Payment Date:
-                    <input type="date" name="date" placeholder="date" ngModel/>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    Description:
-                    <input type="text" name="description" placeholder="description" ngModel/>
-                  </div>
-                </div>
-                <br>
-                <button (click)="createNewExpense(createExpenseRecord)">Create New Record</button>
-              </form>
-            </div>
-          </ng-template>
-        </ngb-tab>
-        <ngb-tab>
-          <ng-template ngbTabTitle>Future Expense/Recurring</ng-template>
-          <ng-template ngbTabContent>
-            <div class="container">
-              <form #createFutureExpenseRecord="ngForm">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      Category
-                      <select name="category" ngModel>
-                        <option *ngFor="let category of expenseCategories" [value]="category.name">{{ category.name }}</option>
-                      </select>
-                      <br>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      Amount:
-                      <input type="number" class="form-control" name="amount" ngModel/>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    Payment Date:
-                    <input type="date" name="expectedDate" placeholder="Expected Date" ngModel/>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    Description:
-                    <input type="text" name="description" placeholder="Description" ngModel/>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <span> Recurring:
-                      <input type="checkbox" name="recurring" ngModel/>
-                    </span>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                      <input type="number" name="numberOfRecurrences" ngModel/>
-                  </div>
-                  <div class="form-group">
-                      Weekly: <input type="radio" name="frequency" value = "weekly" ngModel/>
-                     Monthly: <input type="radio" name="frequency" value = "monthly" ngModel/>
-                     Yearly: <input type="radio" name="frequency" value = "yearly" ngModel/>
-                  </div>
-                </div>
-                <br>
-                <button (click)="createNewFutureExpense(createFutureExpenseRecord)">Create New Record</button>
-                <br>
-              </form>
-            </div>
-          </ng-template>
-        </ngb-tab>
-      </ngb-tabset>
-    </ng-template>
-  </ngb-panel>
-  <ngb-panel id="static-3" title="Budgets" [disabled]="false">
-    <ng-template ngbPanelContent>
-      <div class="container">
-        <form #newBudget="ngForm">
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                Category
-                <select name="category" ngModel>
-                  <option *ngFor="let category of expenseCategories" [value]="category.name">{{ category.name }}</option>
-                </select>
-                <br>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                Amount:
-                <input type="number" class="form-control" name="amount" ngModel/>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                Start Date:
-                <input type="date" class="form-control" name="startDate" ngModel/>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                End Date:
-                <input type="date" class="form-control" name="endDate" ngModel/>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            Description:
-            <input type="text" class="form-control" name="description" placeholder="Description" ngModel/>
-          </div>
-          <button (click)="addBudget(newBudget)" class="btn btn-success">Add Budget</button>&nbsp;
-        </form>
-      </div>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion> -->
-
 
 <mat-accordion class="example-headers-align">
     <mat-expansion-panel >
@@ -255,14 +26,14 @@
               <div class="col">
                 <div class="form-group">
                   Amount:
-                  <input type="number" name="amount" placeholder="amount" required ngModel />
+                  <input type="number" name="amount"class = "form-control" placeholder="amount" required ngModel />
                 </div>
               </div>
             </div>
             <div class="col">
               <div class="form-group">
               Date Received:
-                <input type="date" name="dateReceived" placeholder="date" required ngModel/>
+                <input type="date" name="dateReceived" class = "form-control" placeholder="date" required ngModel/>
               </div>
             </div>
             <br>
@@ -288,31 +59,31 @@
                   <div class="col">
                     <div class="form-group">
                       Amount:
-                      <input type="number" name="expectedAmount" placeholder="Expected Amount" ngModel />
+                      <input type="number" name="expectedAmount" class = "form-control" placeholder="amount" ngModel />
                     </div>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     Start Date:
-                    <input type="date" name="startDate" placeholder="Start Date" ngModel/>
+                    <input type="date" name="startDate" class = "form-control" placeholder="Start Date" ngModel/>
                   </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                       <span> Recurring:
-                        <input type="checkbox" name="recurring" ngModel/>
+                        <input type="checkbox" name="recurring" [(ngModel)] = "newIncomeStream.recurring"/>
                       </span>
                     </div>
                   </div>
-                  <div class="col">
+                  <div class="col" *ngIf= "newIncomeStream.recurring">
                     <div class="form-group">
-                      No Of Occurences  <input type="number" name="numberOfRecurrences" ngModel/>
+                      No. Of Occurences  <input type="number" class = "form-control" name="numberOfRecurrences" ngModel/>
                     </div>
                     <div class="form-group">
-                        Weekly: <input type="radio" name="frequency" value = "weekly" ngModel/>
+                        Weekly: <input type="radio" name="frequency"  value = "weekly" ngModel/>
                        Monthly: <input type="radio" name="frequency" value = "monthly" ngModel/>
-                       Yearly: <input type="radio" name="frequency" value = "yearly" ngModel/>
+                       Yearly: <input type="radio" name="frequency"  value = "yearly" ngModel/>
                     </div>
                   </div>
                 <br>
@@ -360,13 +131,13 @@
                   <div class="col">
                     <div class="form-group">
                       Payment Date:
-                      <input type="date" name="date" placeholder="date" ngModel/>
+                      <input type="date" name="date" class = "form-control" placeholder="date" ngModel/>
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-group">
                       Description:
-                      <input type="text" name="description" placeholder="description" ngModel/>
+                      <input type="text" name="description" class = "form-control" placeholder="description" ngModel/>
                     </div>
                   </div>
                   <br>
@@ -401,25 +172,25 @@
               <div class="col">
                 <div class="form-group">
                   Payment Date:
-                  <input type="date" name="expectedDate" placeholder="Expected Date" ngModel/>
+                  <input type="date" name="expectedDate" class = "form-control" placeholder="Expected Date" ngModel/>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   Description:
-                  <input type="text" name="description" placeholder="Description" ngModel/>
+                  <input type="text" name="description" class = "form-control" placeholder="Description" ngModel/>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <span> Recurring:
-                    <input type="checkbox" name="recurring" ngModel/>
+                    <input type="checkbox" name="recurring" [(ngModel)] = "newFutureExpense.recurring"/>
                   </span>
                 </div>
               </div>
-              <div class="col">
+              <div class="col"  *ngIf= "newFutureExpense.recurring">
                 <div class="form-group">
-                    <input type="number" name="numberOfRecurrences" ngModel/>
+                   No. of Occurrences <input type="number" class = "form-control" name="numberOfRecurrences" ngModel/>
                 </div>
                 <div class="form-group">
                     Weekly: <input type="radio" name="frequency" value = "weekly" ngModel/>

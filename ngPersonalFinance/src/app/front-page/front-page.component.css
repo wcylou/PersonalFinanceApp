@@ -1,15 +1,17 @@
 .banner {
 	background: url(/assets/images/money.jpg);
-	background-attachment: fixed center;
+	background-attachment: fixed bottom;
 	background-repeat: no-repeat;
 	min-height: 680px;
 	background-size: cover;
 	color: black;
-	text-align: center;
+  text-align: center;
+  margin:0;
 }
 
 .darkSection {
   background:indigo;
+  text-align: center;
 }
 
 agm-map {
@@ -21,13 +23,20 @@ body {
 }
 
 .example-card {
-  max-width: 350px;
+  max-width: 320px;
+  max-height:500px;
+}
+
+.cardImg {
+  max-width:320px;
+  max-height:120px;
 }
 
 mat-card {
   margin:25px;
+  background:darkorchid;
 }
 
 #teamRow {
-  margin-left:100px;
+  justify-content: center;
 }
