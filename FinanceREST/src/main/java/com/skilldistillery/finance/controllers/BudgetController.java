@@ -36,10 +36,8 @@ public class BudgetController {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date startDate = df.parse(start);
 		Date endDate = df.parse(end);
-		return budServ.sortBudgetsByCategoryAndDate(username, startDate, endDate);
+		return budServ.sortBudgetsByCategoryAndDate(principal.getName(), startDate, endDate);
 	}
-
-
 	
 	@RequestMapping(path="budget/categories/{id}", method = RequestMethod.GET)
 	public List<Budget> expensesByCategory(@PathVariable int id, Principal principal) {
