@@ -228,8 +228,8 @@ export class HomeComponent implements OnInit {
 
     this.budServ.getBudgetByCategoryAndDate(this.dateObject).subscribe(
       data => {
-        this.budgetMap = null;
         this.budgetMap = data;
+        this.lastMonthBudget = 0;
         for (const p in this.budgetMap) {
           if (this.budgetMap.hasOwnProperty(p)) {
             this.barChartData2.push(this.budgetMap[p]);
