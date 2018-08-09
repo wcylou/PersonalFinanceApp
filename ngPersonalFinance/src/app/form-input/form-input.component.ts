@@ -1,3 +1,4 @@
+import { AllDataTableComponent } from './../all-data-table/all-data-table.component';
 import { DatePipe } from '@angular/common';
 import { CategoryPieChartComponent } from './../category-pie-chart/category-pie-chart.component';
 import { Budget } from './../models/budget';

@@ -26,10 +26,11 @@ html, body, material-app, mat-sidenav-container {
 
 .button-row button {
   margin-right: 8px;
+  width: 140px;
 }
 
 .mat-form-field {
-  margin-right: 8px;
+  margin-right: 18px;
 }
 
 th, .mat-sort-header-button {

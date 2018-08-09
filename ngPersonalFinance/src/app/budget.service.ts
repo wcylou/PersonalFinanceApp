@@ -124,5 +124,15 @@ export class BudgetService {
     return this.http.post<Map<string, number>>(this.url + '/between', dates,  httpOptions);
   }
 
+  getBudgetBetweenDates(dates) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authService.getToken()}`
+      })
+    };
+    return this.http.post<Budget[]>(this.url + '/between', dates, httpOptions);
+  }
+
   constructor(private http: HttpClient, private authService: AuthService) {}
 }
