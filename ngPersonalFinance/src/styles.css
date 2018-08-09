@@ -23,3 +23,11 @@ html, body, material-app, mat-sidenav-container {
   font-family: Roboto, Arial, sans-serif;
   height:1600px;
 }
+
+.button-row button {
+  margin-right: 8px;
+}
+
+.mat-form-field {
+  margin-right: 8px;
+}
