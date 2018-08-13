@@ -101,29 +101,20 @@ export class FormInputComponent implements OnInit {
 
     if (form.value.recurring === true) {
       this.newFutureExpense.recurring = true;
-      this.newFutureExpense.numberOfRecurrences =
-        form.value.numberOfRecurrences;
+      this.newFutureExpense.numberOfRecurrences = form.value.numberOfRecurrences;
       if (form.value.frequency === 'weekly') {
         const recurringExpense = Object.assign({}, this.newFutureExpense);
         for (let i = 0; i < this.newFutureExpense.numberOfRecurrences; i++) {
-          recurringExpense.expectedDate = new Date(
-            recurringExpense.expectedDate
-          );
+          recurringExpense.expectedDate = new Date(recurringExpense.expectedDate);
           this.fexServ.create(recurringExpense).subscribe(
             data => {
               this.loadIncomeData();
               form.reset();
               this.newFutureExpense = new FutureExpense();
             },
-            err => {
-              console.log(this.newFutureExpense);
-
-              console.error('Error in component ts: ' + err);
-            }
+            err => console.error(err)
           );
-         recurringExpense.expectedDate.setDate(
-            recurringExpense.expectedDate.getDate() + 7
-          );
+          recurringExpense.expectedDate.setDate(recurringExpense.expectedDate.getDate() + 7);
         }
       } else if (form.value.frequency === 'monthly') {
         const recurringExpense = Object.assign({}, this.newFutureExpense);
