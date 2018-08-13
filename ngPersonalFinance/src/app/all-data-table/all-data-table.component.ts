@@ -843,7 +843,6 @@ export class AllDataTableComponent implements OnInit {
         this.currentPage,
         this.pageSize
       );
-      console.log(this.filteredExpenses.length);
 
     } else {
       this.sortedExpenses = expensesData.sort((a, b) => {
@@ -875,38 +874,21 @@ export class AllDataTableComponent implements OnInit {
   sortExpensesByDate(sort: Sort) {
     const expensesDataByDate = this.expensesByDate.slice();
     const expensesByDateAndCategory = this.setExpensesCategoryFilterByDate();
-    if (
-      !sort.active ||
-      (sort.direction === '' && !this.expensesSelectedByCategory)
-    ) {
+    if (!sort.active || (sort.direction === '' && !this.expensesSelectedByCategory)) {
       this.sortedExpensesByDate = expensesDataByDate;
-      return;
-    }
-
+      return; }
     if (this.expensesSelectedByCategory) {
       this.sortedExpensesByDate = expensesByDateAndCategory.sort((a, b) => {
         const isAsc = sort.direction === 'asc';
         switch (sort.active) {
-          case 'amount':
-            return this.compare(a.amount, b.amount, isAsc);
-          case 'expenseCategory.name':
-            return this.compare(
-              a.expenseCategory.name,
-              b.expenseCategory.name,
-              isAsc
-            );
-          case 'date':
-            return this.compare(a.date, b.date, isAsc);
-          default:
-            return 0;
+          case 'amount': return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name': return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
+          case 'date': return this.compare(a.date, b.date, isAsc);
+          default: return 0;
         }
       });
+      this.filteredExpensesByDate = this.pagePipe.transform(this.sortedExpensesByDate, this.currentPage, this.pageSize);
 
-      this.filteredExpensesByDate = this.pagePipe.transform(
-        this.sortedExpensesByDate,
-        this.currentPage,
-        this.pageSize
-      );
     } else {
       this.sortedExpensesByDate = expensesDataByDate.sort((a, b) => {
         const isAsc = sort.direction === 'asc';
