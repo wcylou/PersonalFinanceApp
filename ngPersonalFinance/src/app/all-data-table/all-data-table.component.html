@@ -68,7 +68,7 @@
 
       <mat-header-row *matHeaderRowDef="displayedColumnsExpenses"></mat-header-row>
 
-      <mat-row *matRowDef="let row; columns: displayedColumnsExpenses" (click)="onExpenseRowClicked(row)"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsExpenses" ></mat-row>
 
 
     </mat-table>
@@ -117,7 +117,7 @@
 
       <mat-header-row *matHeaderRowDef="displayedColumnsExpensesByDate"></mat-header-row>
 
-      <mat-row *matRowDef="let row; columns: displayedColumnsExpensesByDate" (click)="onExpenseRowClicked(row)"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsExpensesByDate" ></mat-row>
 
 
     </mat-table>
@@ -172,7 +172,7 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumnsFutureExpenses"></mat-header-row>
 
-    <mat-row *matRowDef="let row; columns: displayedColumnsFutureExpenses" (click)="onFutureExpenseRowClicked(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnsFutureExpenses"></mat-row>
 
 
   </mat-table>
@@ -227,7 +227,7 @@
 
       <mat-header-row *matHeaderRowDef="displayedColumnsBudgets"></mat-header-row>
 
-      <mat-row *matRowDef="let row; columns: displayedColumnsBudgets" (click)="onBudgetRowClicked(row)"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsBudgets"></mat-row>
 
 
     </mat-table>
@@ -281,7 +281,7 @@
 
       <mat-header-row *matHeaderRowDef="displayedColumnsBudgetsByDate"></mat-header-row>
 
-      <mat-row *matRowDef="let row; columns: displayedColumnsBudgetsByDate" (click)="onBudgetRowClicked(row)"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsBudgetsByDate"></mat-row>
 
 
     </mat-table>
@@ -327,7 +327,7 @@
 
       <mat-header-row *matHeaderRowDef="displayedColumnsIncomes"></mat-header-row>
 
-      <mat-row *matRowDef="let row; columns: displayedColumnsIncomes" (click)="onIncomeRowClicked(row)"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsIncomes"></mat-row>
 
 
     </mat-table>
@@ -373,7 +373,7 @@
 
       <mat-header-row *matHeaderRowDef="displayedColumnsIncomesByDate"></mat-header-row>
 
-      <mat-row *matRowDef="let row; columns: displayedColumnsIncomesByDate" (click)="onIncomeRowClicked(row)"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsIncomesByDate"></mat-row>
 
 
     </mat-table>
@@ -418,7 +418,7 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumnsIncomeStreams"></mat-header-row>
 
-    <mat-row *matRowDef="let row; columns: displayedColumnsIncomeStreams" (click)="onIncomeStreamRowClicked(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnsIncomeStreams"></mat-row>
 
 
   </mat-table>

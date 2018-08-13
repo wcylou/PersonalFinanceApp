@@ -243,7 +243,6 @@ export class AllDataTableComponent implements OnInit {
 
   // category filters
   setBudgetsCategoryFilter() {
-    console.log(this.selectedBudgetsCategories);
 
     this.sortedBudgets = this.expenseCategoryPipe.transform(
       this.budgets,
@@ -261,7 +260,6 @@ export class AllDataTableComponent implements OnInit {
   }
 
   setBudgetsCategoryFilterByDate() {
-    console.log(this.selectedBudgetsCategories);
 
     this.sortedBudgetsByDate = this.expenseCategoryPipe.transform(
       this.budgetsByDate,
@@ -378,7 +376,6 @@ export class AllDataTableComponent implements OnInit {
     this.startDate = new Date();
     this.endDate = new Date();
     this.startDate.setDate(this.startDate.getDate() - 30);
-    console.log(this.startDate);
   }
 
   // toggle switches for showing tables
@@ -577,28 +574,7 @@ export class AllDataTableComponent implements OnInit {
     }
   }
 
-  onExpenseRowClicked(row) {
-    console.log('Row clicked: ', row);
-  }
-
-  onFutureExpenseRowClicked(row) {
-    console.log('Row clicked: ', row);
-  }
-
-  onBudgetRowClicked(row) {
-    console.log('Row clicked: ', row);
-  }
-
-  onIncomeRowClicked(row) {
-    console.log('Row clicked: ', row);
-  }
-
-  onIncomeStreamRowClicked(row) {
-    console.log('Row clicked: ', row);
-  }
-
   filterBudgetList(event) {
-    console.log(event);
     this.currentPage = event.pageIndex;
     this.filteredBudgets = this.pagePipe.transform(
       this.sortedBudgets,
@@ -608,7 +584,6 @@ export class AllDataTableComponent implements OnInit {
   }
 
   filterBudgetListByDate(event) {
-    console.log(event);
     this.currentPage = event.pageIndex;
     this.filteredBudgetsByDate = this.pagePipe.transform(
       this.sortedBudgetsByDate,
@@ -618,7 +593,6 @@ export class AllDataTableComponent implements OnInit {
   }
 
   filterExpensesList(event) {
-    console.log(event);
     this.currentPage = event.pageIndex;
     this.filteredExpenses = this.pagePipe.transform(
       this.sortedExpenses,
@@ -628,7 +602,6 @@ export class AllDataTableComponent implements OnInit {
   }
 
   filterExpensesByDateList(event) {
-    console.log(event);
     this.currentPage = event.pageIndex;
     this.filteredExpensesByDate = this.pagePipe.transform(
       this.sortedExpensesByDate,
@@ -843,7 +816,6 @@ export class AllDataTableComponent implements OnInit {
         this.currentPage,
         this.pageSize
       );
-      console.log(this.filteredExpenses.length);
 
     } else {
       this.sortedExpenses = expensesData.sort((a, b) => {
@@ -875,38 +847,21 @@ export class AllDataTableComponent implements OnInit {
   sortExpensesByDate(sort: Sort) {
     const expensesDataByDate = this.expensesByDate.slice();
     const expensesByDateAndCategory = this.setExpensesCategoryFilterByDate();
-    if (
-      !sort.active ||
-      (sort.direction === '' && !this.expensesSelectedByCategory)
-    ) {
+    if (!sort.active || (sort.direction === '' && !this.expensesSelectedByCategory)) {
       this.sortedExpensesByDate = expensesDataByDate;
-      return;
-    }
-
+      return; }
     if (this.expensesSelectedByCategory) {
       this.sortedExpensesByDate = expensesByDateAndCategory.sort((a, b) => {
         const isAsc = sort.direction === 'asc';
         switch (sort.active) {
-          case 'amount':
-            return this.compare(a.amount, b.amount, isAsc);
-          case 'expenseCategory.name':
-            return this.compare(
-              a.expenseCategory.name,
-              b.expenseCategory.name,
-              isAsc
-            );
-          case 'date':
-            return this.compare(a.date, b.date, isAsc);
-          default:
-            return 0;
+          case 'amount': return this.compare(a.amount, b.amount, isAsc);
+          case 'expenseCategory.name': return this.compare(a.expenseCategory.name, b.expenseCategory.name, isAsc);
+          case 'date': return this.compare(a.date, b.date, isAsc);
+          default: return 0;
         }
       });
+      this.filteredExpensesByDate = this.pagePipe.transform(this.sortedExpensesByDate, this.currentPage, this.pageSize);
 
-      this.filteredExpensesByDate = this.pagePipe.transform(
-        this.sortedExpensesByDate,
-        this.currentPage,
-        this.pageSize
-      );
     } else {
       this.sortedExpensesByDate = expensesDataByDate.sort((a, b) => {
         const isAsc = sort.direction === 'asc';
@@ -1188,10 +1143,8 @@ export class AllDataTableComponent implements OnInit {
     this.dateObject.start = date1;
     const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
     this.dateObject.end = date2;
-    console.log(this.dateObject);
     this.budgetService.getBudgetBetweenDates(this.dateObject).subscribe(
       data => {
-        console.log(data);
         if (this.selectedBudgetsCategories !== '') {
           this.budgetsByDate = data;
           this.sortedBudgetsByDate = this.expenseCategoryPipe.transform(
@@ -1222,10 +1175,8 @@ export class AllDataTableComponent implements OnInit {
     this.dateObject.start = date1;
     const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
     this.dateObject.end = date2;
-    console.log(this.dateObject);
     this.expenseService.getExpenseBetweenDates(this.dateObject).subscribe(
       data => {
-        console.log(data);
         if (this.selectedExpenseCategories !== '') {
           this.expensesByDate = data;
           this.sortedExpensesByDate = this.expenseCategoryPipe.transform(
@@ -1256,10 +1207,8 @@ export class AllDataTableComponent implements OnInit {
     this.dateObject.start = date1;
     const date2 = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
     this.dateObject.end = date2;
-    console.log(this.dateObject);
     this.incomeService.getIncomeBetweenDates(this.dateObject).subscribe(
       data => {
-        console.log(data);
         if (this.selectedIncomeCategories !== '') {
           this.incomesByDate = data;
           this.sortedIncomesByDate = this.incomeCategoryPipe.transform(
