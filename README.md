@@ -1,3 +1,9 @@
+http://18.216.126.90:8080/FinanceREST/
+
+To test the application, login using the following:
+User: user
+Password: password
+
 ### Group Members
 
 Joseph DiBiasi, Wilson Lou, Alex Murphy
