@@ -1,12 +1,35 @@
+# Week 16 Personal Finance App
+
 http://18.216.126.90:8080/FinanceREST/
 
 To test the application, login using the following:
+
 User: user
+
 Password: password
 
 ### Group Members
 
-Joseph DiBiasi, Wilson Lou, Alex Murphy
+Wilson Lou, Joseph DiBiasi, Alex Murphy
+
+### Technologies Used
+* Java
+* Spring Boot
+* REST APIs
+* Angular 6
+* Typescript
+* Javascript
+* HTML/CSS
+* Bootstrap
+* MySQL
+* Gradle
+* Hibernate
+* JPA
+* Spring Data JPA
+* Apache Tomcat
+* AWS EC2
+* MAMP
+* Git/Github
 
 ### Application Purpose
 
